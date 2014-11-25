@@ -7,7 +7,6 @@
 //
 
 #import <CoreLocation/CoreLocation.h>
-
 #import "BRKSearchViewController.h"
 #import "BRKFoursquareClient.h"
 #import "BRKSearchResultsController.h"
@@ -19,7 +18,6 @@
 @property (strong, nonatomic) UIView * resultsView;
 @property (strong, nonatomic) BRKScrollView * venueCategoryScroll;
 @property (strong, nonatomic) BRKScrollView * venueTableScroll;
-
 @property (strong, nonatomic) NSArray * venuesSearchTables;
 @property (strong, nonatomic) CLLocationManager * locationManager;
 @property (strong, nonatomic) CLLocation * location;
@@ -28,6 +26,7 @@
 
 @implementation BRKSearchResultsController
 
+<<<<<<< HEAD
 -(void)loadView{
     [super loadView];
 }
@@ -136,9 +135,11 @@
  *
  ***********************************************************************************/
 #pragma mark - View helpers -
+
 - (void)viewWillAppear:(BOOL)animated {
     [self.locationManager requestWhenInUseAuthorization];
 }
+
 
 -(void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -176,6 +177,5 @@
         [scrollView setContentOffset:CGPointMake(scrollView.contentSize.width - [UIScreen mainScreen].bounds.size.width, 0.0) animated:NO];
     }
 }
-
 
 @end
