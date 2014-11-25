@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		07F863FE1A250D90009EAB2F /* adorable-puppy.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 07F863FD1A250D90009EAB2F /* adorable-puppy.jpeg */; };
 		109E2E8FD64C9BBFBEEE95F8 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 09C6EB0BF5BF9D0A7D566AF8 /* libPods.a */; };
 		95B81A661A23C854005F9AE0 /* BRKFoursquareClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 95B81A651A23C854005F9AE0 /* BRKFoursquareClient.m */; };
 		95B81A6C1A23C951005F9AE0 /* BRKVenue.m in Sources */ = {isa = PBXBuildFile; fileRef = 95B81A6B1A23C951005F9AE0 /* BRKVenue.m */; };
@@ -39,6 +40,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		07F863FD1A250D90009EAB2F /* adorable-puppy.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "adorable-puppy.jpeg"; sourceTree = "<group>"; };
 		09C6EB0BF5BF9D0A7D566AF8 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		0B8B6E31379FF2590C47AA20 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		88C440BB57B1ECE75CE0576A /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -192,6 +194,7 @@
 		F925AC4B1A23C1670086F2EB /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				07F863FD1A250D90009EAB2F /* adorable-puppy.jpeg */,
 				F925AC4C1A23C1670086F2EB /* Info.plist */,
 				F925AC4D1A23C1670086F2EB /* main.m */,
 			);
@@ -302,6 +305,7 @@
 				CBE36D1B1A25067A00AD80F6 /* BRKVenueDetailTableViewCell.xib in Resources */,
 				F94606721A23D86A00FF6AB0 /* BRKLocationTableViewCell.xib in Resources */,
 				F94606741A23D86A00FF6AB0 /* Main.storyboard in Resources */,
+				07F863FE1A250D90009EAB2F /* adorable-puppy.jpeg in Resources */,
 				F925AC5C1A23C1670086F2EB /* LaunchScreen.xib in Resources */,
 				F925AC591A23C1670086F2EB /* Images.xcassets in Resources */,
 			);
