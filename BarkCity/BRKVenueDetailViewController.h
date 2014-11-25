@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+@class BRKVenue;
+
 @interface BRKVenueDetailViewController : UIViewController
+
+@property (strong, nonatomic) BRKVenue *venue;
 
 @end

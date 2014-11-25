@@ -10,4 +10,10 @@
 
 @interface BRKVenueDetailView : UIView <UITableViewDelegate, UITableViewDataSource>
 
+@property (strong, nonatomic) IBOutlet UIView *view;
+@property (weak, nonatomic) IBOutlet UITableView *commentsTableView;
+@property (weak, nonatomic) IBOutlet UILabel *nameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *ratingLabel;
+@property (weak, nonatomic) IBOutlet UILabel *distanceLabel;
+
 @end

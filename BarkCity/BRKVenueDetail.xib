@@ -7,6 +7,9 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BRKVenueDetailView">
             <connections>
                 <outlet property="commentsTableView" destination="g3F-SV-5bL" id="gNN-k8-am4"/>
+                <outlet property="distanceLabel" destination="aVd-rv-uTY" id="kbj-AO-s3B"/>
+                <outlet property="nameLabel" destination="va2-WI-YYJ" id="Oya-sj-2nI"/>
+                <outlet property="ratingLabel" destination="nHD-RK-gdd" id="0hv-ye-nKj"/>
                 <outlet property="view" destination="iN0-l3-epB" id="3Ad-dH-5S4"/>
             </connections>
         </placeholder>

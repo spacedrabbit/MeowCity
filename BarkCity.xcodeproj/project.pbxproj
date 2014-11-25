@@ -128,35 +128,49 @@
 			name = Models;
 			sourceTree = "<group>";
 		};
-		95B81A681A23C87A005F9AE0 /* Controllers */ = {
-			isa = PBXGroup;
-			children = (
-				F94606681A23D86A00FF6AB0 /* BRKHomeTableViewController.h */,
-				F94606691A23D86A00FF6AB0 /* BRKHomeTableViewController.m */,
-				F946066D1A23D86A00FF6AB0 /* BRKSearchViewController.h */,
-				F946066E1A23D86A00FF6AB0 /* BRKSearchViewController.m */,
-				07F863FF1A250F4A009EAB2F /* BRKVenueDetailViewController.h */,
-				07F864001A250F4A009EAB2F /* BRKVenueDetailViewController.m */,
-			);
-			name = Controllers;
-			sourceTree = "<group>";
-		};
 		95B81A691A23C898005F9AE0 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				CBE36D1C1A25069900AD80F6 /* BRKVenueDetail.xib */,
-				CBE36D1D1A25069900AD80F6 /* BRKVenueDetailView.h */,
-				CBE36D1E1A25069900AD80F6 /* BRKVenueDetailView.m */,
-				F946066A1A23D86A00FF6AB0 /* BRKLocationTableViewCell.h */,
-				F946066B1A23D86A00FF6AB0 /* BRKLocationTableViewCell.m */,
-				F946066C1A23D86A00FF6AB0 /* BRKLocationTableViewCell.xib */,
-				CBE36D171A25067A00AD80F6 /* BRKVenueDetailTableViewCell.h */,
-				CBE36D181A25067A00AD80F6 /* BRKVenueDetailTableViewCell.m */,
-				CBE36D191A25067A00AD80F6 /* BRKVenueDetailTableViewCell.xib */,
 				B17860201A23CAB600EBE64F /* BRKScrollView.h */,
 				B17860211A23CAB600EBE64F /* BRKScrollView.m */,
 			);
 			name = Views;
+			sourceTree = "<group>";
+		};
+		CBE36D211A25138D00AD80F6 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				F94606681A23D86A00FF6AB0 /* BRKHomeTableViewController.h */,
+				F94606691A23D86A00FF6AB0 /* BRKHomeTableViewController.m */,
+				F946066A1A23D86A00FF6AB0 /* BRKLocationTableViewCell.h */,
+				F946066B1A23D86A00FF6AB0 /* BRKLocationTableViewCell.m */,
+				F946066C1A23D86A00FF6AB0 /* BRKLocationTableViewCell.xib */,
+			);
+			name = Home;
+			sourceTree = "<group>";
+		};
+		CBE36D221A2513D100AD80F6 /* Venue Detail */ = {
+			isa = PBXGroup;
+			children = (
+				07F863FF1A250F4A009EAB2F /* BRKVenueDetailViewController.h */,
+				07F864001A250F4A009EAB2F /* BRKVenueDetailViewController.m */,
+				CBE36D1D1A25069900AD80F6 /* BRKVenueDetailView.h */,
+				CBE36D1E1A25069900AD80F6 /* BRKVenueDetailView.m */,
+				CBE36D1C1A25069900AD80F6 /* BRKVenueDetail.xib */,
+				CBE36D171A25067A00AD80F6 /* BRKVenueDetailTableViewCell.h */,
+				CBE36D181A25067A00AD80F6 /* BRKVenueDetailTableViewCell.m */,
+				CBE36D191A25067A00AD80F6 /* BRKVenueDetailTableViewCell.xib */,
+			);
+			name = "Venue Detail";
+			sourceTree = "<group>";
+		};
+		CBE36D231A2513ED00AD80F6 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				F946066D1A23D86A00FF6AB0 /* BRKSearchViewController.h */,
+				F946066E1A23D86A00FF6AB0 /* BRKSearchViewController.m */,
+			);
+			name = Search;
 			sourceTree = "<group>";
 		};
 		F925AC3F1A23C1670086F2EB = {
@@ -183,10 +197,10 @@
 		F925AC4A1A23C1670086F2EB /* BarkCity */ = {
 			isa = PBXGroup;
 			children = (
-				F925AC4F1A23C1670086F2EB /* AppDelegate.h */,
-				F925AC501A23C1670086F2EB /* AppDelegate.m */,
 				F946066F1A23D86A00FF6AB0 /* Main.storyboard */,
-				95B81A681A23C87A005F9AE0 /* Controllers */,
+				CBE36D231A2513ED00AD80F6 /* Search */,
+				CBE36D221A2513D100AD80F6 /* Venue Detail */,
+				CBE36D211A25138D00AD80F6 /* Home */,
 				95B81A671A23C85E005F9AE0 /* Models */,
 				95B81A691A23C898005F9AE0 /* Views */,
 				F925AC581A23C1670086F2EB /* Images.xcassets */,
@@ -199,6 +213,8 @@
 		F925AC4B1A23C1670086F2EB /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				F925AC4F1A23C1670086F2EB /* AppDelegate.h */,
+				F925AC501A23C1670086F2EB /* AppDelegate.m */,
 				07F863FD1A250D90009EAB2F /* adorable-puppy.jpeg */,
 				F925AC4C1A23C1670086F2EB /* Info.plist */,
 				F925AC4D1A23C1670086F2EB /* main.m */,

@@ -10,6 +10,7 @@
 #import "BRKLocationTableViewCell.h"
 #import "BRKFoursquareClient.h"
 #import "BRKVenue.h"
+#import "BRKVenueDetailViewController.h"
 
 @interface BRKHomeTableViewController ()
 
@@ -68,38 +69,38 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-//    if (indexPath.row == 0) {
-//        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
-//        cell.textLabel.text = @"Restaurants Bars Outdoor Events";
-//        // Scroll view ("Restaurants", "Bars", "Outdoor", "Events")
-//        return cell;
-//    }
-//    
-//    else if (indexPath.row == 1) {
-//        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
-//        cell.textLabel.text = @"Image";
-//        // Image
-//        return cell;
-//    }
-//    
-//    else {
-//        BRKLocationTableViewCell *cell = (BRKLocationTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"Location" forIndexPath:indexPath];
-//        cell.nameLabel.text = @"Sample Restaurant";
-//        cell.ratingLabel.text = @"*****";
-//        cell.distanceLabel.text = @"1.0 mi";
-//        cell.detailTextLabel.text = @"This restaurant is great for dogs";
-//        return cell;
-//    }
-//    
-//    return nil;
-    BRKVenue *venue = self.venues[indexPath.row];
-    BRKLocationTableViewCell *cell = (BRKLocationTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"Location" forIndexPath:indexPath];
-    cell.nameLabel.text = venue.name;
-    cell.ratingLabel.text = [venue.rating description];
-    cell.distanceLabel.text = @"1.0 mi";
-    cell.detailTextLabel.text = @"This restaurant is great for dogs";
-    return cell;
+    if (indexPath.row == 0) {
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
+        cell.textLabel.text = @"Restaurants Bars Outdoor Events";
+        // Scroll view ("Restaurants", "Bars", "Outdoor", "Events")
+        return cell;
+    }
+    
+    else if (indexPath.row == 1) {
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
+        cell.textLabel.text = @"Image";
+        // Image
+        return cell;
+    }
+    
+    else {
+        BRKVenue *venue = self.venues[indexPath.row];
+        BRKLocationTableViewCell *cell = (BRKLocationTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"Location" forIndexPath:indexPath];
+        cell.nameLabel.text = venue.name;
+        cell.ratingLabel.text = [venue.rating description];
+        cell.distanceLabel.text = @"1.0 mi";
+        cell.detailTextLabel.text = @"This restaurant is great for dogs";
+        return cell;
+    }
+    
+    return nil;
+}
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.row > 1) {
+        [self performSegueWithIdentifier:@"homeToVenueDetailSegue" sender:self];
+    }
 }
 
 
@@ -112,8 +113,12 @@
         NSLog(@"Search");
     }
     
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    else if ([segue.identifier isEqualToString:@"homeToVenueDetailSegue"]) {
+        
+        NSIndexPath *path = [self.tableView indexPathForSelectedRow];
+        BRKVenueDetailViewController *targetVC = segue.destinationViewController;
+        targetVC.venue = self.venues[path.row];
+    }
 }
 
 #pragma mark - CORE LOCATION GET LOCATION

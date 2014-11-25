@@ -8,6 +8,7 @@
 
 #import "BRKVenueDetailViewController.h"
 #import "BRKVenueDetailView.h"
+#import "BRKVenue.h"
 
 @interface BRKVenueDetailViewController ()
 
@@ -36,5 +37,11 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+- (void)setVenue:(BRKVenue *)venue
+{
+    self.venueDetailView.nameLabel.text = self.venue.name;
+    self.venueDetailView.ratingLabel.text = [NSString stringWithFormat:@"%@", self.venue.rating];
+}
 
 @end

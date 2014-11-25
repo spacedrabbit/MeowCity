@@ -11,9 +11,6 @@
 
 @interface BRKVenueDetailView()
 
-@property (strong, nonatomic) IBOutlet UIView *view;
-@property (weak, nonatomic) IBOutlet UITableView *commentsTableView;
-
 @end
 
 @implementation BRKVenueDetailView
