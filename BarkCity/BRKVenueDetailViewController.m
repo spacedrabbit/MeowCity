@@ -21,6 +21,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+        self.venueDetailView.nameLabel.text = self.venue.name;
+        self.venueDetailView.ratingLabel.text = [NSString stringWithFormat:@"%@", self.venue.rating];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -38,10 +41,11 @@
 }
 */
 
-- (void)setVenue:(BRKVenue *)venue
-{
-    self.venueDetailView.nameLabel.text = self.venue.name;
-    self.venueDetailView.ratingLabel.text = [NSString stringWithFormat:@"%@", self.venue.rating];
-}
+//- (void)setVenue:(BRKVenue *)venue
+//{
+//    _venue = venue;
+//    self.venueDetailView.nameLabel.text = _venue.name;
+//    self.venueDetailView.ratingLabel.text = [NSString stringWithFormat:@"%@", _venue.rating];
+//}
 
 @end

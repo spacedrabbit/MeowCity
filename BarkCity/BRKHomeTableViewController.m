@@ -116,8 +116,8 @@
     else if ([segue.identifier isEqualToString:@"homeToVenueDetailSegue"]) {
         
         NSIndexPath *path = [self.tableView indexPathForSelectedRow];
-        BRKVenueDetailViewController *targetVC = segue.destinationViewController;
-        targetVC.venue = self.venues[path.row];
+        BRKVenueDetailViewController *targetVC = (BRKVenueDetailViewController *)segue.destinationViewController;
+        targetVC.venue = (BRKVenue *)self.venues[path.row];
     }
 }
 
