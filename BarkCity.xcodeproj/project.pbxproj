@@ -1,0 +1,551 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		109E2E8FD64C9BBFBEEE95F8 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 09C6EB0BF5BF9D0A7D566AF8 /* libPods.a */; };
+		95B81A661A23C854005F9AE0 /* BRKFoursquareClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 95B81A651A23C854005F9AE0 /* BRKFoursquareClient.m */; };
+		95B81A6C1A23C951005F9AE0 /* BRKVenue.m in Sources */ = {isa = PBXBuildFile; fileRef = 95B81A6B1A23C951005F9AE0 /* BRKVenue.m */; };
+		B17860221A23CAB600EBE64F /* BRKScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = B17860211A23CAB600EBE64F /* BRKScrollView.m */; };
+		F925AC4E1A23C1670086F2EB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F925AC4D1A23C1670086F2EB /* main.m */; };
+		F925AC511A23C1670086F2EB /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F925AC501A23C1670086F2EB /* AppDelegate.m */; };
+		F925AC591A23C1670086F2EB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F925AC581A23C1670086F2EB /* Images.xcassets */; };
+		F925AC5C1A23C1670086F2EB /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = F925AC5A1A23C1670086F2EB /* LaunchScreen.xib */; };
+		F925AC681A23C1670086F2EB /* BarkCityTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F925AC671A23C1670086F2EB /* BarkCityTests.m */; };
+		F94606671A23C30000FF6AB0 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F94606661A23C30000FF6AB0 /* CoreLocation.framework */; };
+		F94606701A23D86A00FF6AB0 /* BRKHomeTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F94606691A23D86A00FF6AB0 /* BRKHomeTableViewController.m */; };
+		F94606711A23D86A00FF6AB0 /* BRKLocationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F946066B1A23D86A00FF6AB0 /* BRKLocationTableViewCell.m */; };
+		F94606721A23D86A00FF6AB0 /* BRKLocationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F946066C1A23D86A00FF6AB0 /* BRKLocationTableViewCell.xib */; };
+		F94606731A23D86A00FF6AB0 /* BRKSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F946066E1A23D86A00FF6AB0 /* BRKSearchViewController.m */; };
+		F94606741A23D86A00FF6AB0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F946066F1A23D86A00FF6AB0 /* Main.storyboard */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		F925AC621A23C1670086F2EB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F925AC401A23C1670086F2EB /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F925AC471A23C1670086F2EB;
+			remoteInfo = BarkCity;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		09C6EB0BF5BF9D0A7D566AF8 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		0B8B6E31379FF2590C47AA20 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		88C440BB57B1ECE75CE0576A /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		95B81A641A23C854005F9AE0 /* BRKFoursquareClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRKFoursquareClient.h; sourceTree = "<group>"; };
+		95B81A651A23C854005F9AE0 /* BRKFoursquareClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRKFoursquareClient.m; sourceTree = "<group>"; };
+		95B81A6A1A23C951005F9AE0 /* BRKVenue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRKVenue.h; sourceTree = "<group>"; };
+		95B81A6B1A23C951005F9AE0 /* BRKVenue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRKVenue.m; sourceTree = "<group>"; };
+		B17860201A23CAB600EBE64F /* BRKScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRKScrollView.h; sourceTree = "<group>"; };
+		B17860211A23CAB600EBE64F /* BRKScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRKScrollView.m; sourceTree = "<group>"; };
+		F925AC481A23C1670086F2EB /* BarkCity.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BarkCity.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F925AC4C1A23C1670086F2EB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F925AC4D1A23C1670086F2EB /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		F925AC4F1A23C1670086F2EB /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		F925AC501A23C1670086F2EB /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		F925AC581A23C1670086F2EB /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		F925AC5B1A23C1670086F2EB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		F925AC611A23C1670086F2EB /* BarkCityTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BarkCityTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F925AC661A23C1670086F2EB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F925AC671A23C1670086F2EB /* BarkCityTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BarkCityTests.m; sourceTree = "<group>"; };
+		F94606661A23C30000FF6AB0 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		F94606681A23D86A00FF6AB0 /* BRKHomeTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRKHomeTableViewController.h; sourceTree = "<group>"; };
+		F94606691A23D86A00FF6AB0 /* BRKHomeTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRKHomeTableViewController.m; sourceTree = "<group>"; };
+		F946066A1A23D86A00FF6AB0 /* BRKLocationTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRKLocationTableViewCell.h; sourceTree = "<group>"; };
+		F946066B1A23D86A00FF6AB0 /* BRKLocationTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRKLocationTableViewCell.m; sourceTree = "<group>"; };
+		F946066C1A23D86A00FF6AB0 /* BRKLocationTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BRKLocationTableViewCell.xib; sourceTree = "<group>"; };
+		F946066D1A23D86A00FF6AB0 /* BRKSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRKSearchViewController.h; sourceTree = "<group>"; };
+		F946066E1A23D86A00FF6AB0 /* BRKSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRKSearchViewController.m; sourceTree = "<group>"; };
+		F946066F1A23D86A00FF6AB0 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		F925AC451A23C1670086F2EB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F94606671A23C30000FF6AB0 /* CoreLocation.framework in Frameworks */,
+				109E2E8FD64C9BBFBEEE95F8 /* libPods.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F925AC5E1A23C1670086F2EB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		420DDDEFB2E448B374E63407 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				0B8B6E31379FF2590C47AA20 /* Pods.debug.xcconfig */,
+				88C440BB57B1ECE75CE0576A /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		82EED657A22F394B44EC8938 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				09C6EB0BF5BF9D0A7D566AF8 /* libPods.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		95B81A671A23C85E005F9AE0 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				95B81A641A23C854005F9AE0 /* BRKFoursquareClient.h */,
+				95B81A651A23C854005F9AE0 /* BRKFoursquareClient.m */,
+				95B81A6A1A23C951005F9AE0 /* BRKVenue.h */,
+				95B81A6B1A23C951005F9AE0 /* BRKVenue.m */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		95B81A681A23C87A005F9AE0 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				F94606681A23D86A00FF6AB0 /* BRKHomeTableViewController.h */,
+				F94606691A23D86A00FF6AB0 /* BRKHomeTableViewController.m */,
+				F946066D1A23D86A00FF6AB0 /* BRKSearchViewController.h */,
+				F946066E1A23D86A00FF6AB0 /* BRKSearchViewController.m */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		95B81A691A23C898005F9AE0 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				F946066A1A23D86A00FF6AB0 /* BRKLocationTableViewCell.h */,
+				F946066B1A23D86A00FF6AB0 /* BRKLocationTableViewCell.m */,
+				F946066C1A23D86A00FF6AB0 /* BRKLocationTableViewCell.xib */,
+				B17860201A23CAB600EBE64F /* BRKScrollView.h */,
+				B17860211A23CAB600EBE64F /* BRKScrollView.m */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		F925AC3F1A23C1670086F2EB = {
+			isa = PBXGroup;
+			children = (
+				F94606661A23C30000FF6AB0 /* CoreLocation.framework */,
+				F925AC4A1A23C1670086F2EB /* BarkCity */,
+				F925AC641A23C1670086F2EB /* BarkCityTests */,
+				F925AC491A23C1670086F2EB /* Products */,
+				420DDDEFB2E448B374E63407 /* Pods */,
+				82EED657A22F394B44EC8938 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		F925AC491A23C1670086F2EB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F925AC481A23C1670086F2EB /* BarkCity.app */,
+				F925AC611A23C1670086F2EB /* BarkCityTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F925AC4A1A23C1670086F2EB /* BarkCity */ = {
+			isa = PBXGroup;
+			children = (
+				F925AC4F1A23C1670086F2EB /* AppDelegate.h */,
+				F925AC501A23C1670086F2EB /* AppDelegate.m */,
+				F946066F1A23D86A00FF6AB0 /* Main.storyboard */,
+				95B81A681A23C87A005F9AE0 /* Controllers */,
+				95B81A671A23C85E005F9AE0 /* Models */,
+				95B81A691A23C898005F9AE0 /* Views */,
+				F925AC581A23C1670086F2EB /* Images.xcassets */,
+				F925AC5A1A23C1670086F2EB /* LaunchScreen.xib */,
+				F925AC4B1A23C1670086F2EB /* Supporting Files */,
+			);
+			path = BarkCity;
+			sourceTree = "<group>";
+		};
+		F925AC4B1A23C1670086F2EB /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				F925AC4C1A23C1670086F2EB /* Info.plist */,
+				F925AC4D1A23C1670086F2EB /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		F925AC641A23C1670086F2EB /* BarkCityTests */ = {
+			isa = PBXGroup;
+			children = (
+				F925AC671A23C1670086F2EB /* BarkCityTests.m */,
+				F925AC651A23C1670086F2EB /* Supporting Files */,
+			);
+			path = BarkCityTests;
+			sourceTree = "<group>";
+		};
+		F925AC651A23C1670086F2EB /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				F925AC661A23C1670086F2EB /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		F925AC471A23C1670086F2EB /* BarkCity */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F925AC6B1A23C1670086F2EB /* Build configuration list for PBXNativeTarget "BarkCity" */;
+			buildPhases = (
+				7F5C989701050905CA569249 /* Check Pods Manifest.lock */,
+				F925AC441A23C1670086F2EB /* Sources */,
+				F925AC451A23C1670086F2EB /* Frameworks */,
+				F925AC461A23C1670086F2EB /* Resources */,
+				310710386724EDE12C5461E9 /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = BarkCity;
+			productName = BarkCity;
+			productReference = F925AC481A23C1670086F2EB /* BarkCity.app */;
+			productType = "com.apple.product-type.application";
+		};
+		F925AC601A23C1670086F2EB /* BarkCityTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F925AC6E1A23C1670086F2EB /* Build configuration list for PBXNativeTarget "BarkCityTests" */;
+			buildPhases = (
+				F925AC5D1A23C1670086F2EB /* Sources */,
+				F925AC5E1A23C1670086F2EB /* Frameworks */,
+				F925AC5F1A23C1670086F2EB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F925AC631A23C1670086F2EB /* PBXTargetDependency */,
+			);
+			name = BarkCityTests;
+			productName = BarkCityTests;
+			productReference = F925AC611A23C1670086F2EB /* BarkCityTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F925AC401A23C1670086F2EB /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0610;
+				ORGANIZATIONNAME = com.rosamcgee;
+				TargetAttributes = {
+					F925AC471A23C1670086F2EB = {
+						CreatedOnToolsVersion = 6.1;
+						DevelopmentTeam = MX8253552V;
+					};
+					F925AC601A23C1670086F2EB = {
+						CreatedOnToolsVersion = 6.1;
+						TestTargetID = F925AC471A23C1670086F2EB;
+					};
+				};
+			};
+			buildConfigurationList = F925AC431A23C1670086F2EB /* Build configuration list for PBXProject "BarkCity" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = F925AC3F1A23C1670086F2EB;
+			productRefGroup = F925AC491A23C1670086F2EB /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				F925AC471A23C1670086F2EB /* BarkCity */,
+				F925AC601A23C1670086F2EB /* BarkCityTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		F925AC461A23C1670086F2EB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F94606721A23D86A00FF6AB0 /* BRKLocationTableViewCell.xib in Resources */,
+				F94606741A23D86A00FF6AB0 /* Main.storyboard in Resources */,
+				F925AC5C1A23C1670086F2EB /* LaunchScreen.xib in Resources */,
+				F925AC591A23C1670086F2EB /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F925AC5F1A23C1670086F2EB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		310710386724EDE12C5461E9 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7F5C989701050905CA569249 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		F925AC441A23C1670086F2EB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F94606731A23D86A00FF6AB0 /* BRKSearchViewController.m in Sources */,
+				95B81A6C1A23C951005F9AE0 /* BRKVenue.m in Sources */,
+				F925AC511A23C1670086F2EB /* AppDelegate.m in Sources */,
+				F94606711A23D86A00FF6AB0 /* BRKLocationTableViewCell.m in Sources */,
+				F94606701A23D86A00FF6AB0 /* BRKHomeTableViewController.m in Sources */,
+				F925AC4E1A23C1670086F2EB /* main.m in Sources */,
+				95B81A661A23C854005F9AE0 /* BRKFoursquareClient.m in Sources */,
+				B17860221A23CAB600EBE64F /* BRKScrollView.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F925AC5D1A23C1670086F2EB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F925AC681A23C1670086F2EB /* BarkCityTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		F925AC631A23C1670086F2EB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F925AC471A23C1670086F2EB /* BarkCity */;
+			targetProxy = F925AC621A23C1670086F2EB /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		F925AC5A1A23C1670086F2EB /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F925AC5B1A23C1670086F2EB /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		F925AC691A23C1670086F2EB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		F925AC6A1A23C1670086F2EB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		F925AC6C1A23C1670086F2EB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0B8B6E31379FF2590C47AA20 /* Pods.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				INFOPLIST_FILE = BarkCity/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+			};
+			name = Debug;
+		};
+		F925AC6D1A23C1670086F2EB /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 88C440BB57B1ECE75CE0576A /* Pods.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				INFOPLIST_FILE = BarkCity/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+			};
+			name = Release;
+		};
+		F925AC6F1A23C1670086F2EB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = BarkCityTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BarkCity.app/BarkCity";
+			};
+			name = Debug;
+		};
+		F925AC701A23C1670086F2EB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = BarkCityTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BarkCity.app/BarkCity";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		F925AC431A23C1670086F2EB /* Build configuration list for PBXProject "BarkCity" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F925AC691A23C1670086F2EB /* Debug */,
+				F925AC6A1A23C1670086F2EB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F925AC6B1A23C1670086F2EB /* Build configuration list for PBXNativeTarget "BarkCity" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F925AC6C1A23C1670086F2EB /* Debug */,
+				F925AC6D1A23C1670086F2EB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F925AC6E1A23C1670086F2EB /* Build configuration list for PBXNativeTarget "BarkCityTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F925AC6F1A23C1670086F2EB /* Debug */,
+				F925AC701A23C1670086F2EB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = F925AC401A23C1670086F2EB /* Project object */;
+}
