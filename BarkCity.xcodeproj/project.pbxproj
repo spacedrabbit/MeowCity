@@ -13,6 +13,8 @@
 		95B81A661A23C854005F9AE0 /* BRKFoursquareClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 95B81A651A23C854005F9AE0 /* BRKFoursquareClient.m */; };
 		95B81A6C1A23C951005F9AE0 /* BRKVenue.m in Sources */ = {isa = PBXBuildFile; fileRef = 95B81A6B1A23C951005F9AE0 /* BRKVenue.m */; };
 		B17860221A23CAB600EBE64F /* BRKScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = B17860211A23CAB600EBE64F /* BRKScrollView.m */; };
+		B17860331A251C7F00EBE64F /* BRKSearchResultsController.m in Sources */ = {isa = PBXBuildFile; fileRef = B17860301A251C7F00EBE64F /* BRKSearchResultsController.m */; };
+		B17860341A251C7F00EBE64F /* BRKVenuesResultsTable.m in Sources */ = {isa = PBXBuildFile; fileRef = B17860321A251C7F00EBE64F /* BRKVenuesResultsTable.m */; };
 		CBE36D1A1A25067A00AD80F6 /* BRKVenueDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE36D181A25067A00AD80F6 /* BRKVenueDetailTableViewCell.m */; };
 		CBE36D1B1A25067A00AD80F6 /* BRKVenueDetailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBE36D191A25067A00AD80F6 /* BRKVenueDetailTableViewCell.xib */; };
 		CBE36D1F1A25069900AD80F6 /* BRKVenueDetail.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBE36D1C1A25069900AD80F6 /* BRKVenueDetail.xib */; };
@@ -54,6 +56,10 @@
 		95B81A6B1A23C951005F9AE0 /* BRKVenue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRKVenue.m; sourceTree = "<group>"; };
 		B17860201A23CAB600EBE64F /* BRKScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRKScrollView.h; sourceTree = "<group>"; };
 		B17860211A23CAB600EBE64F /* BRKScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRKScrollView.m; sourceTree = "<group>"; };
+		B178602F1A251C7F00EBE64F /* BRKSearchResultsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRKSearchResultsController.h; sourceTree = "<group>"; };
+		B17860301A251C7F00EBE64F /* BRKSearchResultsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRKSearchResultsController.m; sourceTree = "<group>"; };
+		B17860311A251C7F00EBE64F /* BRKVenuesResultsTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRKVenuesResultsTable.h; sourceTree = "<group>"; };
+		B17860321A251C7F00EBE64F /* BRKVenuesResultsTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRKVenuesResultsTable.m; sourceTree = "<group>"; };
 		CBE36D171A25067A00AD80F6 /* BRKVenueDetailTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRKVenueDetailTableViewCell.h; sourceTree = "<group>"; };
 		CBE36D181A25067A00AD80F6 /* BRKVenueDetailTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRKVenueDetailTableViewCell.m; sourceTree = "<group>"; };
 		CBE36D191A25067A00AD80F6 /* BRKVenueDetailTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BRKVenueDetailTableViewCell.xib; sourceTree = "<group>"; };
@@ -147,6 +153,10 @@
 			children = (
 				F94606681A23D86A00FF6AB0 /* BRKHomeTableViewController.h */,
 				F94606691A23D86A00FF6AB0 /* BRKHomeTableViewController.m */,
+				B178602F1A251C7F00EBE64F /* BRKSearchResultsController.h */,
+				B17860301A251C7F00EBE64F /* BRKSearchResultsController.m */,
+				B17860311A251C7F00EBE64F /* BRKVenuesResultsTable.h */,
+				B17860321A251C7F00EBE64F /* BRKVenuesResultsTable.m */,
 				F946066A1A23D86A00FF6AB0 /* BRKLocationTableViewCell.h */,
 				F946066B1A23D86A00FF6AB0 /* BRKLocationTableViewCell.m */,
 				F946066C1A23D86A00FF6AB0 /* BRKLocationTableViewCell.xib */,
@@ -392,9 +402,11 @@
 				CBE36D1A1A25067A00AD80F6 /* BRKVenueDetailTableViewCell.m in Sources */,
 				F94606711A23D86A00FF6AB0 /* BRKLocationTableViewCell.m in Sources */,
 				F94606701A23D86A00FF6AB0 /* BRKHomeTableViewController.m in Sources */,
+				B17860331A251C7F00EBE64F /* BRKSearchResultsController.m in Sources */,
 				F925AC4E1A23C1670086F2EB /* main.m in Sources */,
 				95B81A661A23C854005F9AE0 /* BRKFoursquareClient.m in Sources */,
 				B17860221A23CAB600EBE64F /* BRKScrollView.m in Sources */,
+				B17860341A251C7F00EBE64F /* BRKVenuesResultsTable.m in Sources */,
 				07F864011A250F4A009EAB2F /* BRKVenueDetailViewController.m in Sources */,
 				CBE36D201A25069900AD80F6 /* BRKVenueDetailView.m in Sources */,
 			);
