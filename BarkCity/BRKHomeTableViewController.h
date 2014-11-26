@@ -8,10 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
+#import "BRKLocationManager.h"
 
-@interface BRKHomeTableViewController : UITableViewController <CLLocationManagerDelegate>
+@interface BRKHomeTableViewController : UITableViewController
 
-@property (strong, nonatomic) CLLocationManager *locationManager;
-@property (strong, nonatomic) CLLocation *location;
+@property (strong, nonatomic) BRKLocationManager *locationManager;
 
 @end

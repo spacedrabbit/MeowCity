@@ -31,22 +31,20 @@
     
     self.numberOfLocationsToShow = 5;
     
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
+    self.locationManager = [BRKLocationManager sharedLocationManager];
     
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    [self.locationManager startUpdatingLocation];
     
-    if ([CLLocationManager locationServicesEnabled]) {
-        self.locationManager = [[CLLocationManager alloc] init];
-        self.locationManager.delegate = self;
-        self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-        [self.locationManager startUpdatingLocation];//
-        
-        self.location = [[CLLocation alloc] init];
-    } else {
-        NSLog(@"Ish don't think so.");
-    }
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(handleLocationChange:)
+                                                 name:@"locationChanged"
+                                               object:nil];
+}
+
+- (void)handleLocationChange:(NSNotification *)notification {
+    NSDictionary *userInfo = notification.userInfo;
+    CLLocation *newLocation = userInfo[@"newLocation"];
+    [self fetchVenuesForLocation:newLocation];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -121,47 +119,11 @@
     }
 }
 
-#pragma mark - CORE LOCATION GET LOCATION
-
-- (void)viewWillAppear:(BOOL)animated {
-    [self.locationManager requestWhenInUseAuthorization];
-}
-
-
--(void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error{
-    
-    UIAlertView *errorAlert = [[UIAlertView alloc]initWithTitle:@"Error"
-                                                        message:@"There was an error retrieving your location"
-                                                       delegate:nil
-                                              cancelButtonTitle:@"OK"
-                                              otherButtonTitles: nil];
-    
-    [errorAlert show];
-    
-    NSLog(@"Error: %@",error.description);
-    
-}
-
-
-- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
-    if (self.location != locations.lastObject) {
-        [self fetchVenuesForLocation:locations.lastObject];
-    }
-    self.location = locations.lastObject;
-    NSLog(@"latitude %+.6f, longitude %+.6f\n", self.location.coordinate.latitude, self.location.coordinate.longitude);
-    
-}
-
-- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
+- (void)viewWillAppear:(BOOL)animated
 {
-    NSLog(@"didUpdateToLocation: %@", newLocation);
-    CLLocation *currentLocation = newLocation;
-    
-    if (currentLocation != nil) {
-        NSLog(@"%@",[NSString stringWithFormat:@"%.8f", currentLocation.coordinate.longitude]);
-        NSLog(@"%@",[NSString stringWithFormat:@"%.8f", currentLocation.coordinate.latitude]);
-    }
+    [self.locationManager requestInUseAuthorization];
 }
+
 
 - (void)fetchVenuesForLocation:(CLLocation *)location
 {

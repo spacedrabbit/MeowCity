@@ -28,6 +28,7 @@
 		F94606721A23D86A00FF6AB0 /* BRKLocationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F946066C1A23D86A00FF6AB0 /* BRKLocationTableViewCell.xib */; };
 		F94606731A23D86A00FF6AB0 /* BRKSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F946066E1A23D86A00FF6AB0 /* BRKSearchViewController.m */; };
 		F94606741A23D86A00FF6AB0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F946066F1A23D86A00FF6AB0 /* Main.storyboard */; };
+		F94606AF1A262DCA00FF6AB0 /* BRKLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F94606AE1A262DCA00FF6AB0 /* BRKLocationManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,6 +79,8 @@
 		F946066D1A23D86A00FF6AB0 /* BRKSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRKSearchViewController.h; sourceTree = "<group>"; };
 		F946066E1A23D86A00FF6AB0 /* BRKSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRKSearchViewController.m; sourceTree = "<group>"; };
 		F946066F1A23D86A00FF6AB0 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		F94606AD1A262DCA00FF6AB0 /* BRKLocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRKLocationManager.h; sourceTree = "<group>"; };
+		F94606AE1A262DCA00FF6AB0 /* BRKLocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRKLocationManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,6 +123,8 @@
 		95B81A671A23C85E005F9AE0 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				F94606AD1A262DCA00FF6AB0 /* BRKLocationManager.h */,
+				F94606AE1A262DCA00FF6AB0 /* BRKLocationManager.m */,
 				95B81A641A23C854005F9AE0 /* BRKFoursquareClient.h */,
 				95B81A651A23C854005F9AE0 /* BRKFoursquareClient.m */,
 				95B81A6A1A23C951005F9AE0 /* BRKVenue.h */,
@@ -290,10 +295,11 @@
 				TargetAttributes = {
 					F925AC471A23C1670086F2EB = {
 						CreatedOnToolsVersion = 6.1;
-						DevelopmentTeam = MX8253552V;
+						DevelopmentTeam = 9RXLE5FXUN;
 					};
 					F925AC601A23C1670086F2EB = {
 						CreatedOnToolsVersion = 6.1;
+						DevelopmentTeam = 9RXLE5FXUN;
 						TestTargetID = F925AC471A23C1670086F2EB;
 					};
 				};
@@ -381,6 +387,7 @@
 			files = (
 				F94606731A23D86A00FF6AB0 /* BRKSearchViewController.m in Sources */,
 				95B81A6C1A23C951005F9AE0 /* BRKVenue.m in Sources */,
+				F94606AF1A262DCA00FF6AB0 /* BRKLocationManager.m in Sources */,
 				F925AC511A23C1670086F2EB /* AppDelegate.m in Sources */,
 				CBE36D1A1A25067A00AD80F6 /* BRKVenueDetailTableViewCell.m in Sources */,
 				F94606711A23D86A00FF6AB0 /* BRKLocationTableViewCell.m in Sources */,
