@@ -12,6 +12,7 @@
 		109E2E8FD64C9BBFBEEE95F8 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 09C6EB0BF5BF9D0A7D566AF8 /* libPods.a */; };
 		95B81A661A23C854005F9AE0 /* BRKFoursquareClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 95B81A651A23C854005F9AE0 /* BRKFoursquareClient.m */; };
 		95B81A6C1A23C951005F9AE0 /* BRKVenue.m in Sources */ = {isa = PBXBuildFile; fileRef = 95B81A6B1A23C951005F9AE0 /* BRKVenue.m */; };
+		B1434DD71A268BB300770E29 /* barkboxLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = B1434DD61A268BB300770E29 /* barkboxLogo.png */; };
 		B17860221A23CAB600EBE64F /* BRKScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = B17860211A23CAB600EBE64F /* BRKScrollView.m */; };
 		B17860331A251C7F00EBE64F /* BRKSearchResultsController.m in Sources */ = {isa = PBXBuildFile; fileRef = B17860301A251C7F00EBE64F /* BRKSearchResultsController.m */; };
 		B17860341A251C7F00EBE64F /* BRKVenuesResultsTable.m in Sources */ = {isa = PBXBuildFile; fileRef = B17860321A251C7F00EBE64F /* BRKVenuesResultsTable.m */; };
@@ -54,6 +55,7 @@
 		95B81A651A23C854005F9AE0 /* BRKFoursquareClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRKFoursquareClient.m; sourceTree = "<group>"; };
 		95B81A6A1A23C951005F9AE0 /* BRKVenue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRKVenue.h; sourceTree = "<group>"; };
 		95B81A6B1A23C951005F9AE0 /* BRKVenue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRKVenue.m; sourceTree = "<group>"; };
+		B1434DD61A268BB300770E29 /* barkboxLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = barkboxLogo.png; sourceTree = "<group>"; };
 		B17860201A23CAB600EBE64F /* BRKScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRKScrollView.h; sourceTree = "<group>"; };
 		B17860211A23CAB600EBE64F /* BRKScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRKScrollView.m; sourceTree = "<group>"; };
 		B178602F1A251C7F00EBE64F /* BRKSearchResultsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRKSearchResultsController.h; sourceTree = "<group>"; };
@@ -228,6 +230,7 @@
 		F925AC4B1A23C1670086F2EB /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				B1434DD61A268BB300770E29 /* barkboxLogo.png */,
 				F925AC4F1A23C1670086F2EB /* AppDelegate.h */,
 				F925AC501A23C1670086F2EB /* AppDelegate.m */,
 				07F863FD1A250D90009EAB2F /* adorable-puppy.jpeg */,
@@ -342,6 +345,7 @@
 				CBE36D1B1A25067A00AD80F6 /* BRKVenueDetailTableViewCell.xib in Resources */,
 				F94606721A23D86A00FF6AB0 /* BRKLocationTableViewCell.xib in Resources */,
 				F94606741A23D86A00FF6AB0 /* Main.storyboard in Resources */,
+				B1434DD71A268BB300770E29 /* barkboxLogo.png in Resources */,
 				07F863FE1A250D90009EAB2F /* adorable-puppy.jpeg in Resources */,
 				F925AC5C1A23C1670086F2EB /* LaunchScreen.xib in Resources */,
 				F925AC591A23C1670086F2EB /* Images.xcassets in Resources */,

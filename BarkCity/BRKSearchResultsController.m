@@ -7,15 +7,18 @@
 //
 
 #import <CoreLocation/CoreLocation.h>
+
+#import "BRKSearchViewController.h"
+#import "BRKFoursquareClient.h"
 #import "BRKSearchResultsController.h"
 #import "BRKVenuesResultsTable.h"
 #import "BRKScrollView.h"
 
-@interface BRKSearchResultsController () <UIScrollViewDelegate>
+@interface BRKSearchResultsController () <UIScrollViewDelegate, CLLocationManagerDelegate>
 
 @property (strong, nonatomic) UIView * resultsView;
-@property (strong, nonatomic) BRKScrollView * topScrollNav;
-@property (strong, nonatomic) BRKScrollView * venueTablesScrollNav;
+@property (strong, nonatomic) BRKScrollView * venueCategoryScroll;
+@property (strong, nonatomic) BRKScrollView * venueTableScroll;
 
 @property (strong, nonatomic) NSArray * venuesSearchTables;
 @property (strong, nonatomic) CLLocationManager * locationManager;
@@ -25,68 +28,142 @@
 
 @implementation BRKSearchResultsController
 
+-(void)loadView{
+    [super loadView];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.resultsView = [[UIView alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    UIBarButtonItem * searchButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(displaySearchViewController)];
+    [searchButton setWidth:44.0];
+    [self.navigationController.navigationBar.topItem setRightBarButtonItem:searchButton animated:YES];
+    
+    // -- Category details are filled in from API -- //
+    NSArray * venueCategories = @[ @"Bars", @"Parks", @"Bakery", @"Shopping", @"Cookies" ];
+
+    // -- Setting up some rects -- //
+    CGRect screenRect = [UIScreen mainScreen].bounds;
+    CGPoint originWithNavBarAndMenu = CGPointMake(0.0, 64.0);
+    //CGPoint originWithNavBarandNoMenu = CGPointMake(0.0, 44.0);
+    //CGPoint originWithMenuBarAndNoNav = CGPointMake(0.0, 20.0);
+    CGFloat categoryBarHeight = 60.0;
+    
+    CGRect categoryScrollViewFrame = CGRectMake(originWithNavBarAndMenu.x , originWithNavBarAndMenu.y, [UIScreen mainScreen].bounds.size.width, categoryBarHeight);
+    CGRect tableScrollViewFrame = CGRectMake(originWithNavBarAndMenu.x, originWithNavBarAndMenu.y + categoryBarHeight, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - categoryBarHeight);
+    
+    // -- Creating the view for this view controller and setting it -- //
+    UIImageView * barkbox = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"barkboxLogo"]];
+    [barkbox setFrame:screenRect];
+    [barkbox setContentMode:UIViewContentModeRight];
+    
+    self.resultsView = [[UIView alloc] initWithFrame:screenRect];
+    [self.resultsView addSubview:barkbox];
+
     [self setView:self.resultsView];
-    [self.resultsView setBackgroundColor:[UIColor greenColor]];
     
-    self.venuesSearchTables = @[ [[UITableView alloc] initWithFrame:CGRectMake(0, 82.0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height ) style:UITableViewStylePlain], [[UITableView alloc] initWithFrame:CGRectMake(0, 82.0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height ) style:UITableViewStylePlain], [[UITableView alloc] initWithFrame:CGRectMake(0, 82.0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height ) style:UITableViewStylePlain] ];
+    // -- creating scroll views -- //
+    self.venueCategoryScroll = [self createCategoryScrollWithCategories:venueCategories inFrame:categoryScrollViewFrame];
+    [self.view addSubview:self.venueCategoryScroll];
     
-    for (BRKVenuesResultsTable * venueTable in self.venuesSearchTables) {
-        [venueTable setBackgroundColor:[UIColor blueColor]];
+    self.venueTableScroll = [self createScrollingTableFromVenues:venueCategories inFrame:tableScrollViewFrame];
+    [self.view addSubview:self.venueTableScroll];
+    
+    // -- setting scroll delegates -- //
+    self.venueCategoryScroll.delegate = self;
+    self.venueTableScroll.delegate = self;
+    
+}
+
+
+/**********************************************************************************
+ *
+ *                  Creating custom scroll views
+ *
+ ***********************************************************************************/
+
+-(BRKScrollView *) createCategoryScrollWithCategories:(NSArray *)categories inFrame:(CGRect)labelRect {
+    
+    NSMutableArray * labelsForCategories = [NSMutableArray array];
+    for (NSInteger i= 0; i<[categories count]; i++) {
+        
+        UILabel * newLabel = [[UILabel alloc] init];
+        newLabel.text = categories[i];
+        newLabel.accessibilityLabel = categories[i];
+        [newLabel setAdjustsFontSizeToFitWidth:YES];
+        [newLabel setTextAlignment:NSTextAlignmentCenter];
+        [newLabel setBackgroundColor:[UIColor blueColor]];
+        
+        [labelsForCategories addObject:newLabel];
+        
     }
     
-    UILabel * restaurantsLabel = [[UILabel alloc] init];
-    restaurantsLabel.text = @"Restaurants";
-    [restaurantsLabel setAdjustsFontSizeToFitWidth:YES];
-    [restaurantsLabel setBackgroundColor:[UIColor redColor]];
-    [restaurantsLabel setTextAlignment:NSTextAlignmentCenter];
+    BRKScrollView * scrollNav = [BRKScrollView createScrollViewFromFrame:labelRect withSubViews:labelsForCategories];
+    [scrollNav setShowsVerticalScrollIndicator:NO];
+    [scrollNav setShowsHorizontalScrollIndicator:NO];
     
-    UILabel * parksLabel = [[UILabel alloc] init];
-    parksLabel.text = @"Parks";
-    [parksLabel setAdjustsFontSizeToFitWidth:YES];
-    [parksLabel setBackgroundColor:[UIColor blueColor]];
-    [parksLabel setTextAlignment:NSTextAlignmentCenter];
-    
-    UILabel * barsLabel = [[UILabel alloc] init];
-    barsLabel.text = @"Bars";
-    [barsLabel setAdjustsFontSizeToFitWidth:YES];
-    [barsLabel setBackgroundColor:[UIColor orangeColor]];
-    [barsLabel setTextAlignment:NSTextAlignmentCenter];
-    
-    self.topScrollNav = [BRKScrollView createScrollViewFromFrame:CGRectMake(0.0, 22.0, [UIScreen mainScreen].bounds.size.width, 60.0) withSubViews:@[restaurantsLabel, parksLabel, barsLabel]];
-    [self.view addSubview:self.topScrollNav];
-    
-    self.venueTablesScrollNav = [BRKScrollView createScrollViewFromFrame:CGRectMake(0.0, 82.0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height-82.0) withSubViews:self.venuesSearchTables];
-    [self.view addSubview:self.venueTablesScrollNav];
-    
-    self.venueTablesScrollNav.delegate = self;
-    self.topScrollNav.delegate = self;
-    
+    return scrollNav;
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+-(BRKScrollView *) createScrollingTableFromVenues:(NSArray *)venues inFrame:(CGRect)frame{
+    
+    NSMutableArray * tableViewsForCategories = [NSMutableArray array];
+    for (NSInteger i= 0; i< [venues count]; i++) {
+        
+        UITableView * newTable = [[UITableView alloc] initWithFrame:frame];
+        [newTable setBackgroundColor:[UIColor whiteColor]];
+        [newTable setAccessibilityLabel:venues[i]];
+        [newTable setSeparatorColor:[UIColor grayColor]];
+        [newTable setSeparatorInset:UIEdgeInsetsZero];
+        [newTable setSeparatorStyle:UITableViewCellSeparatorStyleSingleLineEtched];
+        [newTable setSeparatorEffect:[UIBlurEffect effectWithStyle:UIBlurEffectStyleDark]];
+        [newTable registerNib:[UINib nibWithNibName:@"BRKLocationTableViewCell" bundle:nil] forCellReuseIdentifier:@"Location"];
+        
+        [tableViewsForCategories addObject:newTable];
+        
+    }
+    
+    BRKScrollView * scrollNavTables = [BRKScrollView createScrollViewFromFrame:frame withSubViews:tableViewsForCategories];
+    
+    return scrollNavTables;
 }
 
-#pragma mark - CORE LOCATION GET LOCATION
-
+/**********************************************************************************
+ *
+ *                  View helpers
+ *
+ ***********************************************************************************/
+#pragma mark - View helpers -
 - (void)viewWillAppear:(BOOL)animated {
     [self.locationManager requestWhenInUseAuthorization];
 }
 
-
--(void)scrollViewDidScroll:(UIScrollView *)scrollView{
+-(void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+}
+-(void)displaySearchViewController{
     
-    if (scrollView == self.topScrollNav) {
-        self.venueTablesScrollNav.contentOffset = scrollView.contentOffset;
-    } else {
-        self.topScrollNav.contentOffset = scrollView.contentOffset;
-    }
+    BRKSearchViewController * searchViewController = [[BRKSearchViewController alloc] init];
+    [self presentViewController:searchViewController animated:YES completion:^{
+        NSLog(@"Presented search");
+    }];
     
 }
+
+/**********************************************************************************
+ *
+ *                  Scroll Delegate
+ *
+ ***********************************************************************************/
+#pragma mark - Scroll Delegate -
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    CGPoint offset = scrollView.contentOffset;
+    if (scrollView == self.venueCategoryScroll) {
+        self.venueTableScroll.contentOffset = offset;
+    } else {
+        [self.venueCategoryScroll setContentOffset:CGPointMake(offset.x, 0.0)]; // we don't need to translate the Y offset for labels
+    }
+}
+
 
 @end

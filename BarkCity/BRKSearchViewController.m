@@ -26,7 +26,7 @@
     [self.view setTranslatesAutoresizingMaskIntoConstraints:NO];
     
     // -- Uncomment to test scroll view -- //
-    
+    /*
     [[NSOperationQueue mainQueue] addOperationWithBlock:^{
         
         CGRect screenRect = [UIScreen mainScreen].bounds;
@@ -55,7 +55,7 @@
                                                                     withSubViews:@[ view1, view2, view3, view4, view5 ]];
         
            [self.view addSubview:testScrollView];
-    }];
+    }];*/
     
 }
 

@@ -61,17 +61,17 @@
 #pragma mark - API Calls -
 - (void)fetchVenuesForLocation:(CLLocation *)location withQuery:(NSString *)query{
     
-
-    
-}
-- (void)fetchVenuesForLocation:(CLLocation *)location
-{
-    [[BRKFoursquareClient sharedClient] requestVenuesForQuery:@"Dog Friendly Restaurants" location:location limit:15 success:^(NSArray *venues) {
+    [[BRKFoursquareClient sharedClient] requestVenuesForQuery:query location:location limit:15 success:^(NSArray *venues) {
         self.venues = venues;
         [self.venueResultsTable reloadData];
     } failure:^(NSError *error) {
         NSLog(@"%@", error);
     }];
+    
+}
+- (void)fetchVenuesForLocation:(CLLocation *)location
+{
+    [self fetchVenuesForLocation:location withQuery:@"Dog Friendly Restaurants"];
 }
 
 
