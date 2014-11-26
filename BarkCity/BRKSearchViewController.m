@@ -27,7 +27,7 @@
 #pragma mark - UIViewController Standard Methods -
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+
     // handling moving content when keyboard appears ...
     NSOperationQueue * keyBoardHandlingQueue = [[NSOperationQueue alloc] init];
     [[NSNotificationCenter defaultCenter] addObserverForName:UIKeyboardWillShowNotification
@@ -38,12 +38,11 @@
         // the userInfo dict has info on KB size/location
         CGRect keyboardTopPoint = [[note.userInfo objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue];
         CGRect keyboardBottomPoint = [[note.userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
-        
+
         // because this involves an animation, it gets placed on the main queue
         [[NSOperationQueue mainQueue] addOperationWithBlock:^{
             [self updateSearchViewWithTopRect:keyboardTopPoint andBottomRect:keyboardBottomPoint];
         }];
-        
     }];
     
     // ... and when it disappears
@@ -54,8 +53,7 @@
     {
         //NSLog(@"The info: %@", note.userInfo);
         //NSLog(@"The Keyboard will disappear");
-    }];
-    
+    }];    
 }
 
 -(void)viewWillAppear:(BOOL)animated{

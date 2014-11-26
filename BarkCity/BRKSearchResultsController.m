@@ -26,7 +26,6 @@
 
 @implementation BRKSearchResultsController
 
-<<<<<<< HEAD
 -(void)loadView{
     [super loadView];
 }
@@ -102,7 +101,7 @@
     BRKScrollView * scrollNav = [BRKScrollView createScrollViewFromFrame:labelRect withSubViews:labelsForCategories ofFullWidth:YES];
     [scrollNav setShowsVerticalScrollIndicator:NO];
     [scrollNav setShowsHorizontalScrollIndicator:NO];
-    
+  
     return scrollNav;
 }
 
@@ -136,10 +135,27 @@
  ***********************************************************************************/
 #pragma mark - View helpers -
 
+/**********************************************************************************
+ *
+ *                  View helpers
+ *
+ ***********************************************************************************/
+#pragma mark - View helpers -
 - (void)viewWillAppear:(BOOL)animated {
     [self.locationManager requestWhenInUseAuthorization];
 }
 
+-(void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+}
+-(void)displaySearchViewController{
+    
+    BRKSearchViewController * searchViewController = [[BRKSearchViewController alloc] init];
+    [self presentViewController:searchViewController animated:YES completion:^{
+        NSLog(@"Presented search");
+    }];
+    
+}
 
 -(void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
