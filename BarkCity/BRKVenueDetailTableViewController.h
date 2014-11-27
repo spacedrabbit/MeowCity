@@ -1,5 +1,5 @@
 //
-//  BRKPictureTableViewCell.h
+//  BRKVenueDetailTableViewController.h
 //  BarkCity
 //
 //  Created by Charles Coutu-Nadeau on 11/27/14.
@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface BRKPictureTableViewCell : UITableViewCell
-
-@property (weak, nonatomic) IBOutlet UIImageView *picture;
+@interface BRKVenueDetailTableViewController : UITableViewController
 
 @end
