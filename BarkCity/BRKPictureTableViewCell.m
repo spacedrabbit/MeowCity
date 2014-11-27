@@ -61,7 +61,17 @@
                                 multiplier:1
                                   constant:0];
     
-    [self.contentView addConstraints:@[pictureLeading, pictureTrailing, pictureTop, pictureBottom]];
+    // Set picture height to 200 points
+    NSLayoutConstraint *pictureHeight =
+    [NSLayoutConstraint constraintWithItem:self.picture
+                                 attribute:NSLayoutAttributeHeight
+                                 relatedBy:NSLayoutRelationEqual
+                                    toItem:self.contentView
+                                 attribute:NSLayoutAttributeHeight
+                                multiplier:0
+                                  constant:200];
+    
+    [self.contentView addConstraints:@[pictureLeading, pictureTrailing, pictureTop, pictureBottom, pictureHeight]];
 }
 
 @end

@@ -7,7 +7,7 @@
 //
 
 #import "BRKHomeView.h"
-#import "BRKLocationTableViewCell.h"
+#import "BRKVenuesTableViewCell.h"
 #import "BRKPictureTableViewCell.h"
 
 @interface BRKHomeView()
@@ -33,10 +33,15 @@
         self.venuesTableView.delegate = self;
         self.venuesTableView.dataSource = self;
         
-        UINib *pictureCellNib = [UINib nibWithNibName:@"BRKPictureTableViewCell" bundle:nil];
-        [self.venuesTableView registerNib:pictureCellNib forCellReuseIdentifier:@"PictureCell"];
+        // This allows the dynamic resizing of cells
+        self.venuesTableView.rowHeight = UITableViewAutomaticDimension;
+        // This estimate is provided to adjust the size of the cursor on the scroll
+        self.venuesTableView.estimatedRowHeight = 120.0;
         
-        [self.venuesTableView registerNib:[UINib nibWithNibName:@"BRKLocationTableViewCell" bundle:nil] forCellReuseIdentifier:@"VenueCell"];
+//        UINib *pictureCellNib = [UINib nibWithNibName:@"BRKPictureTableViewCell" bundle:nil];
+//        [self.venuesTableView registerNib:pictureCellNib forCellReuseIdentifier:@"PictureCell"];
+        
+        [self.venuesTableView registerNib:[UINib nibWithNibName:@"BRKVenuesTableViewCell" bundle:nil] forCellReuseIdentifier:@"VenueCell"];
         
         [self addSubview:self.view];
     }
@@ -58,19 +63,23 @@
 
 - (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    // Picture cell on top
-    if (indexPath.row == 0) {
-         BRKPictureTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PictureCell"];
-        return cell;
-    }
+    BRKVenuesTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"VenueCell"];
+    // Configure cell
+    return cell;
     
-    // Venues cell below picture
-    else {
-        BRKLocationTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"VenueCell"];
-        // Configure cell
-        return cell;
-    }
-    return nil;
+//    // Picture cell on top
+//    if (indexPath.row == 0) {
+//         BRKPictureTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PictureCell"];
+//        return cell;
+//    }
+//    
+//    // Venues cell below picture
+//    else {
+//        BRKVenuesTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"VenueCell"];
+//        // Configure cell
+//        return cell;
+//    }
+//    return nil;
 }
 
 @end
