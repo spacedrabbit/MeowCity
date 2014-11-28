@@ -20,8 +20,8 @@
 
 @interface BRKVenuesResultsTable () <UITableViewDataSource, UITableViewDelegate>
 
-@property (strong, nonatomic) UITableView * venueResultsTable;
 @property (strong, nonatomic) NSArray * venues;
+@property (strong, nonatomic) UINib * cellNib;
 
 @end
 
@@ -38,11 +38,25 @@
     self = [super initWithCoder:coder];
     if (self) {
         
-        _venueResultsTable = [[UITableView alloc] init];
+        //[_venueResultsTable registerNib:[UINib nibWithNibName:@"BRKLocationTableViewCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"Location"];
+        
+        [_venueResultsTable registerNib:_cellNib forCellReuseIdentifier:@"Location"];
+        //[_venueResultsTable setDelegate:self];
+        //[_venueResultsTable setDataSource:self];
+        
+        
+    }
+    return self;
+}
+
+-(instancetype)init{
+    self = [super init];
+    if (self) {
+        _venueResultsTable = [[UITableView alloc] initWithFrame:[UIScreen mainScreen].bounds];
+        _cellNib = [[[NSBundle mainBundle] loadNibNamed:@"BRKLocationTableViewCell" owner:[BRKLocationTableViewCell class] options:nil] firstObject];
+        
         [_venueResultsTable setDelegate:self];
         [_venueResultsTable setDataSource:self];
-        
-        [_venueResultsTable registerNib:[UINib nibWithNibName:@"BRKLocationTableViewCell" bundle:nil] forCellReuseIdentifier:@"Location"];
         
         [self addSubview:_venueResultsTable];
     }
@@ -59,10 +73,12 @@
  *
  ***********************************************************************************/
 #pragma mark - API Calls -
+
 - (void)fetchVenuesForLocation:(CLLocation *)location withQuery:(NSString *)query{
     
     [[BRKFoursquareClient sharedClient] requestVenuesForQuery:query location:location limit:15 success:^(NSArray *venues) {
         self.venues = venues;
+        NSLog(@"The venues: %@", self.venues);
         [self.venueResultsTable reloadData];
     } failure:^(NSError *error) {
         NSLog(@"%@", error);
@@ -101,7 +117,7 @@
     return 1;
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return [self.venues count];
+    return [self.venues count] ? 1 : [self.venues count];
 }
 
 @end

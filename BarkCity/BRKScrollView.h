@@ -10,4 +10,5 @@
 
 @interface BRKScrollView : UIScrollView
 +(instancetype) createScrollViewFromFrame:(CGRect)frameRect withSubViews:(NSArray *)views;
++(instancetype) createScrollViewFromFrame:(CGRect)frameRect withSubViews:(NSArray *)views ofFullWidth:(BOOL)fullWidth;
 @end

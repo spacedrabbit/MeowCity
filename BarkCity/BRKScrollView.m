@@ -10,6 +10,69 @@
 
 @implementation BRKScrollView
 
++(instancetype) createScrollViewFromFrame:(CGRect)frameRect withSubViews:(NSArray *)views ofFullWidth:(BOOL)fullWidth{
+    
+    // --  method variables -- //
+    NSInteger subViewCount = !views ? 1 : [views count];
+    
+    // -------------------//
+    // -- Views set up -- //
+    // -------------------//
+    
+    // setting the frame for the scroll view will define it's proper location in it's super view
+    BRKScrollView * brkScrollView = [[BRKScrollView alloc] initWithFrame:frameRect];
+    [brkScrollView setUserInteractionEnabled:YES];
+    [brkScrollView setShowsHorizontalScrollIndicator:YES];
+    
+    UIView * brkContentView = [[UIView alloc] init];
+    if (fullWidth) {
+        // the content view will be drawn relative to the scroll view, so it's origin will be 0,0
+        [brkContentView setFrame:CGRectMake(0.0, 0.0, frameRect.size.width * subViewCount, frameRect.size.height)];
+    }
+    else{
+        // !! not fully implemented
+        CGFloat largestWidth = 0.0;
+        for (UILabel * view in views) {
+            NSDictionary * attributeValues = [view.attributedText attributesAtIndex:0 effectiveRange:nil];
+            CGSize labelSizes = [view.attributedText.string sizeWithAttributes:attributeValues];
+            //NSLog(@"Size: W:%f   H:%f ", labelSizes.width, labelSizes.height );
+            if (labelSizes.width > largestWidth) {
+                largestWidth = labelSizes.width;
+            }
+        }
+        [brkContentView setFrame:CGRectMake(0.0, 0.0, (largestWidth+10) * subViewCount, frameRect.size.height)];
+    }
+    [brkScrollView addSubview:brkContentView];
+    [brkScrollView setContentSize:brkContentView.frame.size];
+    [brkScrollView setPagingEnabled:YES];
+    
+    // iterates over the array of views, placing them on in the content view
+    for (NSInteger i = 0; i < subViewCount; i++ ){
+        
+        UIView * currentView = (UIView *)views[i];
+        [currentView setFrame:CGRectMake( i * frameRect.size.width, 0.0, frameRect.size.width,  frameRect.size.height)];
+        [brkContentView addSubview:currentView];
+        
+    }
+    
+    return brkScrollView;
+
+}
++(instancetype) createScrollViewFromFrame:(CGRect)frameRect withSubViews:(NSArray *)views{
+    return [self createScrollViewFromFrame:frameRect withSubViews:views ofFullWidth:YES];
+}
++(instancetype) createScrollViewWithRect:(CGRect)scrollRect{
+    return [self createScrollViewWithRect:scrollRect andSubViews:nil];
+}
++(instancetype) createScrollViewFromCurrentDisplay{
+    
+    CGFloat kScreenWidth = [UIScreen mainScreen].bounds.size.width;
+    CGFloat kScreenHeight = [UIScreen mainScreen].bounds.size.height;
+    
+    return [self createScrollViewWithRect:CGRectMake(0.0, 0.0, kScreenWidth, kScreenHeight) andSubViews:nil];
+}
+
+// AutoLayout Version - To Do
 +(instancetype) createScrollViewWithRect:(CGRect)scrollRect andSubViews:(NSArray *)views {
     
     // -- Views set up -- //
@@ -28,7 +91,7 @@
                                     @"height"   : [NSNumber numberWithDouble:   scrollRect.size.height  ]  };
     
     NSDictionary * rectBindings = NSDictionaryOfVariableBindings(brkContentView, brkScrollView);
-
+    
     // -- Method Variables -- //
     NSInteger subViewCount = [views count];
     CGFloat contentViewWidth = [rectMetrics[@"width"] doubleValue] * subViewCount;
@@ -82,55 +145,6 @@
                                                                                          views:nil];
     
     return self;
-}
-
-+(instancetype) createScrollViewFromFrame:(CGRect)frameRect withSubViews:(NSArray *)views{
-    
-    // -- rando method variables -- //
-    NSInteger subViewCount = [views count];
-    
-    // -------------------//
-    // -- Views set up -- //
-    // -------------------//
-    
-    // setting the frame for the scroll view will define it's proper location in it's super view
-    BRKScrollView * brkScrollView = [[BRKScrollView alloc] initWithFrame:frameRect];
-    [brkScrollView setUserInteractionEnabled:YES];
-    [brkScrollView setShowsHorizontalScrollIndicator:YES];
-    
-    // the content view will be drawn relative to the scroll view, so it's origin will be 0,0
-    // though, the width will be dependant on the screen size and number of views passed in
-    UIView * brkContentView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, frameRect.size.width * subViewCount, frameRect.size.height)];
-    [brkContentView setTranslatesAutoresizingMaskIntoConstraints:NO];
-    
-    // -- adding content view to scroll, setting some values
-    [brkScrollView addSubview:brkContentView];
-    [brkScrollView setContentSize:brkContentView.frame.size];
-    [brkScrollView setPagingEnabled:YES];
-
-    // iterates over the array of views, placing them on in the content view
-    for (NSInteger i = 0; i < subViewCount; i++ ){
-        
-        UIView * currentView = (UIView *)views[i];
-        // updated this CGRect's x value, as it should account for frames that are offset from 0.0
-        [currentView setFrame:CGRectMake( i * (frameRect.size.width + frameRect.origin.x), 0.0, frameRect.size.width,  frameRect.size.height)];
-        [brkContentView addSubview:currentView];
-        
-    }
-    
-    return brkScrollView;
-}
-
-+(instancetype) createScrollViewWithRect:(CGRect)scrollRect{
-    return [self createScrollViewWithRect:scrollRect andSubViews:nil];
-}
-
-+(instancetype) createScrollViewFromCurrentDisplay{
-    
-    CGFloat kScreenWidth = [UIScreen mainScreen].bounds.size.width;
-    CGFloat kScreenHeight = [UIScreen mainScreen].bounds.size.height;
-    
-    return [self createScrollViewWithRect:CGRectMake(0.0, 0.0, kScreenWidth, kScreenHeight) andSubViews:nil];
 }
 
 

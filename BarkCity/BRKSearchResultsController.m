@@ -35,8 +35,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    // -- SEARCH BUTTON -- //
     UIBarButtonItem * searchButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(displaySearchViewController)];
-    [searchButton setWidth:44.0];
     [self.navigationController.navigationBar.topItem setRightBarButtonItem:searchButton animated:YES];
     
     // -- Category details are filled in from API -- //
@@ -45,18 +45,15 @@
     // -- Setting up some rects -- //
     CGRect screenRect = [UIScreen mainScreen].bounds;
     CGPoint originWithNavBarAndMenu = CGPointMake(0.0, 64.0);
-    //CGPoint originWithNavBarandNoMenu = CGPointMake(0.0, 44.0);
-    //CGPoint originWithMenuBarAndNoNav = CGPointMake(0.0, 20.0);
     CGFloat categoryBarHeight = 60.0;
     
     CGRect categoryScrollViewFrame = CGRectMake(originWithNavBarAndMenu.x , originWithNavBarAndMenu.y, [UIScreen mainScreen].bounds.size.width, categoryBarHeight);
     CGRect tableScrollViewFrame = CGRectMake(originWithNavBarAndMenu.x, originWithNavBarAndMenu.y + categoryBarHeight, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - categoryBarHeight);
     
-    // -- Creating the view for this view controller and setting it -- //
+    // -- Adding a background image -- //
     UIImageView * barkbox = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"barkboxLogo"]];
     [barkbox setFrame:screenRect];
     [barkbox setContentMode:UIViewContentModeRight];
-    
     self.resultsView = [[UIView alloc] initWithFrame:screenRect];
     [self.resultsView addSubview:barkbox];
 
@@ -87,18 +84,23 @@
     NSMutableArray * labelsForCategories = [NSMutableArray array];
     for (NSInteger i= 0; i<[categories count]; i++) {
         
+        UIFont * sysFont = [UIFont systemFontOfSize:16.0];
+        
         UILabel * newLabel = [[UILabel alloc] init];
-        newLabel.text = categories[i];
+        //newLabel.text = categories[i];
+        newLabel.attributedText = [[NSAttributedString alloc] initWithString:categories[i] attributes:@{ NSFontAttributeName: sysFont}];
+        //CGSize labelSize = [categories[i] sizeWithAttributes:@{ NSFontAttributeName: sysFont}];
+        
         newLabel.accessibilityLabel = categories[i];
         [newLabel setAdjustsFontSizeToFitWidth:YES];
         [newLabel setTextAlignment:NSTextAlignmentCenter];
-        [newLabel setBackgroundColor:[UIColor blueColor]];
+        [newLabel setBackgroundColor:[UIColor lightGrayColor]];
         
         [labelsForCategories addObject:newLabel];
         
     }
     
-    BRKScrollView * scrollNav = [BRKScrollView createScrollViewFromFrame:labelRect withSubViews:labelsForCategories];
+    BRKScrollView * scrollNav = [BRKScrollView createScrollViewFromFrame:labelRect withSubViews:labelsForCategories ofFullWidth:YES];
     [scrollNav setShowsVerticalScrollIndicator:NO];
     [scrollNav setShowsHorizontalScrollIndicator:NO];
     
@@ -143,10 +145,11 @@
 }
 -(void)displaySearchViewController{
     
+    
     BRKSearchViewController * searchViewController = [[BRKSearchViewController alloc] init];
-    [self presentViewController:searchViewController animated:YES completion:^{
-        NSLog(@"Presented search");
-    }];
+    [searchViewController setModalPresentationStyle:UIModalPresentationOverCurrentContext];
+    
+    [self presentViewController:searchViewController animated:YES completion:nil];
     
 }
 
@@ -162,6 +165,15 @@
         self.venueTableScroll.contentOffset = offset;
     } else {
         [self.venueCategoryScroll setContentOffset:CGPointMake(offset.x, 0.0)]; // we don't need to translate the Y offset for labels
+    }
+
+    // stops horizontal bounces
+    if (offset.x < 0) {
+        [scrollView setContentOffset:CGPointMake(0.0, 0.0) animated:NO];
+    }
+
+    if (offset.x > scrollView.contentSize.width - [UIScreen mainScreen].bounds.size.width) {
+        [scrollView setContentOffset:CGPointMake(scrollView.contentSize.width - [UIScreen mainScreen].bounds.size.width, 0.0) animated:NO];
     }
 }
 

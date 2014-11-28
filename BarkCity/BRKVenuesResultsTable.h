@@ -10,6 +10,8 @@
 
 @interface BRKVenuesResultsTable : UIView
 
+@property (strong, nonatomic) UITableView * venueResultsTable;
+
 - (void)updateTableViewFrame;
 - (void)fetchVenuesForLocation:(CLLocation *)location;
 - (void)fetchVenuesForLocation:(CLLocation *)location withQuery:(NSString *)query;
