@@ -150,10 +150,11 @@
 }
 -(void)displaySearchViewController{
     
+    
     BRKSearchViewController * searchViewController = [[BRKSearchViewController alloc] init];
-    [self presentViewController:searchViewController animated:YES completion:^{
-        NSLog(@"Presented search");
-    }];
+    [searchViewController setModalPresentationStyle:UIModalPresentationOverCurrentContext];
+    
+    [self presentViewController:searchViewController animated:YES completion:nil];
     
 }
 
@@ -183,7 +184,6 @@
     } else {
         [self.venueCategoryScroll setContentOffset:CGPointMake(offset.x, 0.0)]; // we don't need to translate the Y offset for labels
     }
-
     // stops horizontal bounces
     if (offset.x < 0) {
         [scrollView setContentOffset:CGPointMake(0.0, 0.0) animated:NO];

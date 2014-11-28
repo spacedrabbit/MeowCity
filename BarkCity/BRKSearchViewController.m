@@ -68,8 +68,7 @@
     // Not sure we need this here
 //    CGPoint originWithNavBarAndMenu = CGPointMake(0.0, 64.0);
 //    self.scrollingContainerView = [BRKScrollView createScrollViewFromFrame:CGRectMake(0.0, originWithNavBarAndMenu.y, self.screenRect.size.width, self.screenRect.size.height - originWithNavBarAndMenu.y) withSubViews:nil];
-//    [self.view addSubview:self.scrollingContainerView];
-    
+//    [self.view addSubview:self.scrollingContainerView];    
     [self setUpViews];
 }
 - (void)didReceiveMemoryWarning {
@@ -100,7 +99,7 @@
     }
 }
 
--(void)toggleTableViewAndUnhide:(BOOL)unHide{
+-(void)toggleTableViewAndUnhide:(BOOL)unHide{ 
     
     CGFloat alphaValue;
     if (self.tableViewIsHidden) {
@@ -108,7 +107,6 @@
     }else{
         alphaValue = 0.0;
     }
-    
     //adds a fade animation to the results disapearing
     [UIView animateWithDuration:0.25
                      animations:^

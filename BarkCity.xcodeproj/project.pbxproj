@@ -410,6 +410,11 @@
 					F925AC601A23C1670086F2EB = {
 						CreatedOnToolsVersion = 6.1;
 						DevelopmentTeam = Z7MS44448J;
+						DevelopmentTeam = 3457AE227Q;
+					};
+					F925AC601A23C1670086F2EB = {
+						CreatedOnToolsVersion = 6.1;
+						DevelopmentTeam = 3457AE227Q;
 						TestTargetID = F925AC471A23C1670086F2EB;
 					};
 				};
