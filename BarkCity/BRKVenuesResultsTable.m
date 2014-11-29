@@ -53,7 +53,7 @@
     self = [super init];
     if (self) {
         _venueResultsTable = [[UITableView alloc] initWithFrame:[UIScreen mainScreen].bounds];
-        _cellNib = [[[NSBundle mainBundle] loadNibNamed:@"BRKLocationTableViewCell" owner:[BRKLocationTableViewCell class] options:nil] firstObject];
+        //_cellNib = [[[NSBundle mainBundle] loadNibNamed:@"BRKLocationTableViewCell" owner:[BRKVenuesTableViewCell class] options:nil] firstObject];
         
         [_venueResultsTable setDelegate:self];
         [_venueResultsTable setDataSource:self];

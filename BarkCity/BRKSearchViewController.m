@@ -65,10 +65,6 @@
     [searchViewBlur setFrame    :   [UIScreen mainScreen].bounds];
     [self.view      addSubview  :   searchViewBlur              ];
 
-    // Not sure we need this here
-//    CGPoint originWithNavBarAndMenu = CGPointMake(0.0, 64.0);
-//    self.scrollingContainerView = [BRKScrollView createScrollViewFromFrame:CGRectMake(0.0, originWithNavBarAndMenu.y, self.screenRect.size.width, self.screenRect.size.height - originWithNavBarAndMenu.y) withSubViews:nil];
-//    [self.view addSubview:self.scrollingContainerView];    
     [self setUpViews];
 }
 - (void)didReceiveMemoryWarning {

@@ -61,91 +61,93 @@
 +(instancetype) createScrollViewFromFrame:(CGRect)frameRect withSubViews:(NSArray *)views{
     return [self createScrollViewFromFrame:frameRect withSubViews:views ofFullWidth:YES];
 }
-+(instancetype) createScrollViewWithRect:(CGRect)scrollRect{
-    return [self createScrollViewWithRect:scrollRect andSubViews:nil];
++(instancetype) createScrollViewFromFrame:(CGRect)frameRect{
+    return [self createScrollViewFromFrame:frameRect withSubViews:nil];
 }
 +(instancetype) createScrollViewFromCurrentDisplay{
     
     CGFloat kScreenWidth = [UIScreen mainScreen].bounds.size.width;
     CGFloat kScreenHeight = [UIScreen mainScreen].bounds.size.height;
     
-    return [self createScrollViewWithRect:CGRectMake(0.0, 0.0, kScreenWidth, kScreenHeight) andSubViews:nil];
+    return [self createScrollViewFromFrame:CGRectMake(0.0, 0.0, kScreenWidth, kScreenHeight) withSubViews:nil];
 }
 
 // AutoLayout Version - To Do
-+(instancetype) createScrollViewWithRect:(CGRect)scrollRect andSubViews:(NSArray *)views {
-    
-    // -- Views set up -- //
-    BRKScrollView * brkScrollView = [[BRKScrollView alloc] init];
-    [brkScrollView setUserInteractionEnabled:YES];
-    [brkScrollView setShowsHorizontalScrollIndicator:YES];
-    
-    UIView * brkContentView = [[UIView alloc] init];
-    [brkContentView setTranslatesAutoresizingMaskIntoConstraints:NO];
-    [brkScrollView addSubview:brkContentView];
-    
-    // -- Parameters for Visual Formatting -- //
-    NSDictionary * rectMetrics = @{ @"originX"  : [NSNumber numberWithDouble:   scrollRect.origin.x     ],
-                                    @"originY"  : [NSNumber numberWithDouble:   scrollRect.origin.y     ],
-                                    @"width"    : [NSNumber numberWithDouble:   scrollRect.size.width   ],
-                                    @"height"   : [NSNumber numberWithDouble:   scrollRect.size.height  ]  };
-    
-    NSDictionary * rectBindings = NSDictionaryOfVariableBindings(brkContentView, brkScrollView);
-    
-    // -- Method Variables -- //
-    NSInteger subViewCount = [views count];
-    CGFloat contentViewWidth = [rectMetrics[@"width"] doubleValue] * subViewCount;
-    
-    // -- Extract subviews -- //
-    NSMutableDictionary * viewsReference = [[NSMutableDictionary alloc] init];
-    NSMutableString * subViewFormatString = [[NSMutableString alloc] init];
-    for (NSInteger i = 0; i < subViewCount; i++) {
-        
-        id currentView = views[i];
-        
-        [brkContentView addSubview:currentView];
-        NSString * viewName = [NSString stringWithFormat:@"%@-%li", NSStringFromClass([currentView class]), (long)i];
-        [viewsReference setObject:currentView forKey:viewName];
-        
-        [subViewFormatString appendFormat:@"%@|",viewName]; // to pass to format string in constraints
-    }
-    
-    
-    /**********************************************************************************
-     *
-     *      Programmatic Layout -- Content
-     *
-     ***********************************************************************************/
-    
-    NSArray * brkContentHorizontal = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|brkContentView|"
-                                                                             options:0
-                                                                             metrics:rectMetrics
-                                                                               views:rectBindings];
-    
-    NSArray * brkContentVertical = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|brkContentView(==height)"
-                                                                           options:0
-                                                                           metrics:rectMetrics
-                                                                             views:rectBindings];
-    [brkScrollView addConstraints:brkContentHorizontal];
-    [brkScrollView addConstraints:brkContentVertical];
-    
-    /**********************************************************************************
-     *
-     *      Programmatic Layout -- Views
-     *
-     ***********************************************************************************/
-#pragma -- To do --
-    NSArray * allSubViewsHorizontalContraints = [NSLayoutConstraint constraintsWithVisualFormat:@""
-                                                                                        options:0
-                                                                                        metrics:nil
-                                                                                          views:nil];
-    NSArray * allSubViewsVerticalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@""
-                                                                                       options:0
-                                                                                       metrics:nil
-                                                                                         views:nil];
-    
-    return self;
-}
+//
+//+(instancetype) createScrollViewWithRect:(CGRect)scrollRect andSubViews:(NSArray *)views {
+//    
+//    // -- Views set up -- //
+//    BRKScrollView * brkScrollView = [[BRKScrollView alloc] init];
+//    [brkScrollView setUserInteractionEnabled:YES];
+//    [brkScrollView setShowsHorizontalScrollIndicator:YES];
+//    
+//    UIView * brkContentView = [[UIView alloc] init];
+//    [brkContentView setTranslatesAutoresizingMaskIntoConstraints:NO];
+//    [brkScrollView addSubview:brkContentView];
+//    
+//    // -- Parameters for Visual Formatting -- //
+//    NSDictionary * rectMetrics = @{ @"originX"  : [NSNumber numberWithDouble:   scrollRect.origin.x     ],
+//                                    @"originY"  : [NSNumber numberWithDouble:   scrollRect.origin.y     ],
+//                                    @"width"    : [NSNumber numberWithDouble:   scrollRect.size.width   ],
+//                                    @"height"   : [NSNumber numberWithDouble:   scrollRect.size.height  ]  };
+//    
+//    NSDictionary * rectBindings = NSDictionaryOfVariableBindings(brkContentView, brkScrollView);
+//    
+//    // -- Method Variables -- //
+//    NSInteger subViewCount = [views count];
+//    CGFloat contentViewWidth = [rectMetrics[@"width"] doubleValue] * subViewCount;
+//    
+//    // -- Extract subviews -- //
+//    NSMutableDictionary * viewsReference = [[NSMutableDictionary alloc] init];
+//    NSMutableString * subViewFormatString = [[NSMutableString alloc] init];
+//    for (NSInteger i = 0; i < subViewCount; i++) {
+//        
+//        id currentView = views[i];
+//        
+//        [brkContentView addSubview:currentView];
+//        NSString * viewName = [NSString stringWithFormat:@"%@-%li", NSStringFromClass([currentView class]), (long)i];
+//        [viewsReference setObject:currentView forKey:viewName];
+//        
+//        [subViewFormatString appendFormat:@"%@|",viewName]; // to pass to format string in constraints
+//    }
+//    
+//    
+//    /**********************************************************************************
+//     *
+//     *      Programmatic Layout -- Content
+//     *
+//     ***********************************************************************************/
+//    
+//    NSArray * brkContentHorizontal = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|brkContentView|"
+//                                                                             options:0
+//                                                                             metrics:rectMetrics
+//                                                                               views:rectBindings];
+//    
+//    NSArray * brkContentVertical = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|brkContentView(==height)"
+//                                                                           options:0
+//                                                                           metrics:rectMetrics
+//                                                                             views:rectBindings];
+//    [brkScrollView addConstraints:brkContentHorizontal];
+//    [brkScrollView addConstraints:brkContentVertical];
+//    
+//    /**********************************************************************************
+//     *
+//     *      Programmatic Layout -- Views
+//     *
+//     ***********************************************************************************/
+//#pragma -- To do --
+//    NSArray * allSubViewsHorizontalContraints = [NSLayoutConstraint constraintsWithVisualFormat:@""
+//                                                                                        options:0
+//                                                                                        metrics:nil
+//                                                                                          views:nil];
+//    NSArray * allSubViewsVerticalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@""
+//                                                                                       options:0
+//                                                                                       metrics:nil
+//                                                                                         views:nil];
+//    
+//    return self;
+//}
+
 
 
 @end

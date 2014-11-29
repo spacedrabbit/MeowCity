@@ -117,7 +117,7 @@
         [newTable setSeparatorInset:UIEdgeInsetsZero];
         [newTable setSeparatorStyle:UITableViewCellSeparatorStyleSingleLineEtched];
         [newTable setSeparatorEffect:[UIBlurEffect effectWithStyle:UIBlurEffectStyleDark]];
-        [newTable registerNib:[UINib nibWithNibName:@"BRKLocationTableViewCell" bundle:nil] forCellReuseIdentifier:@"Location"];
+        //[newTable registerNib:[UINib nibWithNibName:@"BRKLocationTableViewCell" bundle:nil] forCellReuseIdentifier:@"Location"];
         
         [tableViewsForCategories addObject:newTable];
         
