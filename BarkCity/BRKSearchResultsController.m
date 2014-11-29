@@ -12,15 +12,15 @@
 #import "BRKSearchResultsController.h"
 #import "BRKVenuesResultsTable.h"
 #import "BRKScrollView.h"
+#import "BRKPictureTableViewCell.h"
 
-@interface BRKSearchResultsController () <UIScrollViewDelegate, CLLocationManagerDelegate>
+@interface BRKSearchResultsController () <UIScrollViewDelegate, CLLocationManagerDelegate, UITableViewDataSource, UITableViewDelegate>
 
 @property (strong, nonatomic) UIView * resultsView;
 @property (strong, nonatomic) BRKScrollView * venueCategoryScroll;
 @property (strong, nonatomic) BRKScrollView * venueTableScroll;
 @property (strong, nonatomic) NSArray * venuesSearchTables;
-@property (strong, nonatomic) CLLocationManager * locationManager;
-@property (strong, nonatomic) CLLocation * location;
+@property (strong, nonatomic) CLLocation * currentLocation;
 
 @end
 
@@ -68,6 +68,21 @@
     self.venueCategoryScroll.delegate = self;
     self.venueTableScroll.delegate = self;
     
+    // -- getting info -- //
+    self.foursquareClient = [BRKFoursquareClient sharedClient];
+    
+    self.numberOfLocationsToShow = 5;
+    
+    self.locationManager = [BRKLocationManager sharedLocationManager];
+    
+    [self.locationManager startUpdatingLocation];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(handleLocationChange:)
+                                                 name:@"locationChanged"
+                                               object:nil];
+
+    
 }
 
 
@@ -85,9 +100,8 @@
         UIFont * sysFont = [UIFont systemFontOfSize:16.0];
         
         UILabel * newLabel = [[UILabel alloc] init];
-        //newLabel.text = categories[i];
         newLabel.attributedText = [[NSAttributedString alloc] initWithString:categories[i] attributes:@{ NSFontAttributeName: sysFont}];
-        //CGSize labelSize = [categories[i] sizeWithAttributes:@{ NSFontAttributeName: sysFont}];
+
         
         newLabel.accessibilityLabel = categories[i];
         [newLabel setAdjustsFontSizeToFitWidth:YES];
@@ -110,16 +124,23 @@
     NSMutableArray * tableViewsForCategories = [NSMutableArray array];
     for (NSInteger i= 0; i< [venues count]; i++) {
         
-        UITableView * newTable = [[UITableView alloc] initWithFrame:frame];
-        [newTable setBackgroundColor:[UIColor whiteColor]];
-        [newTable setAccessibilityLabel:venues[i]];
-        [newTable setSeparatorColor:[UIColor grayColor]];
-        [newTable setSeparatorInset:UIEdgeInsetsZero];
-        [newTable setSeparatorStyle:UITableViewCellSeparatorStyleSingleLineEtched];
-        [newTable setSeparatorEffect:[UIBlurEffect effectWithStyle:UIBlurEffectStyleDark]];
-        //[newTable registerNib:[UINib nibWithNibName:@"BRKLocationTableViewCell" bundle:nil] forCellReuseIdentifier:@"Location"];
+        //UITableView * newTable = [[UITableView alloc] initWithFrame:frame];
+        self.testTable = [[UITableView alloc] init];
+        UINib *venueNib = [[[NSBundle mainBundle] loadNibNamed:@"BRKVenuesTableViewCell" owner:self options:nil] firstObject];
+        [self.testTable registerNib:venueNib forCellReuseIdentifier:@"VenueCell"];
+        //[self.testTable setBackgroundColor:[UIColor whiteColor]];
+        //[self.testTable setAccessibilityLabel:venues[i]];
+        //[self.testTable setSeparatorColor:[UIColor grayColor]];
+        //[self.testTable setSeparatorInset:UIEdgeInsetsZero];
+        //[self.testTable setSeparatorStyle:UITableViewCellSeparatorStyleSingleLineEtched];
+        //[self.testTable setSeparatorEffect:[UIBlurEffect effectWithStyle:UIBlurEffectStyleDark]];
+        [self.testTable setDelegate:self];
+        [self.testTable setDataSource:self];
+//        BRKVenuesResultsTable * newTable = [[BRKVenuesResultsTable alloc] init];
         
-        [tableViewsForCategories addObject:newTable];
+//        [newTable fetchVenuesForLocation:self.currentLocation];
+        
+        [tableViewsForCategories addObject:self.testTable];
         
     }
     
@@ -134,15 +155,8 @@
  *
  ***********************************************************************************/
 #pragma mark - View helpers -
-
-/**********************************************************************************
- *
- *                  View helpers
- *
- ***********************************************************************************/
-#pragma mark - View helpers -
 - (void)viewWillAppear:(BOOL)animated {
-    [self.locationManager requestWhenInUseAuthorization];
+    [self.locationManager requestInUseAuthorization];
 }
 
 -(void)didReceiveMemoryWarning {
@@ -185,13 +199,86 @@
         [self.venueCategoryScroll setContentOffset:CGPointMake(offset.x, 0.0)]; // we don't need to translate the Y offset for labels
     }
     // stops horizontal bounces
-    if (offset.x < 0) {
-        [scrollView setContentOffset:CGPointMake(0.0, 0.0) animated:NO];
-    }
-
-    if (offset.x > scrollView.contentSize.width - [UIScreen mainScreen].bounds.size.width) {
-        [scrollView setContentOffset:CGPointMake(scrollView.contentSize.width - [UIScreen mainScreen].bounds.size.width, 0.0) animated:NO];
-    }
+//    if (offset.x < 0) {
+//        [scrollView setContentOffset:CGPointMake(0.0, 0.0) animated:NO];
+//    }
+//
+//    if (offset.x > scrollView.contentSize.width - [UIScreen mainScreen].bounds.size.width) {
+//        [scrollView setContentOffset:CGPointMake(scrollView.contentSize.width - [UIScreen mainScreen].bounds.size.width, 0.0) animated:NO];
+//    }
 }
 
+- (void)handleLocationChange:(NSNotification *)notification {
+    NSDictionary *userInfo = notification.userInfo;
+    CLLocation *newLocation = userInfo[@"newLocation"];
+    if (!self.currentLocation) {
+        self.currentLocation = newLocation;
+    }
+    [self fetchVenuesForLocation:newLocation withCompletionHandler:^(bool success) {
+        
+        if (success) {
+            [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                [self.venueTableScroll reloadBRKSubViews];
+                [self.testTable reloadData];
+            }];
+        }else{
+            NSLog(@"Nothing found");
+        }
+        
+    }];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+
+//    if (indexPath.row == 0) {
+//        BRKPictureTableViewCell * cell = (BRKPictureTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"PictureCell"];
+//        return cell;
+//    }else{
+//        cell = (BRKVenuesTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"VenueCell" forIndexPath:indexPath];
+//    }
+    
+    static NSString *cellIdentifier = @"VenueCell";
+    BRKVenuesTableViewCell *cell = nil;
+    
+    if (!cell) {
+        cell = [[BRKVenuesTableViewCell alloc] init];
+    }
+    
+    cell = (BRKVenuesTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
+    
+    
+    BRKVenue *venue = self.venues[indexPath.row];
+    cell.name.text = venue.name;
+    cell.rating.text = [venue.rating description];
+    cell.distance.text = @"1.0 mi";
+    
+    // conditional to test the dynamic length of the cells
+    
+    if (indexPath.row %2 == 0) {
+        cell.descriptiveBody.text = @"This restaurant is great for dogs";
+    } else {
+        cell.descriptiveBody.text = @"This is a very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very long version of the cell";
+    }
+    
+    return cell;
+}
+
+- (void)fetchVenuesForLocation:(CLLocation *)location withCompletionHandler:(void (^)(bool))success
+{
+    [self.foursquareClient requestVenuesForQuery:@"Dog Friendly Restaurants" location:location limit:15 success:^(NSArray *venues) {
+        self.venues = venues;
+        if (self.venues) {
+           success(YES);
+        }
+    } failure:^(NSError *error) {
+        NSLog(@"%@", error);
+    }];
+}
+
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return 1;
+}
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return [self.venues count]; //? 1 : [self.venues count];
+}
 @end

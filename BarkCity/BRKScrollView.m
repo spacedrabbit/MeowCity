@@ -64,6 +64,17 @@
 +(instancetype) createScrollViewFromFrame:(CGRect)frameRect{
     return [self createScrollViewFromFrame:frameRect withSubViews:nil];
 }
+
+-(void) reloadBRKSubViews{
+    
+    NSArray * allSubviews = [self subviews];
+    for(UIView * table in allSubviews){
+        if ([table respondsToSelector:@selector(reloadData)]) {
+            [(UITableView *)table reloadData];
+        }
+    }
+    
+}
 +(instancetype) createScrollViewFromCurrentDisplay{
     
     CGFloat kScreenWidth = [UIScreen mainScreen].bounds.size.width;

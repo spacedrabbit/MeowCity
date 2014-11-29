@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface BRKScrollView : UIScrollView
+-(void) reloadBRKSubViews;
 +(instancetype) createScrollViewFromFrame:(CGRect)frameRect withSubViews:(NSArray *)views;
 +(instancetype) createScrollViewFromFrame:(CGRect)frameRect withSubViews:(NSArray *)views ofFullWidth:(BOOL)fullWidth;
 @end

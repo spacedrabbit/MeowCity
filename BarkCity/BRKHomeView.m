@@ -49,6 +49,7 @@
     
 }
 
+
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     // Write code to deselect row
 }
@@ -61,12 +62,14 @@
     return 10;
 }
 
+
 - (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     BRKVenuesTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"VenueCell"];
     // Configure cell
-    return cell;
     
+    return cell;
+
 //    // Picture cell on top
 //    if (indexPath.row == 0) {
 //         BRKPictureTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PictureCell"];
@@ -81,5 +84,6 @@
 //    }
 //    return nil;
 }
+
 
 @end

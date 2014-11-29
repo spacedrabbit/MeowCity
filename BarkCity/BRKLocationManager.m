@@ -45,9 +45,13 @@
     [self.locationManager startUpdatingLocation];
 }
 
-- (void)requestInUseAuthorization
-{
-    [self.locationManager requestWhenInUseAuthorization];
+//- (void)requestInUseAuthorization
+//{
+//    [self.locationManager requestWhenInUseAuthorization];
+//}
+
+- (void)requestInUseAuthorization {
+    [self.locationManager requestAlwaysAuthorization];
 }
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
