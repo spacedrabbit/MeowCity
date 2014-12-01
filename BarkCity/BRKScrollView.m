@@ -66,14 +66,19 @@
 }
 
 -(void) reloadBRKSubViews{
+    // View Hierchy of this Class:
+    // BRKScrollView > @[UIView, UIImageView, UIImageView]
+    // BRKScrollView[0] > @[UITableView, UITableView, UITableView, UITableView, UITableView]
+    // Fucking breakthrough.
+    NSArray * allBRKSubViews = [self subviews];
+    UIView * brkContentView = allBRKSubViews[0];
+    NSArray * allBRKContentViewSubTables = [brkContentView subviews];
     
-    NSArray * allSubviews = [self subviews];
-    for(UIView * table in allSubviews){
+    for(UIView * table in allBRKContentViewSubTables){
         if ([table respondsToSelector:@selector(reloadData)]) {
             [(UITableView *)table reloadData];
         }
     }
-    
 }
 +(instancetype) createScrollViewFromCurrentDisplay{
     

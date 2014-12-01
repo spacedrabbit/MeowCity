@@ -121,26 +121,24 @@
 
 -(BRKScrollView *) createScrollingTableFromVenues:(NSArray *)venues inFrame:(CGRect)frame{
     
+    UINib *pictureCellNib = [UINib nibWithNibName:@"BRKPictureTableViewCell" bundle:nil];
+    UINib *dynamicCelllNib = [UINib nibWithNibName:@"BRKVenuesTableViewCell" bundle:nil];
+    
     NSMutableArray * tableViewsForCategories = [NSMutableArray array];
     for (NSInteger i= 0; i< [venues count]; i++) {
         
-        //UITableView * newTable = [[UITableView alloc] initWithFrame:frame];
-        self.testTable = [[UITableView alloc] init];
-        UINib *venueNib = [[[NSBundle mainBundle] loadNibNamed:@"BRKVenuesTableViewCell" owner:self options:nil] firstObject];
-        [self.testTable registerNib:venueNib forCellReuseIdentifier:@"VenueCell"];
-        //[self.testTable setBackgroundColor:[UIColor whiteColor]];
-        //[self.testTable setAccessibilityLabel:venues[i]];
-        //[self.testTable setSeparatorColor:[UIColor grayColor]];
-        //[self.testTable setSeparatorInset:UIEdgeInsetsZero];
-        //[self.testTable setSeparatorStyle:UITableViewCellSeparatorStyleSingleLineEtched];
-        //[self.testTable setSeparatorEffect:[UIBlurEffect effectWithStyle:UIBlurEffectStyleDark]];
-        [self.testTable setDelegate:self];
-        [self.testTable setDataSource:self];
-//        BRKVenuesResultsTable * newTable = [[BRKVenuesResultsTable alloc] init];
+        UITableView * newTable = [[UITableView alloc] initWithFrame:frame];
+
+        [newTable registerNib:pictureCellNib forCellReuseIdentifier:@"PictureCell"];
+        [newTable registerNib:dynamicCelllNib forCellReuseIdentifier:@"VenueCell"];
         
-//        [newTable fetchVenuesForLocation:self.currentLocation];
+        newTable.rowHeight = UITableViewAutomaticDimension;
+        newTable.estimatedRowHeight = 200.0;
         
-        [tableViewsForCategories addObject:self.testTable];
+        [newTable setDelegate:self];
+        [newTable setDataSource:self];
+        
+        [tableViewsForCategories addObject:newTable];
         
     }
     
@@ -157,19 +155,6 @@
 #pragma mark - View helpers -
 - (void)viewWillAppear:(BOOL)animated {
     [self.locationManager requestInUseAuthorization];
-}
-
--(void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-}
--(void)displaySearchViewController{
-    
-    
-    BRKSearchViewController * searchViewController = [[BRKSearchViewController alloc] init];
-    [searchViewController setModalPresentationStyle:UIModalPresentationOverCurrentContext];
-    
-    [self presentViewController:searchViewController animated:YES completion:nil];
-    
 }
 
 -(void)didReceiveMemoryWarning {
@@ -209,6 +194,7 @@
 }
 
 - (void)handleLocationChange:(NSNotification *)notification {
+    
     NSDictionary *userInfo = notification.userInfo;
     CLLocation *newLocation = userInfo[@"newLocation"];
     if (!self.currentLocation) {
@@ -219,7 +205,6 @@
         if (success) {
             [[NSOperationQueue mainQueue] addOperationWithBlock:^{
                 [self.venueTableScroll reloadBRKSubViews];
-                [self.testTable reloadData];
             }];
         }else{
             NSLog(@"Nothing found");
@@ -230,22 +215,12 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 
-//    if (indexPath.row == 0) {
-//        BRKPictureTableViewCell * cell = (BRKPictureTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"PictureCell"];
-//        return cell;
-//    }else{
-//        cell = (BRKVenuesTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"VenueCell" forIndexPath:indexPath];
-//    }
-    
-    static NSString *cellIdentifier = @"VenueCell";
-    BRKVenuesTableViewCell *cell = nil;
-    
-    if (!cell) {
-        cell = [[BRKVenuesTableViewCell alloc] init];
+    if (indexPath.row == 0) {
+        BRKPictureTableViewCell *cell = (BRKPictureTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"PictureCell"];
+        return cell;
     }
     
-    cell = (BRKVenuesTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
-    
+    BRKVenuesTableViewCell *cell = (BRKVenuesTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"VenueCell" forIndexPath:indexPath];
     
     BRKVenue *venue = self.venues[indexPath.row];
     cell.name.text = venue.name;
@@ -261,6 +236,7 @@
     }
     
     return cell;
+    
 }
 
 - (void)fetchVenuesForLocation:(CLLocation *)location withCompletionHandler:(void (^)(bool))success
