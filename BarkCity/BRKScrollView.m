@@ -80,6 +80,7 @@
         }
     }
 }
+
 +(instancetype) createScrollViewFromCurrentDisplay{
     
     CGFloat kScreenWidth = [UIScreen mainScreen].bounds.size.width;

@@ -9,13 +9,13 @@
 #import "BRKVenueDetailTableViewController.h"
 #import "BRKVenueDetailTableViewCell.h"
 #import "BRKPictureTableViewCell.h"
+#import "BRKVenue.h"
 
 @interface BRKVenueDetailTableViewController ()
 
 @end
 
 @implementation BRKVenueDetailTableViewController
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -33,6 +33,10 @@
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     self.tableView.estimatedRowHeight = 200.0;
 }
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

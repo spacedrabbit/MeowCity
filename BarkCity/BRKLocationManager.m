@@ -45,11 +45,6 @@
     [self.locationManager startUpdatingLocation];
 }
 
-//- (void)requestInUseAuthorization
-//{
-//    [self.locationManager requestWhenInUseAuthorization];
-//}
-
 - (void)requestInUseAuthorization {
     [self.locationManager requestAlwaysAuthorization];
 }
@@ -63,6 +58,7 @@
         [[NSNotificationCenter defaultCenter] postNotificationName:@"locationChanged"
                                                             object:self
                                                           userInfo:dataDict];
+        [manager stopUpdatingLocation]; // new, added 12/1 Louis
     }
     
     self.location = locations.lastObject;
