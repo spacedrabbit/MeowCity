@@ -105,11 +105,12 @@
     CGRect tableScrollViewFrame = CGRectMake(originWithNavBarAndMenu.x, originWithNavBarAndMenu.y + categoryBarHeight, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - categoryBarHeight);
     
     // -- Adding a background image -- //
-    UIImageView * barkbox = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"barkboxLogo"]];
-    [barkbox setFrame:screenRect];
-    [barkbox setContentMode:UIViewContentModeRight];
+    UIView * background = [[UIView alloc] initWithFrame:screenRect];
+    [background setBackgroundColor:[UIColor lightGrayColor]];
+    
     self.resultsView = [[UIView alloc] initWithFrame:screenRect];
-    [self.resultsView addSubview:barkbox];
+    
+    [self.resultsView addSubview:background];
     
     [self setView:self.resultsView];
     
@@ -235,6 +236,7 @@
 //    if (offset.x > scrollView.contentSize.width - [UIScreen mainScreen].bounds.size.width) {
 //        [scrollView setContentOffset:CGPointMake(scrollView.contentSize.width - [UIScreen mainScreen].bounds.size.width, 0.0) animated:NO];
 //    }
+
 }
 
 
@@ -284,11 +286,11 @@
 #pragma mark - TableView Methods -
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 
-    if (indexPath.row == 0) {
-        BRKPictureTableViewCell *cell = (BRKPictureTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"PictureCell"];
-        return cell;
-    }
-    
+//    if (indexPath.row == 0) {
+//        BRKPictureTableViewCell *cell = (BRKPictureTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"PictureCell"];
+//        return cell;
+//    }
+//    
     BRKVenuesTableViewCell *cell = (BRKVenuesTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"VenueCell" forIndexPath:indexPath];
     
     BRKVenue *venue = self.venues[indexPath.row];

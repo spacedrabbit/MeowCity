@@ -6,16 +6,21 @@
 //  Copyright (c) 2014 com.rosamcgee. All rights reserved.
 //
 
+#import <MapKit/MapKit.h>
+#import <CoreLocation/CoreLocation.h>
 #import "BRKSearchViewController.h"
 #import "BRKVenuesResultsTable.h"
 #import "BRKScrollView.h"
+#import "BRKLocationManager.h"
 
-@interface BRKSearchViewController () <UITextFieldDelegate>
+@interface BRKSearchViewController () <UITextFieldDelegate, MKMapViewDelegate>
 
 @property (strong, nonatomic) BRKVenuesResultsTable * venuesTable;
 @property (strong, nonatomic) BRKScrollView * scrollingContainerView;
 @property (strong, nonatomic) UITextField * searchTextField;
 @property (strong, nonatomic) UITextField * locationTextField;
+
+@property (strong, nonatomic) MKMapView * currentLocationView;
 
 @property (nonatomic) CGRect screenRect;
 @property (nonatomic) BOOL tableViewIsHidden;
@@ -65,6 +70,7 @@
     [searchViewBlur setFrame    :   [UIScreen mainScreen].bounds];
     [self.view      addSubview  :   searchViewBlur              ];
 
+    [self setUpMap];
     [self setUpViews];
 }
 - (void)didReceiveMemoryWarning {
@@ -277,8 +283,44 @@
     [self.view addConstraints:venuesTableHorizontal];
     [self.view addConstraints:venuesTableVertical];
     
+
+    [self.currentLocationView setTranslatesAutoresizingMaskIntoConstraints:NO];
+    [self.currentLocationView setDelegate:self];
+    [self.view addSubview:self.currentLocationView];
     
+    NSArray * mapTableHorizontal = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_currentLocationView]|"
+                                                                              options:0
+                                                                              metrics:nil
+                                                                                views:NSDictionaryOfVariableBindings(_currentLocationView)];
+    NSArray * mapTableVertical = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[searchBarContainer]-[_currentLocationView]-|"
+                                                                            options:0
+                                                                            metrics:nil
+                                                                              views:NSDictionaryOfVariableBindings(_currentLocationView, searchBarContainer)];
+    
+    [self.view addConstraints:mapTableHorizontal];
+    [self.view addConstraints:mapTableVertical];
 }
+
+
+- (void)setUpMap
+{
+    self.currentLocationView  = [[MKMapView alloc] init];
+    CLLocation * currentLocation = [[BRKLocationManager sharedLocationManager] location];
+    CLLocationCoordinate2D zoomLocation = currentLocation.coordinate;
+    
+    
+    MKCoordinateRegion region = MKCoordinateRegionMake(zoomLocation , MKCoordinateSpanMake(0.003, 0.003));
+    
+    [self.currentLocationView setRegion:region animated:YES];
+    
+    MKPointAnnotation *point = [[MKPointAnnotation alloc] init];
+    point.coordinate = zoomLocation;
+    
+    NSLog(@"The lat: %f, the long: %f", currentLocation.coordinate.latitude, currentLocation.coordinate.longitude);
+    
+    [self.currentLocationView addAnnotation:point];
+}
+
 // -- shows/hides results table, needs further work
 
 - (void)cancelBarButtonItemPressed:(id)sender{
