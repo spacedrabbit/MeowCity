@@ -260,11 +260,11 @@
 #pragma mark - TableView Methods -
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 
-//    if (indexPath.row == 0) {
-//        BRKPictureTableViewCell *cell = (BRKPictureTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"PictureCell"];
-//        return cell;
-//    }
-//    
+    if (indexPath.row == 0) {
+        BRKPictureTableViewCell *cell = (BRKPictureTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"PictureCell"];
+        return cell;
+    }
+    
     BRKVenuesTableViewCell *cell = (BRKVenuesTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"VenueCell" forIndexPath:indexPath];
     
     BRKVenue *venue = self.venues[indexPath.row];
