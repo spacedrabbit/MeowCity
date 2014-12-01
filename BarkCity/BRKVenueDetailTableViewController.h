@@ -1,8 +1,8 @@
 //
-//  BRKVenueDetailViewController.h
+//  BRKVenueDetailTableViewController.h
 //  BarkCity
 //
-//  Created by Richard McAteer on 11/25/14.
+//  Created by Charles Coutu-Nadeau on 11/27/14.
 //  Copyright (c) 2014 com.rosamcgee. All rights reserved.
 //
 
@@ -10,7 +10,7 @@
 
 @class BRKVenue;
 
-@interface BRKVenueDetailViewController : UIViewController
+@interface BRKVenueDetailTableViewController : UITableViewController
 
 @property (strong, nonatomic) BRKVenue *venue;
 

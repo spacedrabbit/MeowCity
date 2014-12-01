@@ -18,21 +18,21 @@
             <rect key="frame" x="0.0" y="0.0" width="564" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" placeholderIntrinsicWidth="600" placeholderIntrinsicHeight="200" pagingEnabled="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rtb-5j-yrf">
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" placeholderIntrinsicWidth="600" placeholderIntrinsicHeight="200" pagingEnabled="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rtb-5j-yrf">
                     <rect key="frame" x="0.0" y="0.0" width="564" height="200"/>
                     <subviews>
-                        <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OB6-5H-EqB">
+                        <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OB6-5H-EqB">
                             <rect key="frame" x="79" y="27" width="394" height="142"/>
                             <subviews>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7NF-DI-z23">
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="placeholder.png" translatesAutoresizingMaskIntoConstraints="NO" id="7NF-DI-z23">
                                     <rect key="frame" x="8" y="17" width="112" height="117"/>
                                     <color key="backgroundColor" red="0.98823535439999999" green="0.19215688110000001" blue="0.34901961679999999" alpha="1" colorSpace="deviceRGB"/>
                                 </imageView>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VpJ-1G-g6S">
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="placeholder.png" translatesAutoresizingMaskIntoConstraints="NO" id="VpJ-1G-g6S">
                                     <rect key="frame" x="269" y="17" width="112" height="117"/>
                                     <color key="backgroundColor" red="0.37647059560000001" green="0.28627452250000002" blue="0.4784313738" alpha="1" colorSpace="calibratedRGB"/>
                                 </imageView>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="i0H-mS-9Gn">
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="placeholder.png" translatesAutoresizingMaskIntoConstraints="NO" id="i0H-mS-9Gn">
                                     <rect key="frame" x="141" y="17" width="112" height="117"/>
                                     <color key="backgroundColor" red="0.99215692280000001" green="0.73333334920000004" blue="0.20000001789999999" alpha="1" colorSpace="deviceRGB"/>
                                 </imageView>
@@ -58,6 +58,7 @@
                         <constraint firstItem="OB6-5H-EqB" firstAttribute="top" secondItem="rtb-5j-yrf" secondAttribute="top" id="eJU-WU-bxW"/>
                         <constraint firstAttribute="width" secondItem="i0H-mS-9Gn" secondAttribute="width" id="fRN-OU-Nwl"/>
                         <constraint firstAttribute="width" secondItem="VpJ-1G-g6S" secondAttribute="width" id="nwM-uT-jN5"/>
+                        <constraint firstAttribute="height" constant="200" id="ogN-bs-uj9"/>
                         <constraint firstItem="7NF-DI-z23" firstAttribute="width" secondItem="rtb-5j-yrf" secondAttribute="width" id="pAC-Qm-7cK"/>
                         <constraint firstAttribute="height" secondItem="OB6-5H-EqB" secondAttribute="height" id="qLp-c2-9pR"/>
                         <constraint firstAttribute="trailing" secondItem="OB6-5H-EqB" secondAttribute="trailing" id="wjv-V1-8fN"/>
@@ -106,4 +107,7 @@
             <point key="canvasLocation" x="503" y="442"/>
         </view>
     </objects>
+    <resources>
+        <image name="placeholder.png" width="640" height="640"/>
+    </resources>
 </document>

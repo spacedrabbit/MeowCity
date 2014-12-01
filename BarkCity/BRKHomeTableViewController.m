@@ -4,13 +4,13 @@
 //
 //  Created by Richard McAteer on 11/24/14.
 //  Copyright (c) 2014 com.rosamcgee. All rights reserved.
-//
+
 
 #import "BRKHomeTableViewController.h"
-#import "BRKLocationTableViewCell.h"
 #import "BRKFoursquareClient.h"
 #import "BRKVenue.h"
-#import "BRKVenueDetailViewController.h"
+#import "BRKPictureTableViewCell.h"
+#import "BRKVenuesTableViewCell.h"
 
 @interface BRKHomeTableViewController ()
 
@@ -24,8 +24,18 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.tableView.separatorColor = [UIColor clearColor];
-    [self.tableView registerNib:[UINib nibWithNibName:@"BRKLocationTableViewCell" bundle:nil] forCellReuseIdentifier:@"Location"];
+    //self.tableView.separatorColor = [UIColor clearColor];
+    
+    // Retrieve Nib of the two custom cell types.
+    UINib *pictureCellNib = [UINib nibWithNibName:@"BRKPictureTableViewCell" bundle:nil];
+    [self.tableView registerNib:pictureCellNib forCellReuseIdentifier:@"PictureCell"];
+    
+    UINib *dynamicCelllNib = [UINib nibWithNibName:@"BRKVenuesTableViewCell" bundle:nil];
+    [self.tableView registerNib:dynamicCelllNib forCellReuseIdentifier:@"VenueCell"];
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
+    self.tableView.estimatedRowHeight = 200.0;
+    
+    
     
     self.foursquareClient = [BRKFoursquareClient sharedClient];
     
@@ -61,37 +71,33 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    return 2 + self.numberOfLocationsToShow;
+    return self.numberOfLocationsToShow + 1;
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     if (indexPath.row == 0) {
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
-        cell.textLabel.text = @"Restaurants Bars Outdoor Events";
-        // Scroll view ("Restaurants", "Bars", "Outdoor", "Events")
+        BRKPictureTableViewCell *cell = (BRKPictureTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"PictureCell"];
         return cell;
     }
     
-    else if (indexPath.row == 1) {
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
-        cell.textLabel.text = @"Image";
-        // Image
-        return cell;
+    BRKVenuesTableViewCell *cell = (BRKVenuesTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"VenueCell" forIndexPath:indexPath];
+    
+    BRKVenue *venue = self.venues[indexPath.row];
+    cell.name.text = venue.name;
+    cell.rating.text = [venue.rating description];
+    cell.distance.text = @"1.0 mi";
+    
+    // conditional to test the dynamic length of the cells
+    
+    if (indexPath.row %2 == 0) {
+        cell.descriptiveBody.text = @"This restaurant is great for dogs";
+    } else {
+        cell.descriptiveBody.text = @"This is a very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very long version of the cell";
     }
     
-    else {
-        BRKVenue *venue = self.venues[indexPath.row];
-        BRKLocationTableViewCell *cell = (BRKLocationTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"Location" forIndexPath:indexPath];
-        cell.nameLabel.text = venue.name;
-        cell.ratingLabel.text = [venue.rating description];
-        cell.distanceLabel.text = @"1.0 mi";
-        cell.detailTextLabel.text = @"This restaurant is great for dogs";
-        return cell;
-    }
-    
-    return nil;
+    return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -113,9 +119,9 @@
     
     else if ([segue.identifier isEqualToString:@"homeToVenueDetailSegue"]) {
         
-        NSIndexPath *path = [self.tableView indexPathForSelectedRow];
-        BRKVenueDetailViewController *targetVC = (BRKVenueDetailViewController *)segue.destinationViewController;
-        targetVC.venue = (BRKVenue *)self.venues[path.row];
+//        NSIndexPath *path = [self.tableView indexPathForSelectedRow];
+//        BRKVenueDetailViewController *targetVC = (BRKVenueDetailViewController *)segue.destinationViewController;
+//        targetVC.venue = (BRKVenue *)self.venues[path.row];
     }
 }
 
