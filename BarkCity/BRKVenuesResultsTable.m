@@ -16,7 +16,7 @@
 #import "BRKVenue.h"
 #import "BRKFoursquareClient.h"
 #import "BRKVenuesResultsTable.h"
-#import "BRKLocationTableViewCell.h"
+#import "BRKVenuesTableViewCell.h"
 
 @interface BRKVenuesResultsTable () <UITableViewDataSource, UITableViewDelegate>
 
@@ -53,7 +53,7 @@
     self = [super init];
     if (self) {
         _venueResultsTable = [[UITableView alloc] initWithFrame:[UIScreen mainScreen].bounds];
-        _cellNib = [[[NSBundle mainBundle] loadNibNamed:@"BRKLocationTableViewCell" owner:[BRKLocationTableViewCell class] options:nil] firstObject];
+        _cellNib = [[[NSBundle mainBundle] loadNibNamed:@"BRKVenuesTableViewCell" owner:[BRKVenuesTableViewCell class] options:nil] firstObject];
         
         [_venueResultsTable setDelegate:self];
         [_venueResultsTable setDataSource:self];
@@ -100,16 +100,16 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     BRKVenue *venue = self.venues[indexPath.row];
-    BRKLocationTableViewCell * cell;
+    BRKVenuesTableViewCell * cell;
     
     if (!cell) {
-        cell = (BRKLocationTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"Location" forIndexPath:indexPath];
+        cell = (BRKVenuesTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"Location" forIndexPath:indexPath];
     }
     
-    cell.nameLabel.text = venue.name;
-    cell.ratingLabel.text = [venue.rating description];
-    cell.distanceLabel.text = @"1.0 mi";
-    cell.detailTextLabel.text = @"This restaurant is great for dogs";
+    cell.name.text = venue.name;
+    cell.rating.text = [venue.rating description];
+    cell.distance.text = @"1.0 mi";
+    cell.descriptiveBody.text = @"This restaurant is great for dogs";
     
     return cell;
 }
