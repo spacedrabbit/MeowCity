@@ -221,6 +221,9 @@
 {
     [self.foursquareClient requestVenuesForQuery:@"Restaurants" location:location limit:15 success:^(NSArray *venues) {
         self.venues = venues;
+        for (BRKVenue *venue in venues) {
+            [venue downloadPreviewImageInBackground];
+        }
         if (self.venues) {
             success(YES);
         }
@@ -265,9 +268,7 @@
     BRKVenuesTableViewCell *cell = (BRKVenuesTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"VenueCell" forIndexPath:indexPath];
     
     BRKVenue *venue = self.venues[indexPath.row];
-    cell.name.text = venue.name;
-    cell.rating.text = [venue.rating description];
-    cell.distance.text = @"1.0 mi";
+    cell.venue = venue;
     
     // conditional to test the dynamic length of the cells
     
