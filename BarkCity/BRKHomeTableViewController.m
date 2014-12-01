@@ -9,8 +9,6 @@
 #import "BRKHomeTableViewController.h"
 #import "BRKFoursquareClient.h"
 #import "BRKVenue.h"
-#import "BRKVenueDetailViewController.h"
-
 #import "BRKPictureTableViewCell.h"
 #import "BRKVenuesTableViewCell.h"
 
