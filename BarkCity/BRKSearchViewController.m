@@ -13,7 +13,7 @@
 #import "BRKScrollView.h"
 #import "BRKLocationManager.h"
 
-@interface BRKSearchViewController () <UITextFieldDelegate, MKMapViewDelegate>
+@interface BRKSearchViewController () <UITextFieldDelegate, MKMapViewDelegate, UITableViewDelegate, UITableViewDataSource>
 
 @property (strong, nonatomic) BRKVenuesResultsTable * venuesTable;
 @property (strong, nonatomic) BRKScrollView * scrollingContainerView;
@@ -21,6 +21,8 @@
 @property (strong, nonatomic) UITextField * locationTextField;
 
 @property (strong, nonatomic) MKMapView * currentLocationView;
+
+@property (strong, nonatomic) CLLocation * currentLocation;
 
 @property (nonatomic) CGRect screenRect;
 @property (nonatomic) BOOL tableViewIsHidden;
@@ -32,6 +34,21 @@
 #pragma mark - UIViewController Standard Methods -
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    // -- getting info -- //
+    self.foursquareClient = [BRKFoursquareClient sharedClient];
+    
+    self.numberOfLocationsToShow = 5;
+    
+    self.locationManager = [BRKLocationManager sharedLocationManager];
+    
+    [self.locationManager startUpdatingLocation];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(handleLocationChange:)
+                                                 name:@"locationChanged"
+                                               object:nil];
+
 
     // handling moving content when keyboard appears ...
     NSOperationQueue * keyBoardHandlingQueue = [[NSOperationQueue alloc] init];
@@ -272,6 +289,18 @@
     // -- needs search logic -- //
     [self.view addSubview:self.venuesTable];
     
+    // -- DELETE THIS LATER -- //
+    UINib *dynamicCelllNib = [UINib nibWithNibName:@"BRKVenuesTableViewCell" bundle:nil];
+    [self.venuesTable.venueResultsTable registerNib:dynamicCelllNib forCellReuseIdentifier:@"VenueCell"];
+    
+    self.venuesTable.venueResultsTable.rowHeight = UITableViewAutomaticDimension;
+    self.venuesTable.venueResultsTable.estimatedRowHeight = 200.0;
+    
+    [self.venuesTable.venueResultsTable setDelegate:self];
+    [self.venuesTable.venueResultsTable setDataSource:self];
+    
+    // -- DELETE THIS LATER -- //
+    
     NSArray * venuesTableHorizontal = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_venuesTable]|"
                                                                               options:0
                                                                               metrics:nil
@@ -284,21 +313,21 @@
     [self.view addConstraints:venuesTableVertical];
     
 
-    [self.currentLocationView setTranslatesAutoresizingMaskIntoConstraints:NO];
-    [self.currentLocationView setDelegate:self];
-    [self.view addSubview:self.currentLocationView];
-    
-    NSArray * mapTableHorizontal = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_currentLocationView]|"
-                                                                              options:0
-                                                                              metrics:nil
-                                                                                views:NSDictionaryOfVariableBindings(_currentLocationView)];
-    NSArray * mapTableVertical = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[searchBarContainer]-[_currentLocationView]-|"
-                                                                            options:0
-                                                                            metrics:nil
-                                                                              views:NSDictionaryOfVariableBindings(_currentLocationView, searchBarContainer)];
-    
-    [self.view addConstraints:mapTableHorizontal];
-    [self.view addConstraints:mapTableVertical];
+//    [self.currentLocationView setTranslatesAutoresizingMaskIntoConstraints:NO];
+//    [self.currentLocationView setDelegate:self];
+//    [self.view addSubview:self.currentLocationView];
+//    
+//    NSArray * mapTableHorizontal = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_currentLocationView]|"
+//                                                                              options:0
+//                                                                              metrics:nil
+//                                                                                views:NSDictionaryOfVariableBindings(_currentLocationView)];
+//    NSArray * mapTableVertical = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[searchBarContainer]-[_currentLocationView]-|"
+//                                                                            options:0
+//                                                                            metrics:nil
+//                                                                              views:NSDictionaryOfVariableBindings(_currentLocationView, searchBarContainer)];
+//    
+//    [self.view addConstraints:mapTableHorizontal];
+//    [self.view addConstraints:mapTableVertical];
 }
 
 
@@ -334,6 +363,68 @@
 }
 -(void)textFieldDidBeginEditing:(UITextField *)textField{
     
+}
+
+#pragma mark - API call
+- (void)fetchVenuesForLocation:(CLLocation *)location withCompletionHandler:(void (^)(BOOL))success
+{
+    [self.foursquareClient requestVenuesForQuery:@"Restaurants" location:location limit:15 success:^(NSArray *venues) {
+        self.venues = venues;
+        if (self.venues) {
+            success(YES);
+        }
+    } failure:^(NSError *error) {
+        NSLog(@"%@", error);
+    }];
+}
+
+- (void)handleLocationChange:(NSNotification *)notification {
+    
+    NSDictionary *userInfo = notification.userInfo;
+    CLLocation *newLocation = userInfo[@"newLocation"];
+    if (!self.currentLocation) {
+        self.currentLocation = newLocation;
+    }
+    
+    [self fetchVenuesForLocation:newLocation withCompletionHandler:^(BOOL success) {
+        
+        if (success) {
+            [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                [self.venuesTable.venueResultsTable reloadData];
+            }];
+        }else{
+            NSLog(@"Nothing found");
+        }
+        
+    }];
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return self.numberOfLocationsToShow;
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 1;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    BRKVenuesTableViewCell *cell = (BRKVenuesTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"VenueCell" forIndexPath:indexPath];
+    
+    BRKVenue *venue = self.venues[indexPath.row];
+    cell.name.text = venue.name;
+    cell.rating.text = [venue.rating description];
+    cell.distance.text = @"1.0 mi";
+    
+    // conditional to test the dynamic length of the cells
+    
+    if (indexPath.row %2 == 0) {
+        cell.descriptiveBody.text = @"This restaurant is great for dogs";
+    } else {
+        cell.descriptiveBody.text = @"This is a very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very long version of the cell";
+    }
+    
+    return cell;
 }
 
 @end
