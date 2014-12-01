@@ -58,8 +58,6 @@
         [_venueResultsTable setDelegate:self];
         [_venueResultsTable setDataSource:self];
         
-        [_venueResultsTable registerNib:[UINib nibWithNibName:@"BRKLocationTableViewCell" bundle:nil] forCellReuseIdentifier:@"Location"];
-
         [self addSubview:_venueResultsTable];
     }
     return self;
@@ -92,6 +90,7 @@
     [self fetchVenuesForLocation:location withQuery:@"Dog Friendly Restaurants"];
 }
 
+
 /**********************************************************************************
  *
  *              UITableView Delegate Methods
@@ -110,7 +109,7 @@
     cell.name.text = venue.name;
     cell.rating.text = [venue.rating description];
     cell.distance.text = @"1.0 mi";
-    cell.descriptiveBody.text = @"This restaurant is great for dogs";
+    cell.detailTextLabel.text = @"This restaurant is great for dogs";
     
     return cell;
 }

@@ -14,7 +14,7 @@
 		B1434DD71A268BB300770E29 /* barkboxLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = B1434DD61A268BB300770E29 /* barkboxLogo.png */; };
 		B17860221A23CAB600EBE64F /* BRKScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = B17860211A23CAB600EBE64F /* BRKScrollView.m */; };
 		B17860331A251C7F00EBE64F /* BRKSearchResultsController.m in Sources */ = {isa = PBXBuildFile; fileRef = B17860301A251C7F00EBE64F /* BRKSearchResultsController.m */; };
-		B17860341A251C7F00EBE64F /* BRKVenuesResultsTable.m in Sources */ = {isa = PBXBuildFile; fileRef = B17860321A251C7F00EBE64F /* BRKVenuesResultsTable.m */; };
+		B183BACA1A2D06B200CA0383 /* BRKVenuesResultsTable.m in Sources */ = {isa = PBXBuildFile; fileRef = B17860321A251C7F00EBE64F /* BRKVenuesResultsTable.m */; };
 		CBBBE4241A27C4CB00109C41 /* BRKPictureTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CBBBE41F1A27C4CB00109C41 /* BRKPictureTableViewCell.m */; };
 		CBBBE4251A27C4CB00109C41 /* BRKPictureTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBBBE4201A27C4CB00109C41 /* BRKPictureTableViewCell.xib */; };
 		CBBBE4261A27C4CB00109C41 /* BRKVenuesTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CBBBE4221A27C4CB00109C41 /* BRKVenuesTableViewCell.m */; };
@@ -168,15 +168,6 @@
 		CBBBE41D1A27C4A400109C41 /* BRKHomeView */ = {
 			isa = PBXGroup;
 			children = (
-				F94606681A23D86A00FF6AB0 /* BRKHomeTableViewController.h */,
-				F94606691A23D86A00FF6AB0 /* BRKHomeTableViewController.m */,
-				B178602F1A251C7F00EBE64F /* BRKSearchResultsController.h */,
-				B17860301A251C7F00EBE64F /* BRKSearchResultsController.m */,
-				B17860311A251C7F00EBE64F /* BRKVenuesResultsTable.h */,
-				B17860321A251C7F00EBE64F /* BRKVenuesResultsTable.m */,
-				F946066A1A23D86A00FF6AB0 /* BRKLocationTableViewCell.h */,
-				F946066B1A23D86A00FF6AB0 /* BRKLocationTableViewCell.m */,
-				F946066C1A23D86A00FF6AB0 /* BRKLocationTableViewCell.xib */,
 				CBE36D2B1A26711800AD80F6 /* BRKHomeView.h */,
 				CBE36D2C1A26711800AD80F6 /* BRKHomeView.m */,
 				CBE36D291A266F2A00AD80F6 /* BRKHome.xib */,
@@ -394,16 +385,6 @@
 					F925AC601A23C1670086F2EB = {
 						CreatedOnToolsVersion = 6.1;
 						DevelopmentTeam = 3457AE227Q;
-						DevelopmentTeam = Z7MS44448J;
-					};
-					F925AC601A23C1670086F2EB = {
-						CreatedOnToolsVersion = 6.1;
-						DevelopmentTeam = Z7MS44448J;
-						DevelopmentTeam = 3457AE227Q;
-					};
-					F925AC601A23C1670086F2EB = {
-						CreatedOnToolsVersion = 6.1;
-						DevelopmentTeam = 3457AE227Q;
 						TestTargetID = F925AC471A23C1670086F2EB;
 					};
 				};
@@ -493,6 +474,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B183BACA1A2D06B200CA0383 /* BRKVenuesResultsTable.m in Sources */,
 				F94606731A23D86A00FF6AB0 /* BRKSearchViewController.m in Sources */,
 				95B81A6C1A23C951005F9AE0 /* BRKVenue.m in Sources */,
 				F94606AF1A262DCA00FF6AB0 /* BRKLocationManager.m in Sources */,
@@ -504,13 +486,10 @@
 				F925AC4E1A23C1670086F2EB /* main.m in Sources */,
 				95B81A661A23C854005F9AE0 /* BRKFoursquareClient.m in Sources */,
 				B17860221A23CAB600EBE64F /* BRKScrollView.m in Sources */,
-				B17860341A251C7F00EBE64F /* BRKVenuesResultsTable.m in Sources */,
-				07F864011A250F4A009EAB2F /* BRKVenueDetailViewController.m in Sources */,
 				CBBBE42E1A27D0D100109C41 /* BRKVenueDetailTableViewController.m in Sources */,
 				CBE36D351A26851300AD80F6 /* BRKHomeViewController.m in Sources */,
 				CBBBE4241A27C4CB00109C41 /* BRKPictureTableViewCell.m in Sources */,
 				CBBBE4261A27C4CB00109C41 /* BRKVenuesTableViewCell.m in Sources */,
-				B17860341A251C7F00EBE64F /* BRKVenuesResultsTable.m in Sources */,
 				CBE36D201A25069900AD80F6 /* BRKVenueDetailView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -70,11 +70,6 @@
 -(void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
-/**********************************************************************************
- *
- *
- *
- ***********************************************************************************/
 
 -(void)displaySearchViewController{
     
@@ -182,30 +177,6 @@
     BRKScrollView * scrollNavTables = [BRKScrollView createScrollViewFromFrame:frame withSubViews:tableViewsForCategories];
     
     return scrollNavTables;
-}
-
-
-/**********************************************************************************
- *
- *                  View helpers
- *
- ***********************************************************************************/
-#pragma mark - View helpers -
-- (void)viewWillAppear:(BOOL)animated {
-    [self.locationManager requestInUseAuthorization];
-}
-
--(void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-}
--(void)displaySearchViewController{
-    
-    
-    BRKSearchViewController * searchViewController = [[BRKSearchViewController alloc] init];
-    [searchViewController setModalPresentationStyle:UIModalPresentationOverCurrentContext];
-    
-    [self presentViewController:searchViewController animated:YES completion:nil];
-    
 }
 
 /**********************************************************************************
