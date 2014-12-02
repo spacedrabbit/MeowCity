@@ -14,6 +14,7 @@
 #import "BRKScrollView.h"
 #import "BRKPictureTableViewCell.h"
 #import "BRKVenuesTableViewController.h"
+#import "BRKUIManager.h"
 
 @interface BRKHomeViewController () <UIScrollViewDelegate, CLLocationManagerDelegate, BRKDetailTableViewSegueDelegate>
 
@@ -129,16 +130,14 @@
     NSMutableArray * labelsForCategories = [NSMutableArray array];
     for (NSInteger i= 0; i<[categories count]; i++) {
         
-        UIFont * sysFont = [UIFont systemFontOfSize:16.0];
-        
         UILabel * newLabel = [[UILabel alloc] init];
-        newLabel.attributedText = [[NSAttributedString alloc] initWithString:categories[i] attributes:@{ NSFontAttributeName: sysFont}];
+        newLabel.attributedText = [[NSAttributedString alloc] initWithString:categories[i] attributes:@{ NSFontAttributeName: [BRKUIManager venueCategoryScrollFont]}];
 
         
         newLabel.accessibilityLabel = categories[i];
         [newLabel setAdjustsFontSizeToFitWidth:YES];
         [newLabel setTextAlignment:NSTextAlignmentCenter];
-        [newLabel setBackgroundColor:[UIColor lightGrayColor]];
+        [newLabel setBackgroundColor:[BRKUIManager venueCategoryScrollColor]];
         
         [labelsForCategories addObject:newLabel];
         

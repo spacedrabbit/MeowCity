@@ -8,6 +8,7 @@
 
 #import "BRKVenuesTableViewCell.h"
 #import "BRKVenue.h"
+#import "BRKUIManager.h"
 
 @interface BRKVenuesTableViewCell()
 @property (weak, nonatomic) IBOutlet UILabel *name;
@@ -22,6 +23,7 @@
 - (void)awakeFromNib {
     // Initialization code
     //[self autoLayout];
+    [self setLabelFonts];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -47,10 +49,16 @@
     }
 }
 
-- (void)venueImageDidUpdate:(NSNotification *)notification
-{
+- (void)venueImageDidUpdate:(NSNotification *)notification {
     BRKVenue *venue = notification.object;
     self.picture.image = venue.previewImage;
+}
+
+- (void) setLabelFonts {
+    self.name.font = [BRKUIManager venueNameFont];
+    self.rating.font = [BRKUIManager venueRatingFont];
+    self.distance.font = [BRKUIManager venueDistanceFont];
+    self.descriptiveBody.font = [BRKUIManager venueDescriptiveBodyFont];
 }
 
 - (void) autoLayout {

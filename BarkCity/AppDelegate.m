@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "BRKHomeViewController.h"
+#import "BRKUIManager.h"
 
 @interface AppDelegate ()
 
@@ -23,6 +24,7 @@
     BRKHomeViewController * rootViewController = [[BRKHomeViewController alloc] init];
     UINavigationController * navControl = [[UINavigationController alloc] initWithRootViewController:rootViewController ];
     navControl.navigationBar.topItem.title = @"Bark City";
+    [navControl.navigationBar setTitleTextAttributes:[BRKUIManager navBarAttributes]];
     self.window.rootViewController = navControl;
 
     [self.window makeKeyAndVisible];

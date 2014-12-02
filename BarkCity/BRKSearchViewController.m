@@ -12,6 +12,7 @@
 #import "BRKScrollView.h"
 #import "BRKLocationManager.h"
 #import "BRKVenuesTableViewController.h"
+#import "BRKUIManager.h"
 
 @interface BRKSearchViewController () <UITextFieldDelegate, MKMapViewDelegate, UITableViewDelegate, UITableViewDataSource>
 
@@ -166,7 +167,7 @@
     UILabel * barkCityLabel = [[UILabel alloc] init];
     [barkCityLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
     [barkCityLabel setTextAlignment:NSTextAlignmentCenter];
-    [barkCityLabel setFont:[UIFont boldSystemFontOfSize:18.0]];
+    [barkCityLabel setFont:[BRKUIManager sniffAroundLabelFont]];
     [barkCityLabel setText:@"Sniff Around!"];
     [fakeNavBar addSubview:barkCityLabel];
     
@@ -188,6 +189,7 @@
     UIButton * closeButton = [UIButton buttonWithType:UIButtonTypeSystem];
     [closeButton setTranslatesAutoresizingMaskIntoConstraints:NO];
     [closeButton setTitle:@"Close" forState:UIControlStateNormal];
+    closeButton.titleLabel.font = [BRKUIManager closeButtonFont];
     [closeButton addTarget:self action:@selector(cancelBarButtonItemPressed:) forControlEvents:UIControlEventTouchUpInside];
     [fakeNavBar addSubview:closeButton];
     
