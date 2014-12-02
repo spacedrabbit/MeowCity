@@ -11,7 +11,7 @@
 #import "BRKVenueDetailTableViewController.h"
 #import "BRKLocationManager.h"
 
-@interface BRKHomeTableViewController : UITableViewController
+@interface BRKVenuesTableViewController : UITableViewController
 
 @property (nonatomic, weak) id <BRKDetailTableViewSegueDelegate> venueDetailSegueDelegate;
 @property (strong, nonatomic) CLLocation * location;

@@ -13,7 +13,7 @@
 #import "BRKVenue.h"
 #import "BRKVenuesTableViewCell.h"
 
-@interface BRKSearchResultsController : UIViewController
+@interface BRKHomeViewController : UIViewController
 
 @property (strong, nonatomic) BRKLocationManager *locationManager;
 @property (nonatomic) NSInteger numberOfLocationsToShow;

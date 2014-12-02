@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-#import "BRKSearchResultsController.h"
+#import "BRKHomeViewController.h"
 
 @interface AppDelegate ()
 
@@ -20,7 +20,7 @@
 
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     
-    BRKSearchResultsController * rootViewController = [[BRKSearchResultsController alloc] init];
+    BRKHomeViewController * rootViewController = [[BRKHomeViewController alloc] init];
     UINavigationController * navControl = [[UINavigationController alloc] initWithRootViewController:rootViewController ];
     navControl.navigationBar.topItem.title = @"Bark City";
     self.window.rootViewController = navControl;

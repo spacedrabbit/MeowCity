@@ -9,14 +9,14 @@
 #import <CoreLocation/CoreLocation.h>
 #import "BRKSearchViewController.h"
 #import "BRKFoursquareClient.h"
-#import "BRKSearchResultsController.h"
+#import "BRKHomeViewController.h"
 #import "BRKVenuesResultsTable.h"
 #import "BRKVenueDetailTableViewController.h"
 #import "BRKScrollView.h"
 #import "BRKPictureTableViewCell.h"
-#import "BRKHomeTableViewController.h"
+#import "BRKVenuesTableViewController.h"
 
-@interface BRKSearchResultsController () <UIScrollViewDelegate, CLLocationManagerDelegate, BRKDetailTableViewSegueDelegate>
+@interface BRKHomeViewController () <UIScrollViewDelegate, CLLocationManagerDelegate, BRKDetailTableViewSegueDelegate>
 
 @property (strong, nonatomic) UIView * resultsView;
 @property (strong, nonatomic) BRKScrollView * venueCategoryScroll;
@@ -29,7 +29,7 @@
 
 @end
 
-@implementation BRKSearchResultsController
+@implementation BRKHomeViewController
 
 /**********************************************************************************
  *
@@ -158,7 +158,7 @@
     NSMutableArray * tableViewsForCategories = [NSMutableArray array];
     for (NSInteger i= 0; i< [venues count]; i++) {
         
-        BRKHomeTableViewController * newTableController = [[BRKHomeTableViewController alloc] initWithQuery:self.venueCategories[i]];
+        BRKVenuesTableViewController * newTableController = [[BRKVenuesTableViewController alloc] initWithQuery:self.venueCategories[i]];
         newTableController.venueDetailSegueDelegate = self;
         [self.venueTableControllers addObject:newTableController];
         

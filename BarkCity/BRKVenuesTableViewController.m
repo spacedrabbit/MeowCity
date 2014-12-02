@@ -6,14 +6,14 @@
 //  Copyright (c) 2014 com.rosamcgee. All rights reserved.
 
 
-#import "BRKHomeTableViewController.h"
+#import "BRKVenuesTableViewController.h"
 #import "BRKFoursquareClient.h"
 #import "BRKVenue.h"
 #import "BRKPictureTableViewCell.h"
 #import "BRKVenuesTableViewCell.h"
 #import "BRKVenueDetailTableViewController.h"
 
-@interface BRKHomeTableViewController ()
+@interface BRKVenuesTableViewController ()
 
 @property (nonatomic) NSInteger numberOfLocationsToShow;
 @property (nonatomic) BRKFoursquareClient *foursquareClient;
@@ -22,7 +22,7 @@
 @property (strong, nonatomic) NSString * query;
 @end
 
-@implementation BRKHomeTableViewController
+@implementation BRKVenuesTableViewController
 
 - (instancetype) initWithQuery:(NSString *) query {
     self = [super init];
