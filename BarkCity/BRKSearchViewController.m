@@ -412,9 +412,7 @@
     BRKVenuesTableViewCell *cell = (BRKVenuesTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"VenueCell" forIndexPath:indexPath];
     
     BRKVenue *venue = self.venues[indexPath.row];
-    cell.name.text = venue.name;
-    cell.rating.text = [venue.rating description];
-    cell.distance.text = @"1.0 mi";
+    cell.venue = venue;
     
     // conditional to test the dynamic length of the cells
     
