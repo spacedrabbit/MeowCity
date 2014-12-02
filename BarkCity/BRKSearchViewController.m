@@ -360,6 +360,34 @@
 
 #pragma mark - UITextDelegate
 -(BOOL)textFieldShouldReturn:(UITextField *)textField{
+    if (textField == self.searchTextField) {
+        NSString *query = self.searchTextField.text;
+        [self fetchVenuesForQuery:query withCompletionHandler:^(BOOL success) {
+            
+            if (success) {
+                [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                    [self.venueTableViewController.tableView reloadData];
+                }];
+            }else{
+                NSLog(@"Nothing found");
+            }
+            
+        }];
+        
+    } else if (textField == self.locationTextField) {
+        
+        [self fetchVenuesForLocation:self.locationManager.location withCompletionHandler:^(BOOL success) {
+            if (success) {
+                [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                    [self.venueTableViewController.tableView reloadData];
+                }];
+            }else{
+                NSLog(@"Nothing found");
+            }
+        }];
+    }
+    
+    
     [self toggleTableViewAndUnhide:YES];
     return [textField resignFirstResponder];
 }
@@ -379,6 +407,19 @@
         NSLog(@"%@", error);
     }];
 }
+
+- (void)fetchVenuesForQuery:(NSString *)query withCompletionHandler:(void (^)(BOOL))success {
+    [self.foursquareClient requestVenuesForQuery:query location:self.locationManager.location limit:15 success:^(NSArray *venues) {
+        self.venues = venues;
+        if (self.venues) {
+            success(YES);
+        }
+    } failure:^(NSError *error) {
+        NSLog(@"%@", error);
+    }];
+    
+}
+
 
 - (void)handleLocationChange:(NSNotification *)notification {
     
