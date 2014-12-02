@@ -35,7 +35,6 @@
 		F94606671A23C30000FF6AB0 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F94606661A23C30000FF6AB0 /* CoreLocation.framework */; };
 		F94606701A23D86A00FF6AB0 /* BRKHomeTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F94606691A23D86A00FF6AB0 /* BRKHomeTableViewController.m */; };
 		F94606731A23D86A00FF6AB0 /* BRKSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F946066E1A23D86A00FF6AB0 /* BRKSearchViewController.m */; };
-		F94606741A23D86A00FF6AB0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F946066F1A23D86A00FF6AB0 /* Main.storyboard */; };
 		F94606AF1A262DCA00FF6AB0 /* BRKLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F94606AE1A262DCA00FF6AB0 /* BRKLocationManager.m */; };
 /* End PBXBuildFile section */
 
@@ -98,7 +97,6 @@
 		F94606691A23D86A00FF6AB0 /* BRKHomeTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRKHomeTableViewController.m; sourceTree = "<group>"; };
 		F946066D1A23D86A00FF6AB0 /* BRKSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRKSearchViewController.h; sourceTree = "<group>"; };
 		F946066E1A23D86A00FF6AB0 /* BRKSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRKSearchViewController.m; sourceTree = "<group>"; };
-		F946066F1A23D86A00FF6AB0 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		F94606AD1A262DCA00FF6AB0 /* BRKLocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRKLocationManager.h; sourceTree = "<group>"; };
 		F94606AE1A262DCA00FF6AB0 /* BRKLocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRKLocationManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -289,7 +287,6 @@
 			children = (
 				95B81A701A2D1793005F9AE0 /* Utils */,
 				CBE36D241A26678100AD80F6 /* Image Resources */,
-				F946066F1A23D86A00FF6AB0 /* Main.storyboard */,
 				CBE36D231A2513ED00AD80F6 /* Search */,
 				CBE36D211A25138D00AD80F6 /* Home */,
 				CBE36D221A2513D100AD80F6 /* Venue Detail */,
@@ -418,7 +415,6 @@
 			files = (
 				CBE36D1F1A25069900AD80F6 /* BRKVenueDetail.xib in Resources */,
 				CBE36D1B1A25067A00AD80F6 /* BRKVenueDetailTableViewCell.xib in Resources */,
-				F94606741A23D86A00FF6AB0 /* Main.storyboard in Resources */,
 				B1434DD71A268BB300770E29 /* barkboxLogo.png in Resources */,
 				07F863FE1A250D90009EAB2F /* adorable-puppy.jpeg in Resources */,
 				CBE36D261A26679600AD80F6 /* placeholder.png in Resources */,
