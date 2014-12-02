@@ -16,8 +16,8 @@
 @interface BRKSearchViewController : UIViewController
 
 @property (strong, nonatomic) BRKLocationManager *locationManager;
-@property (nonatomic) NSInteger numberOfLocationsToShow;
 @property (nonatomic) BRKFoursquareClient *foursquareClient;
+@property (nonatomic) NSInteger numberOfLocationsToShow;
 @property (nonatomic) NSArray *venues;
 
 

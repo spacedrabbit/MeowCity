@@ -10,6 +10,8 @@
 #import <CoreGraphics/CoreGraphics.h>
 
 @interface BRKHelper : NSObject
+
 + (CGFloat)normalizationWithValue:(CGFloat)value withMinimum:(CGFloat)minimum withMaximum:(CGFloat)maximum;
 + (CGFloat)lerpWithNormal:(CGFloat)normal withMinimum:(CGFloat)minimum withMaximum:(CGFloat)maximum;
+
 @end

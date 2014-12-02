@@ -10,7 +10,7 @@
 
 @implementation BRKScrollView
 
-+(instancetype) createScrollViewFromFrame:(CGRect)frameRect withSubViews:(NSArray *)views ofFullWidth:(BOOL)fullWidth{
++ (instancetype) createScrollViewFromFrame:(CGRect)frameRect withSubViews:(NSArray *)views ofFullWidth:(BOOL)fullWidth {
     
     // --  method variables -- //
     NSInteger subViewCount = !views ? 1 : [views count];
@@ -58,14 +58,20 @@
     return brkScrollView;
 
 }
-+(instancetype) createScrollViewFromFrame:(CGRect)frameRect withSubViews:(NSArray *)views{
+
++ (instancetype) createScrollViewFromFrame:(CGRect)frameRect withSubViews:(NSArray *)views{
+    
     return [self createScrollViewFromFrame:frameRect withSubViews:views ofFullWidth:YES];
+    
 }
-+(instancetype) createScrollViewFromFrame:(CGRect)frameRect{
+
++ (instancetype) createScrollViewFromFrame:(CGRect)frameRect{
+    
     return [self createScrollViewFromFrame:frameRect withSubViews:nil];
 }
 
--(void) reloadBRKSubViews{
+- (void) reloadBRKSubViews {
+    
     // View Hierchy of this Class:
     // BRKScrollView > @[UIView, UIImageView, UIImageView]
     // BRKScrollView[0] > @[UITableView, UITableView, UITableView, UITableView, UITableView]
@@ -79,9 +85,10 @@
             [(UITableView *)table reloadData];
         }
     }
+    
 }
 
-+(instancetype) createScrollViewFromCurrentDisplay{
++ (instancetype) createScrollViewFromCurrentDisplay {
     
     CGFloat kScreenWidth = [UIScreen mainScreen].bounds.size.width;
     CGFloat kScreenHeight = [UIScreen mainScreen].bounds.size.height;

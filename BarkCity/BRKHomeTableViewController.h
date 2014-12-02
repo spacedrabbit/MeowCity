@@ -13,8 +13,9 @@
 
 @interface BRKHomeTableViewController : UITableViewController
 
-@property (nonatomic, weak) id<BRKDetailTableViewSegueDelegate>venueDetailSegueDelegate;
+@property (nonatomic, weak) id <BRKDetailTableViewSegueDelegate> venueDetailSegueDelegate;
 @property (strong, nonatomic) CLLocation * location;
+
 - (instancetype) initWithQuery:(NSString *) query;
 
 @end
