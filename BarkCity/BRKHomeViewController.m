@@ -20,7 +20,6 @@
 @property (strong, nonatomic) UIView * resultsView;
 @property (strong, nonatomic) BRKScrollView * venueCategoryScroll;
 @property (strong, nonatomic) BRKScrollView * venueTableScroll;
-@property (strong, nonatomic) NSArray * venuesSearchTables;
 @property (strong, nonatomic) CLLocation * currentLocation;
 
 @property (strong, nonatomic) NSArray * venueCategories;
