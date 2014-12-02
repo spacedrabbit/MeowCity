@@ -11,13 +11,15 @@
 #import "BRKSearchViewController.h"
 #import "BRKScrollView.h"
 #import "BRKLocationManager.h"
+#import "BRKVenuesTableViewController.h"
 
 @interface BRKSearchViewController () <UITextFieldDelegate, MKMapViewDelegate, UITableViewDelegate, UITableViewDataSource>
 
-@property (strong, nonatomic) BRKVenuesResultsTable * venuesTable;
+@property (strong, nonatomic) BRKVenuesTableViewController *venueTableViewController;
 @property (strong, nonatomic) BRKScrollView * scrollingContainerView;
 @property (strong, nonatomic) UITextField * searchTextField;
 @property (strong, nonatomic) UITextField * locationTextField;
+@property (strong, nonatomic) UITableView *venueResultsTable;
 
 @property (strong, nonatomic) MKMapView * currentLocationView;
 
@@ -108,10 +110,10 @@
     
     if (!self.tableViewIsHidden) {
         
-        [self.venuesTable.venueResultsTable setContentInset:UIEdgeInsetsMake(0.0, 0.0, bottomOfRect.size.height, 0.0)];
+        [self.venueTableViewController.tableView setContentInset:UIEdgeInsetsMake(0.0, 0.0, bottomOfRect.size.height, 0.0)];
         
-        NSArray * visible = [self.venuesTable.venueResultsTable visibleCells];
-        [self.venuesTable.venueResultsTable scrollToRowAtIndexPath:[self.venuesTable.venueResultsTable indexPathForCell:visible[0]]
+        NSArray * visible = [self.venueTableViewController.tableView visibleCells];
+        [self.venueTableViewController.tableView scrollToRowAtIndexPath:[self.venueTableViewController.tableView indexPathForCell:visible[0]]
                                                   atScrollPosition:UITableViewScrollPositionMiddle
                                                           animated:YES];
     }
@@ -129,7 +131,7 @@
     [UIView animateWithDuration:0.25
                      animations:^
      {
-         [self.venuesTable setAlpha:alphaValue];
+         [self.venueTableViewController.tableView setAlpha:alphaValue];
      }
                      completion:^(BOOL finished)
      {
@@ -278,36 +280,37 @@
     // ------------------------- //
     // --  BRKTable View      -- //
     // ------------------------- //
-    self.venuesTable = [[BRKVenuesResultsTable alloc] init];
-    [self.venuesTable setTranslatesAutoresizingMaskIntoConstraints:NO];
-    [self.venuesTable.venueResultsTable setBackgroundColor:[UIColor blueColor]];
-    [self.venuesTable.venueResultsTable setSeparatorStyle:UITableViewCellSeparatorStyleSingleLineEtched];
-    [self.venuesTable.venueResultsTable setSeparatorColor:[UIColor lightGrayColor]];
-    [self.venuesTable.venueResultsTable setSeparatorInset:UIEdgeInsetsZero];
-    [self.venuesTable setAlpha:0.0];
+    self.venueTableViewController = [[BRKVenuesTableViewController alloc] init];
+    self.venueResultsTable = self.venueTableViewController.tableView;
+    [self.venueResultsTable setTranslatesAutoresizingMaskIntoConstraints:NO];
+    [self.venueResultsTable setBackgroundColor:[UIColor blueColor]];
+    [self.venueResultsTable setSeparatorStyle:UITableViewCellSeparatorStyleSingleLineEtched];
+    [self.venueResultsTable setSeparatorColor:[UIColor lightGrayColor]];
+    [self.venueResultsTable setSeparatorInset:UIEdgeInsetsZero];
+    [self.venueResultsTable setAlpha:0.0];
     // -- needs search logic -- //
-    [self.view addSubview:self.venuesTable];
+    [self.view addSubview:self.venueResultsTable];
     
     // -- DELETE THIS LATER -- //
     UINib *dynamicCelllNib = [UINib nibWithNibName:@"BRKVenuesTableViewCell" bundle:nil];
-    [self.venuesTable.venueResultsTable registerNib:dynamicCelllNib forCellReuseIdentifier:@"VenueCell"];
+    [self.venueResultsTable registerNib:dynamicCelllNib forCellReuseIdentifier:@"VenueCell"];
     
-    self.venuesTable.venueResultsTable.rowHeight = UITableViewAutomaticDimension;
-    self.venuesTable.venueResultsTable.estimatedRowHeight = 200.0;
+    self.venueResultsTable.rowHeight = UITableViewAutomaticDimension;
+    self.venueResultsTable.estimatedRowHeight = 200.0;
     
-    [self.venuesTable.venueResultsTable setDelegate:self];
-    [self.venuesTable.venueResultsTable setDataSource:self];
+    [self.venueResultsTable setDelegate:self];
+    [self.venueResultsTable setDataSource:self];
     
     // -- DELETE THIS LATER -- //
     
-    NSArray * venuesTableHorizontal = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_venuesTable]|"
+    NSArray * venuesTableHorizontal = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_venueResultsTable]|"
                                                                               options:0
                                                                               metrics:nil
-                                                                                views:NSDictionaryOfVariableBindings(_venuesTable)];
-    NSArray * venuesTableVertical = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[searchBarContainer]-[_venuesTable]-|"
+                                                                                views:NSDictionaryOfVariableBindings(_venueResultsTable)];
+    NSArray * venuesTableVertical = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[searchBarContainer]-[_venueResultsTable]-|"
                                                                               options:0
                                                                               metrics:nil
-                                                                                views:NSDictionaryOfVariableBindings(_venuesTable, searchBarContainer)];
+                                                                                views:NSDictionaryOfVariableBindings(_venueResultsTable, searchBarContainer)];
     [self.view addConstraints:venuesTableHorizontal];
     [self.view addConstraints:venuesTableVertical];
     
@@ -389,7 +392,7 @@
         
         if (success) {
             [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-                [self.venuesTable.venueResultsTable reloadData];
+                [self.venueTableViewController.tableView reloadData];
             }];
         }else{
             NSLog(@"Nothing found");
