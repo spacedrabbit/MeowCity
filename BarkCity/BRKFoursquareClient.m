@@ -81,7 +81,9 @@
                         }
                     }
                 }
-                success(venues);
+                [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                        success(venues);
+                }];
             }
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {

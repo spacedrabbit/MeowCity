@@ -14,7 +14,7 @@ NSString * const BRKVenueImageDidUpdateNotification = @"BRKVenueImageDidUpdateNo
 @implementation BRKVenue
 - (void)downloadPreviewImageInBackground
 {
-    NSMutableURLRequest *imageRequest = [NSMutableURLRequest requestWithURL:[self imageURLForOriginalSize]];
+    NSMutableURLRequest *imageRequest = [NSMutableURLRequest requestWithURL:[self imageURLForSize:CGSizeMake(160, 160)]];
     [imageRequest addValue:@"image/*" forHTTPHeaderField:@"Accept"];
     
     AFHTTPRequestOperation *requestOperation = [[AFHTTPRequestOperation alloc] initWithRequest:imageRequest];

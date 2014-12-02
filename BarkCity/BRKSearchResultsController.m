@@ -14,14 +14,18 @@
 #import "BRKVenueDetailTableViewController.h"
 #import "BRKScrollView.h"
 #import "BRKPictureTableViewCell.h"
+#import "BRKHomeTableViewController.h"
 
-@interface BRKSearchResultsController () <UIScrollViewDelegate, CLLocationManagerDelegate, UITableViewDataSource, UITableViewDelegate>
+@interface BRKSearchResultsController () <UIScrollViewDelegate, CLLocationManagerDelegate, BRKDetailTableViewSegueDelegate>
 
 @property (strong, nonatomic) UIView * resultsView;
 @property (strong, nonatomic) BRKScrollView * venueCategoryScroll;
 @property (strong, nonatomic) BRKScrollView * venueTableScroll;
 @property (strong, nonatomic) NSArray * venuesSearchTables;
 @property (strong, nonatomic) CLLocation * currentLocation;
+
+@property (strong, nonatomic) NSArray * venueCategories;
+@property (strong, nonatomic) NSMutableArray * venueTableControllers;
 
 @end
 
@@ -36,6 +40,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.venueTableControllers = [[NSMutableArray alloc] init];
     
     // -- getting info -- //
     self.foursquareClient = [BRKFoursquareClient sharedClient];
@@ -50,10 +55,6 @@
                                              selector:@selector(handleLocationChange:)
                                                  name:@"locationChanged"
                                                object:nil];
-
-    
-}
-- (void)viewWillAppear:(BOOL)animated {
     
     self.navigationController.navigationBar.topItem.title = @"Bark City";
     
@@ -66,7 +67,10 @@
     
     // -- Location Start -- //
     [self.locationManager requestInUseAuthorization];
+
+    
 }
+
 -(void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
@@ -89,7 +93,7 @@
 -(void)createAndArrangeScrollViews{
     
     // -- Category details are filled in from API -- //
-    NSArray * venueCategories = @[ @"Bars", @"Parks", @"Bakery", @"Shopping", @"Cookies" ];
+    self.venueCategories = @[ @"Bars", @"Parks", @"Bakery", @"Shopping", @"Cookies" ];
     
     // -- Setting up some rects -- //
     CGRect screenRect = [UIScreen mainScreen].bounds;
@@ -97,7 +101,7 @@
     CGFloat categoryBarHeight = 60.0;
     
     CGRect categoryScrollViewFrame = CGRectMake(originWithNavBarAndMenu.x , originWithNavBarAndMenu.y, [UIScreen mainScreen].bounds.size.width, categoryBarHeight);
-    CGRect tableScrollViewFrame = CGRectMake(originWithNavBarAndMenu.x, originWithNavBarAndMenu.y + categoryBarHeight, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - categoryBarHeight);
+    CGRect tableScrollViewFrame = CGRectMake(originWithNavBarAndMenu.x, originWithNavBarAndMenu.y + categoryBarHeight, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - categoryBarHeight - originWithNavBarAndMenu.y);
     
     // -- Adding a background image -- //
     UIView * background = [[UIView alloc] initWithFrame:screenRect];
@@ -110,10 +114,10 @@
     [self setView:self.resultsView];
     
     // -- creating scroll views -- //
-    self.venueCategoryScroll = [self createCategoryScrollWithCategories:venueCategories inFrame:categoryScrollViewFrame];
+    self.venueCategoryScroll = [self createCategoryScrollWithCategories:self.venueCategories inFrame:categoryScrollViewFrame];
     [self.view addSubview:self.venueCategoryScroll];
     
-    self.venueTableScroll = [self createScrollingTableFromVenues:venueCategories inFrame:tableScrollViewFrame];
+    self.venueTableScroll = [self createScrollingTableFromVenues:self.venueCategories inFrame:tableScrollViewFrame];
     [self.view addSubview:self.venueTableScroll];
     
     // -- setting scroll delegates -- //
@@ -150,28 +154,15 @@
 }
 
 -(BRKScrollView *) createScrollingTableFromVenues:(NSArray *)venues inFrame:(CGRect)frame{
-    
-    UINib *pictureCellNib = [UINib nibWithNibName:@"BRKPictureTableViewCell" bundle:nil];
-    UINib *dynamicCelllNib = [UINib nibWithNibName:@"BRKVenuesTableViewCell" bundle:nil];
-    
+
     NSMutableArray * tableViewsForCategories = [NSMutableArray array];
     for (NSInteger i= 0; i< [venues count]; i++) {
         
-        UITableView * newTable = [[UITableView alloc] initWithFrame:frame];
-
-        [newTable registerNib:pictureCellNib forCellReuseIdentifier:@"PictureCell"];
-        [newTable registerNib:dynamicCelllNib forCellReuseIdentifier:@"VenueCell"];
+        BRKHomeTableViewController * newTableController = [[BRKHomeTableViewController alloc] initWithQuery:self.venueCategories[i]];
+        newTableController.venueDetailSegueDelegate = self;
+        [self.venueTableControllers addObject:newTableController];
         
-        newTable.rowHeight = UITableViewAutomaticDimension;
-        newTable.estimatedRowHeight = 200.0;
-        
-        [newTable setDelegate:self];
-        [newTable setDataSource:self];
-        
-        [newTable setTag:(i+5)];
-        
-        [tableViewsForCategories addObject:newTable];
-        
+        [tableViewsForCategories addObject:newTableController.tableView];
     }
     
     BRKScrollView * scrollNavTables = [BRKScrollView createScrollViewFromFrame:frame withSubViews:tableViewsForCategories];
@@ -199,15 +190,6 @@
         //NSLog(@"This is a different scroll!");
     }
 
-    // stops horizontal bounces
-//    if (offset.x < 0) {
-//        [scrollView setContentOffset:CGPointMake(0.0, 0.0) animated:NO];
-//    }
-//
-//    if (offset.x > scrollView.contentSize.width - [UIScreen mainScreen].bounds.size.width) {
-//        [scrollView setContentOffset:CGPointMake(scrollView.contentSize.width - [UIScreen mainScreen].bounds.size.width, 0.0) animated:NO];
-//    }
-
 }
 
 
@@ -217,87 +199,28 @@
  *
  ***********************************************************************************/
 #pragma mark - FourSquare/Location Fetches -
-- (void)fetchVenuesForLocation:(CLLocation *)location withCompletionHandler:(void (^)(BOOL))success
-{
-    [self.foursquareClient requestVenuesForQuery:@"Restaurants" location:location limit:15 success:^(NSArray *venues) {
-        self.venues = venues;
-        for (BRKVenue *venue in venues) {
-            [venue downloadPreviewImageInBackground];
-        }
-        if (self.venues) {
-            success(YES);
-        }
-    } failure:^(NSError *error) {
-        NSLog(@"%@", error);
-    }];
-}
 
 - (void)handleLocationChange:(NSNotification *)notification {
     
     NSDictionary *userInfo = notification.userInfo;
     CLLocation *newLocation = userInfo[@"newLocation"];
     if (!self.currentLocation) {
-        self.currentLocation = newLocation;
+        [self.venueTableControllers makeObjectsPerformSelector:@selector(setLocation:) withObject:newLocation];
     }
-    [self fetchVenuesForLocation:newLocation withCompletionHandler:^(BOOL success) {
-        
-        if (success) {
-            [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-                [self.venueTableScroll reloadBRKSubViews];
-            }];
-        }else{
-            NSLog(@"Nothing found");
-        }
-        
-    }];
 }
 
 /**********************************************************************************
  *
- *                  TableView Methods
+ *                  Segue Delegate To DetailViewController
  *
  ***********************************************************************************/
-#pragma mark - TableView Methods -
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-
-    if (indexPath.row == 0) {
-        BRKPictureTableViewCell *cell = (BRKPictureTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"PictureCell"];
-        return cell;
-    }
-    
-    BRKVenuesTableViewCell *cell = (BRKVenuesTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"VenueCell" forIndexPath:indexPath];
-    
-    BRKVenue *venue = self.venues[indexPath.row];
-    cell.venue = venue;
-    
-    // conditional to test the dynamic length of the cells
-    
-    if (indexPath.row %2 == 0) {
-        cell.descriptiveBody.text = @"This restaurant is great for dogs";
-    } else {
-        cell.descriptiveBody.text = @"This is a very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very long version of the cell";
-    }
-    
-    return cell;
-    
-}
--(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 1;
-}
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return self.numberOfLocationsToShow +1;
-}
-
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-    NSLog(@"The table selected: %li", tableView.tag);
-    NSLog(@"Selected Section:%li inRow:%li ", indexPath.section, indexPath.row);
-    
+#pragma mark - Segue Delegate To DetailViewController -
+- (void)segueToDetailTableViewWithVenue:(BRKVenue *)venue
+{
     BRKVenueDetailTableViewController * selectedVenue = [[BRKVenueDetailTableViewController alloc] init];
-    selectedVenue.venue = self.venues[indexPath.row];
+    selectedVenue.venue = venue;
 
     [self.navigationController pushViewController:selectedVenue animated:YES];
-
 }
 
 @end

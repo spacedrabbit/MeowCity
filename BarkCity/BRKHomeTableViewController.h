@@ -8,10 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
+#import "BRKVenueDetailTableViewController.h"
 #import "BRKLocationManager.h"
 
 @interface BRKHomeTableViewController : UITableViewController
 
-@property (strong, nonatomic) BRKLocationManager *locationManager;
+@property (nonatomic, weak) id<BRKDetailTableViewSegueDelegate>venueDetailSegueDelegate;
+@property (strong, nonatomic) CLLocation * location;
+- (instancetype) initWithQuery:(NSString *) query;
 
 @end
