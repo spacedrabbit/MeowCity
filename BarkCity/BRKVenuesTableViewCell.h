@@ -8,12 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+@class BRKVenue;
+
 @interface BRKVenuesTableViewCell : UITableViewCell
 
-@property (weak, nonatomic) IBOutlet UILabel *name;
-@property (weak, nonatomic) IBOutlet UILabel *rating;
-@property (weak, nonatomic) IBOutlet UILabel *distance;
-@property (weak, nonatomic) IBOutlet UIImageView *picture;
+@property (strong, nonatomic)BRKVenue *venue;
 @property (weak, nonatomic) IBOutlet UILabel *descriptiveBody;
 
 @end

@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+extern NSString * const BRKVenueImageDidUpdateNotification;
+
 @interface BRKVenue : NSObject
 @property (nonatomic) NSString *foursquareId;
 @property (nonatomic) NSString *name;
@@ -32,4 +34,7 @@
 @property (nonatomic, readonly) NSString *formattedAddress;
 
 - (void)downloadPreviewImageInBackground;
+
+- (NSURL *)imageURLForOriginalSize;
+- (NSURL *)imageURLForSize:(CGSize)size;
 @end

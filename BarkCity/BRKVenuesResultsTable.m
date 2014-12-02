@@ -106,9 +106,7 @@
         cell = (BRKVenuesTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"Location" forIndexPath:indexPath];
     }
     
-    cell.name.text = venue.name;
-    cell.rating.text = [venue.rating description];
-    cell.distance.text = @"1.0 mi";
+    cell.venue = venue;
     cell.detailTextLabel.text = @"This restaurant is great for dogs";
     
     return cell;

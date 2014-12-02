@@ -10,6 +10,12 @@
 
 @class BRKVenue;
 
+@protocol BRKDetailTableViewSegueDelegate <NSObject>
+
+- (void)segueToDetailTableViewWithVenue:(BRKVenue *)venue;
+
+@end
+
 @interface BRKVenueDetailTableViewController : UITableViewController
 
 @property (strong, nonatomic) BRKVenue *venue;

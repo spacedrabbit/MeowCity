@@ -57,6 +57,7 @@
     
     if (indexPath.row == 0) {
         BRKPictureTableViewCell *cell = (BRKPictureTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"PictureCell"];
+        cell.picture.image = self.venue.previewImage;
         return cell;
     }
     

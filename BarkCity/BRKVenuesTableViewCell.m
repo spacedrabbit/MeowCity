@@ -7,6 +7,15 @@
 //
 
 #import "BRKVenuesTableViewCell.h"
+#import "BRKVenue.h"
+
+@interface BRKVenuesTableViewCell()
+@property (weak, nonatomic) IBOutlet UILabel *name;
+@property (weak, nonatomic) IBOutlet UILabel *rating;
+@property (weak, nonatomic) IBOutlet UILabel *distance;
+@property (weak, nonatomic) IBOutlet UIImageView *picture;
+
+@end
 
 @implementation BRKVenuesTableViewCell
 
@@ -19,6 +28,29 @@
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
+}
+
+- (void)setVenue:(BRKVenue *)venue
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    _venue = venue;
+    
+    if (_venue) {
+        self.name.text = venue.name;
+        self.rating.text = [venue.rating description];
+        self.distance.text = @"1.0 mi";
+        if (venue.previewImage) {
+            self.picture.image = venue.previewImage;
+        } else {
+            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(venueImageDidUpdate:) name:BRKVenueImageDidUpdateNotification object:venue];
+        }
+    }
+}
+
+- (void)venueImageDidUpdate:(NSNotification *)notification
+{
+    BRKVenue *venue = notification.object;
+    self.picture.image = venue.previewImage;
 }
 
 - (void) autoLayout {
