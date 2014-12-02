@@ -10,7 +10,6 @@
 #import "BRKSearchViewController.h"
 #import "BRKFoursquareClient.h"
 #import "BRKHomeViewController.h"
-#import "BRKVenuesResultsTable.h"
 #import "BRKVenueDetailTableViewController.h"
 #import "BRKScrollView.h"
 #import "BRKPictureTableViewCell.h"

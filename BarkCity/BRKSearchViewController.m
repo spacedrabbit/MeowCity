@@ -9,7 +9,6 @@
 #import <MapKit/MapKit.h>
 #import <CoreLocation/CoreLocation.h>
 #import "BRKSearchViewController.h"
-#import "BRKVenuesResultsTable.h"
 #import "BRKScrollView.h"
 #import "BRKLocationManager.h"
 
