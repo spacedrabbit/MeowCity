@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface BRKReviewView : UIView
+@interface BRKReviewView : UIView <EDStarRatingProtocol>
 
 @end
