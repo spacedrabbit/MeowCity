@@ -7,6 +7,7 @@
 //
 
 #import "BRKPictureTableViewCell.h"
+#import "Masonry.h"
 
 @implementation BRKPictureTableViewCell
 
@@ -73,6 +74,17 @@
                                   constant:200];
     
     [self.contentView addConstraints:@[pictureLeading, pictureTrailing, pictureTop, pictureBottom, pictureHeight]];
+    
+    [self.reviewButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.height.mas_equalTo(30);
+        make.width.mas_equalTo(30);
+        make.bottom.equalTo(self.contentView.mas_bottom).with.offset(-2);
+        make.right.equalTo(self.contentView.mas_right).with.offset(-2);
+    }];
+}
+
+- (IBAction)reviewButtonTapped:(id)sender {
+    [self.delegate segueToReviewViewController];
 }
 
 @end

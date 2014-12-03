@@ -15,12 +15,12 @@
 		B1434DD71A268BB300770E29 /* barkboxLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = B1434DD61A268BB300770E29 /* barkboxLogo.png */; };
 		B17860221A23CAB600EBE64F /* BRKScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = B17860211A23CAB600EBE64F /* BRKScrollView.m */; };
 		B17860331A251C7F00EBE64F /* BRKHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B17860301A251C7F00EBE64F /* BRKHomeViewController.m */; };
-		CBBBE4241A27C4CB00109C41 /* BRKPictureTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CBBBE41F1A27C4CB00109C41 /* BRKPictureTableViewCell.m */; };
-		CBBBE4251A27C4CB00109C41 /* BRKPictureTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBBBE4201A27C4CB00109C41 /* BRKPictureTableViewCell.xib */; };
 		CBBBE4261A27C4CB00109C41 /* BRKVenuesTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CBBBE4221A27C4CB00109C41 /* BRKVenuesTableViewCell.m */; };
 		CBBBE4271A27C4CB00109C41 /* BRKVenuesTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBBBE4231A27C4CB00109C41 /* BRKVenuesTableViewCell.xib */; };
 		CBBBE42E1A27D0D100109C41 /* BRKVenueDetailTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBBBE42D1A27D0D100109C41 /* BRKVenueDetailTableViewController.m */; };
 		CBBBE4311A2E585200109C41 /* BRKUIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CBBBE4301A2E585200109C41 /* BRKUIManager.m */; };
+		CBBBE4351A2F947800109C41 /* BRKPictureTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CBBBE4331A2F947800109C41 /* BRKPictureTableViewCell.m */; };
+		CBBBE4361A2F947800109C41 /* BRKPictureTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBBBE4341A2F947800109C41 /* BRKPictureTableViewCell.xib */; };
 		CBE36D1A1A25067A00AD80F6 /* BRKVenueDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE36D181A25067A00AD80F6 /* BRKVenueDetailTableViewCell.m */; };
 		CBE36D1B1A25067A00AD80F6 /* BRKVenueDetailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBE36D191A25067A00AD80F6 /* BRKVenueDetailTableViewCell.xib */; };
 		CBE36D1F1A25069900AD80F6 /* BRKVenueDetail.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBE36D1C1A25069900AD80F6 /* BRKVenueDetail.xib */; };
@@ -64,9 +64,6 @@
 		B17860211A23CAB600EBE64F /* BRKScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRKScrollView.m; sourceTree = "<group>"; };
 		B178602F1A251C7F00EBE64F /* BRKHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRKHomeViewController.h; sourceTree = "<group>"; };
 		B17860301A251C7F00EBE64F /* BRKHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRKHomeViewController.m; sourceTree = "<group>"; };
-		CBBBE41E1A27C4CB00109C41 /* BRKPictureTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRKPictureTableViewCell.h; sourceTree = "<group>"; };
-		CBBBE41F1A27C4CB00109C41 /* BRKPictureTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRKPictureTableViewCell.m; sourceTree = "<group>"; };
-		CBBBE4201A27C4CB00109C41 /* BRKPictureTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BRKPictureTableViewCell.xib; sourceTree = "<group>"; };
 		CBBBE4211A27C4CB00109C41 /* BRKVenuesTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRKVenuesTableViewCell.h; sourceTree = "<group>"; };
 		CBBBE4221A27C4CB00109C41 /* BRKVenuesTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRKVenuesTableViewCell.m; sourceTree = "<group>"; };
 		CBBBE4231A27C4CB00109C41 /* BRKVenuesTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BRKVenuesTableViewCell.xib; sourceTree = "<group>"; };
@@ -74,6 +71,9 @@
 		CBBBE42D1A27D0D100109C41 /* BRKVenueDetailTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRKVenueDetailTableViewController.m; sourceTree = "<group>"; };
 		CBBBE42F1A2E585200109C41 /* BRKUIManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRKUIManager.h; sourceTree = "<group>"; };
 		CBBBE4301A2E585200109C41 /* BRKUIManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRKUIManager.m; sourceTree = "<group>"; };
+		CBBBE4321A2F947800109C41 /* BRKPictureTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRKPictureTableViewCell.h; sourceTree = "<group>"; };
+		CBBBE4331A2F947800109C41 /* BRKPictureTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRKPictureTableViewCell.m; sourceTree = "<group>"; };
+		CBBBE4341A2F947800109C41 /* BRKPictureTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BRKPictureTableViewCell.xib; sourceTree = "<group>"; };
 		CBE36D171A25067A00AD80F6 /* BRKVenueDetailTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRKVenueDetailTableViewCell.h; sourceTree = "<group>"; };
 		CBE36D181A25067A00AD80F6 /* BRKVenueDetailTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRKVenueDetailTableViewCell.m; sourceTree = "<group>"; };
 		CBE36D191A25067A00AD80F6 /* BRKVenueDetailTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BRKVenueDetailTableViewCell.xib; sourceTree = "<group>"; };
@@ -184,9 +184,9 @@
 		CBBBE4281A27C4D800109C41 /* BRKPictureTableViewCell */ = {
 			isa = PBXGroup;
 			children = (
-				CBBBE41E1A27C4CB00109C41 /* BRKPictureTableViewCell.h */,
-				CBBBE41F1A27C4CB00109C41 /* BRKPictureTableViewCell.m */,
-				CBBBE4201A27C4CB00109C41 /* BRKPictureTableViewCell.xib */,
+				CBBBE4321A2F947800109C41 /* BRKPictureTableViewCell.h */,
+				CBBBE4331A2F947800109C41 /* BRKPictureTableViewCell.m */,
+				CBBBE4341A2F947800109C41 /* BRKPictureTableViewCell.xib */,
 			);
 			name = BRKPictureTableViewCell;
 			sourceTree = "<group>";
@@ -413,6 +413,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CBBBE4361A2F947800109C41 /* BRKPictureTableViewCell.xib in Resources */,
 				CBE36D1F1A25069900AD80F6 /* BRKVenueDetail.xib in Resources */,
 				CBE36D1B1A25067A00AD80F6 /* BRKVenueDetailTableViewCell.xib in Resources */,
 				B1434DD71A268BB300770E29 /* barkboxLogo.png in Resources */,
@@ -422,7 +423,6 @@
 				F925AC5C1A23C1670086F2EB /* LaunchScreen.xib in Resources */,
 				CBE36D2A1A266F2A00AD80F6 /* BRKHome.xib in Resources */,
 				F925AC591A23C1670086F2EB /* Images.xcassets in Resources */,
-				CBBBE4251A27C4CB00109C41 /* BRKPictureTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -475,6 +475,7 @@
 			files = (
 				95B81A731A2D17AC005F9AE0 /* BRKHelper.m in Sources */,
 				CBBBE4311A2E585200109C41 /* BRKUIManager.m in Sources */,
+				CBBBE4351A2F947800109C41 /* BRKPictureTableViewCell.m in Sources */,
 				F94606731A23D86A00FF6AB0 /* BRKSearchViewController.m in Sources */,
 				95B81A6C1A23C951005F9AE0 /* BRKVenue.m in Sources */,
 				F94606AF1A262DCA00FF6AB0 /* BRKLocationManager.m in Sources */,
@@ -486,7 +487,6 @@
 				95B81A661A23C854005F9AE0 /* BRKFoursquareClient.m in Sources */,
 				B17860221A23CAB600EBE64F /* BRKScrollView.m in Sources */,
 				CBBBE42E1A27D0D100109C41 /* BRKVenueDetailTableViewController.m in Sources */,
-				CBBBE4241A27C4CB00109C41 /* BRKPictureTableViewCell.m in Sources */,
 				CBBBE4261A27C4CB00109C41 /* BRKVenuesTableViewCell.m in Sources */,
 				CBE36D201A25069900AD80F6 /* BRKVenueDetailView.m in Sources */,
 			);
