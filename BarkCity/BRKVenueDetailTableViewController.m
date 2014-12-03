@@ -10,6 +10,7 @@
 #import "BRKVenueDetailTableViewCell.h"
 #import "BRKPictureTableViewCell.h"
 #import "BRKVenue.h"
+#import "BRKReviewViewController.h"
 
 @interface BRKVenueDetailTableViewController ()
 
@@ -58,6 +59,7 @@
     if (indexPath.row == 0) {
         BRKPictureTableViewCell *cell = (BRKPictureTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"PictureCell"];
         cell.picture.image = self.venue.previewImage;
+        cell.delegate = self;
         return cell;
     }
     
@@ -76,6 +78,14 @@
     }
     
     return cell;
+}
+
+- (void)segueToReviewViewController
+{
+    BRKReviewViewController *vc = [[BRKReviewViewController alloc] init];
+    [self presentViewController:vc animated:YES completion:^{
+        NSLog(@"New review");
+    }];
 }
 
 @end
