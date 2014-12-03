@@ -11,13 +11,15 @@
 
 @implementation BRKReviewView
 
+
 - (id)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     
     if (self) {
         [[NSBundle mainBundle] loadNibNamed:@"BRKReviewView" owner:self options:nil];
+        [self addSubview:self.reviewTextView];
     }
-    NSLog(@"Brought in with Storyboards");
+    
     return self;
 }
 

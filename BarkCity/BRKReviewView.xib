@@ -22,6 +22,7 @@
             <connections>
                 <outlet property="reviewTextView" destination="VFf-OR-Qak" id="vIw-kr-quB"/>
             </connections>
+            <point key="canvasLocation" x="225" y="23"/>
         </view>
     </objects>
 </document>

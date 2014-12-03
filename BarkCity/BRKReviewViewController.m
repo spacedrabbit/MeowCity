@@ -18,7 +18,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    BRKReviewView *newReviewView = [[BRKReviewView alloc] initWithFrame:self.view.frame];
+    NSArray *xibContents = [[NSBundle mainBundle] loadNibNamed:@"BRKReviewView" owner:self options:nil];
+    BRKReviewView *newReviewView = [xibContents lastObject];
     [self.view addSubview:newReviewView];
     
 }
