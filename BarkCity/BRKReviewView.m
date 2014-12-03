@@ -7,29 +7,31 @@
 //
 
 #import "BRKReviewView.h"
-#import "Masonry.h"
+
+@interface BRKReviewView ()
+
+@property (strong, nonatomic) IBOutlet UIView *view;
+
+@end
 
 @implementation BRKReviewView
 
+/*
+ // Only override drawRect: if you perform custom drawing.
+ // An empty implementation adversely affects performance during animation.
+ - (void)drawRect:(CGRect)rect {
+ // Drawing code
+ }
+ */
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     
     if (self) {
         [[NSBundle mainBundle] loadNibNamed:@"BRKReviewView" owner:self options:nil];
-        [self addSubview:self.reviewTextView];
+        [self addSubview:self.view];
     }
-    
     return self;
-}
-
-- (void)autolayout {
-    [self.reviewTextView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.height.mas_equalTo(self.bounds.size.height);
-        make.width.mas_equalTo(self.bounds.size.width);
-        make.top.equalTo(self.mas_top);
-        make.left.equalTo(self.mas_left);
-    }];
 }
 
 

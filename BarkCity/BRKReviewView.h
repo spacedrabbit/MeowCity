@@ -10,6 +10,4 @@
 
 @interface BRKReviewView : UIView
 
-@property (strong, nonatomic) IBOutlet UITextView *reviewTextView;
-
 @end
