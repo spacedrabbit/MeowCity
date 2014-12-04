@@ -19,7 +19,8 @@
 @property (strong, nonatomic) BRKVenuesTableViewController *venueTableViewController;
 @property (strong, nonatomic) BRKScrollView * scrollingContainerView;
 @property (strong, nonatomic) UITextField * searchTextField;
-@property (strong, nonatomic) UITextField * locationTextField;
+//@property (strong, nonatomic) UITextField * locationTextField;
+@property (strong, nonatomic) UIButton *locationButton;
 @property (strong, nonatomic) UITableView *venueResultsTable;
 
 @property (strong, nonatomic) MKMapView * currentLocationView;
@@ -246,38 +247,64 @@
     [self.searchTextField setDelegate           :   self                                    ];
     [searchBarContainer   addSubview        :   self.searchTextField];
     
-    self.locationTextField = [[UITextField alloc] init];
-    [self.locationTextField setTranslatesAutoresizingMaskIntoConstraints:NO                 ];
-    [self.locationTextField setBackgroundColor  :   [UIColor whiteColor]                    ];
-    [self.locationTextField setLayoutMargins    :   UIEdgeInsetsMake(0.0, 8.0, 0.0, 8.0)    ];
-    [self.locationTextField setBorderStyle      :   UITextBorderStyleRoundedRect            ];
-    [self.locationTextField setPlaceholder      :   @"Current Location"                     ];
-    [self.locationTextField setKeyboardType     :   UIKeyboardTypeASCIICapable              ];
-    [self.locationTextField setReturnKeyType    :   UIReturnKeySearch                       ];
-    [self.locationTextField.layer setShadowColor:   [UIColor blueColor].CGColor             ];
-    [self.locationTextField.layer setShadowOffset:  CGSizeMake(0.0, 2.0)                    ];
-    [self.locationTextField.layer setShadowOpacity: .25                                     ];
-    [self.locationTextField.layer setShadowRadius:  5.0                                     ];
-    [self.locationTextField.layer setMasksToBounds: NO                                      ];
-    [self.locationTextField setDelegate         :   self                                    ];
-    [searchBarContainer addSubview:self.locationTextField];
+//    self.locationTextField = [[UITextField alloc] init];
+//    [self.locationTextField setTranslatesAutoresizingMaskIntoConstraints:NO                 ];
+//    [self.locationTextField setBackgroundColor  :   [UIColor whiteColor]                    ];
+//    [self.locationTextField setLayoutMargins    :   UIEdgeInsetsMake(0.0, 8.0, 0.0, 8.0)    ];
+//    [self.locationTextField setBorderStyle      :   UITextBorderStyleRoundedRect            ];
+//    [self.locationTextField setPlaceholder      :   @"Current Location"                     ];
+//    [self.locationTextField setKeyboardType     :   UIKeyboardTypeASCIICapable              ];
+//    [self.locationTextField setReturnKeyType    :   UIReturnKeySearch                       ];
+//    [self.locationTextField.layer setShadowColor:   [UIColor blueColor].CGColor             ];
+//    [self.locationTextField.layer setShadowOffset:  CGSizeMake(0.0, 2.0)                    ];
+//    [self.locationTextField.layer setShadowOpacity: .25                                     ];
+//    [self.locationTextField.layer setShadowRadius:  5.0                                     ];
+//    [self.locationTextField.layer setMasksToBounds: NO                                      ];
+//    [self.locationTextField setDelegate         :   self                                    ];
+//    [searchBarContainer addSubview:self.locationTextField];
+    
+    self.locationButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    [self.locationButton setTranslatesAutoresizingMaskIntoConstraints:NO];
+    [self.locationButton addTarget:self
+                            action:@selector(searchByLocation:)
+                  forControlEvents:UIControlEventTouchUpInside];
+    [self.locationButton setTitle:@"Use My Current Location" forState:UIControlStateNormal];
+    [self.locationButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [self.locationButton setBackgroundColor:[UIColor blackColor]];
+    [searchBarContainer addSubview:self.locationButton];
     
     NSArray * searchTextHorizontal = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_searchTextField]-|"
                                                                              options:0
                                                                              metrics:nil
                                                                                views:NSDictionaryOfVariableBindings(_searchTextField)];
     
-    NSArray * locationTextHorizontal = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_locationTextField]-|"
+    NSArray * locationButtonHorizontal = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_locationButton]-|"
                                                                              options:0
                                                                              metrics:nil
-                                                                               views:NSDictionaryOfVariableBindings(_locationTextField)];
-    NSArray * textFieldsVertical = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[_searchTextField(==40)]-(>=0)-[_locationTextField(==40)]-|"
+                                                                               views:NSDictionaryOfVariableBindings(_locationButton)];
+    NSArray * textFieldsVertical = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[_searchTextField(==40)]-(>=0)-[_locationButton(==40)]-|"
                                                                            options:0
                                                                            metrics:nil
-                                                                             views:NSDictionaryOfVariableBindings(_locationTextField, _searchTextField)];
+                                                                             views:NSDictionaryOfVariableBindings(_locationButton, _searchTextField)];
     [self.view addConstraints:searchTextHorizontal];
-    [self.view addConstraints:locationTextHorizontal];
+    [self.view addConstraints:locationButtonHorizontal];
     [self.view addConstraints:textFieldsVertical];
+    
+    /*MAP*/
+    [self.currentLocationView setTranslatesAutoresizingMaskIntoConstraints:NO];
+    [self.currentLocationView setDelegate:self];
+    [self.view addSubview:self.currentLocationView];
+    
+    NSArray * mapTableHorizontal = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_currentLocationView]|"
+                                                                           options:0
+                                                                           metrics:nil
+                                                                             views:NSDictionaryOfVariableBindings(_currentLocationView)];
+    NSArray * mapTableVertical = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[searchBarContainer]-[_currentLocationView]-|"
+                                                                         options:0
+                                                                         metrics:nil
+                                                                           views:NSDictionaryOfVariableBindings(_currentLocationView, searchBarContainer)];
+    
+    [self.view addConstraints:mapTableHorizontal];
     
     // ------------------------- //
     // --  BRKTable View      -- //
@@ -292,6 +319,8 @@
     [self.venueResultsTable setAlpha:0.0];
     // -- needs search logic -- //
     [self.view addSubview:self.venueResultsTable];
+
+    [self.view addConstraints:mapTableVertical];
     
     // -- DELETE THIS LATER -- //
     UINib *dynamicCelllNib = [UINib nibWithNibName:@"BRKVenuesTableViewCell" bundle:nil];
@@ -305,33 +334,47 @@
     
     // -- DELETE THIS LATER -- //
     
-    NSArray * venuesTableHorizontal = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_venueResultsTable]|"
-                                                                              options:0
-                                                                              metrics:nil
-                                                                                views:NSDictionaryOfVariableBindings(_venueResultsTable)];
-    NSArray * venuesTableVertical = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[searchBarContainer]-[_venueResultsTable]-|"
-                                                                              options:0
-                                                                              metrics:nil
-                                                                                views:NSDictionaryOfVariableBindings(_venueResultsTable, searchBarContainer)];
-    [self.view addConstraints:venuesTableHorizontal];
-    [self.view addConstraints:venuesTableVertical];
-    
-
-//    [self.currentLocationView setTranslatesAutoresizingMaskIntoConstraints:NO];
-//    [self.currentLocationView setDelegate:self];
-//    [self.view addSubview:self.currentLocationView];
-//    
-//    NSArray * mapTableHorizontal = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_currentLocationView]|"
+//    NSArray * venuesTableHorizontal = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_venueResultsTable]|"
 //                                                                              options:0
 //                                                                              metrics:nil
-//                                                                                views:NSDictionaryOfVariableBindings(_currentLocationView)];
-//    NSArray * mapTableVertical = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[searchBarContainer]-[_currentLocationView]-|"
-//                                                                            options:0
-//                                                                            metrics:nil
-//                                                                              views:NSDictionaryOfVariableBindings(_currentLocationView, searchBarContainer)];
-//    
-//    [self.view addConstraints:mapTableHorizontal];
-//    [self.view addConstraints:mapTableVertical];
+//                                                                                views:NSDictionaryOfVariableBindings(_venueResultsTable)];
+//    NSArray * venuesTableVertical = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[searchBarContainer]-[_venueResultsTable]-|"
+//                                                                              options:0
+//                                                                              metrics:nil
+//                                                                                views:NSDictionaryOfVariableBindings(_venueResultsTable, searchBarContainer)];
+//    [self.view addConstraints:venuesTableHorizontal];
+//    [self.view addConstraints:venuesTableVertical];
+
+    NSLayoutConstraint *venueTableLeft = [NSLayoutConstraint constraintWithItem:_venueResultsTable
+                                                                      attribute:NSLayoutAttributeLeft
+                                                                      relatedBy:NSLayoutRelationEqual
+                                                                         toItem:self.view
+                                                                      attribute:NSLayoutAttributeLeft
+                                                                     multiplier:1.0
+                                                                       constant:0];
+    NSLayoutConstraint *venueTableRight = [NSLayoutConstraint constraintWithItem:_venueResultsTable
+                                                                       attribute:NSLayoutAttributeRight
+                                                                       relatedBy:NSLayoutRelationEqual
+                                                                          toItem:self.view
+                                                                       attribute:NSLayoutAttributeRight
+                                                                      multiplier:1.0
+                                                                        constant:0];
+    NSLayoutConstraint *venueTableTop = [NSLayoutConstraint constraintWithItem:_venueResultsTable
+                                                                     attribute:NSLayoutAttributeTop
+                                                                     relatedBy:NSLayoutRelationEqual
+                                                                        toItem:searchBarContainer
+                                                                     attribute:NSLayoutAttributeBottom
+                                                                    multiplier:1.0
+                                                                      constant:300];
+    NSLayoutConstraint *venueTableBottom = [NSLayoutConstraint constraintWithItem:_venueResultsTable
+                                                                       attribute:NSLayoutAttributeBottom
+                                                                       relatedBy:NSLayoutRelationEqual
+                                                                          toItem:self.view
+                                                                       attribute:NSLayoutAttributeBottom
+                                                                      multiplier:1.0
+                                                                        constant:0];
+    
+    [self.view addConstraints:@[venueTableLeft, venueTableRight, venueTableTop, venueTableBottom]];
 }
 
 
@@ -375,18 +418,18 @@
             }
             
         }];
-        
-    } else if (textField == self.locationTextField) {
-        
-        [self fetchVenuesForLocation:self.locationManager.location withCompletionHandler:^(BOOL success) {
-            if (success) {
-                [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-                    [self.venueTableViewController.tableView reloadData];
-                }];
-            }else{
-                NSLog(@"Nothing found");
-            }
-        }];
+//        
+//    } else if (textField == self.locationTextField) {
+//        
+//        [self fetchVenuesForLocation:self.locationManager.location withCompletionHandler:^(BOOL success) {
+//            if (success) {
+//                [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+//                    [self.venueTableViewController.tableView reloadData];
+//                }];
+//            }else{
+//                NSLog(@"Nothing found");
+//            }
+//        }];
     }
     
     
@@ -468,6 +511,20 @@
     }
     
     return cell;
+}
+
+- (void)searchByLocation:(UIButton *)sender {
+    NSLog(@"I'm trying to get here!");
+    [self fetchVenuesForLocation:self.locationManager.location withCompletionHandler:^(BOOL success) {
+                    if (success) {
+                        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                            [self.venueTableViewController.tableView reloadData];
+                        }];
+                    }else{
+                        NSLog(@"Nothing found");
+                    }
+                }];
+    [self toggleTableViewAndUnhide:YES];
 }
 
 @end
