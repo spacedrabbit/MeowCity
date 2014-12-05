@@ -18,12 +18,12 @@
 
 @interface BRKSearchViewController () <UITextFieldDelegate, MKMapViewDelegate, BRKDetailTableViewSegueDelegate>
 
-@property (strong, nonatomic) BRKScrollView * scrollingContainerView;
+@property (strong, nonatomic) BRKLocationManager *locationManager;
 @property (strong, nonatomic) UITextField * searchTextField;
 @property (strong, nonatomic) UIButton *locationButton;
-@property (strong, nonatomic) BRKVenuesTableViewController *venueTableViewController;
-@property (strong, nonatomic) BRKTableView *venueResultsTable;
 @property (strong, nonatomic) BRKVenuesViewController *venuesViewController;
+@property (strong, nonatomic) UIView *searchBarContainer;
+@property (strong, nonatomic) UIView *venuesView;
 
 @property (strong, nonatomic) MKMapView * currentLocationView;
 
@@ -37,53 +37,16 @@
 @implementation BRKSearchViewController
 
 #pragma mark - UIViewController Standard Methods -
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     
-    // -- getting info -- //
-    self.foursquareClient = [BRKFoursquareClient sharedClient];
-    
-    self.numberOfLocationsToShow = 5;
-    
     self.locationManager = [BRKLocationManager sharedLocationManager];
-    
-    [self.locationManager startUpdatingLocation];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(handleLocationChange:)
-                                                 name:@"locationChanged"
-                                               object:nil];
-
-
-    // handling moving content when keyboard appears ...
-    NSOperationQueue * keyBoardHandlingQueue = [[NSOperationQueue alloc] init];
-    [[NSNotificationCenter defaultCenter] addObserverForName:UIKeyboardWillShowNotification
-                                                      object:nil
-                                                       queue:keyBoardHandlingQueue
-                                                  usingBlock:^(NSNotification *note)
-    {
-        // the userInfo dict has info on KB size/location
-        CGRect keyboardTopPoint = [[note.userInfo objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue];
-        CGRect keyboardBottomPoint = [[note.userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
-
-        // because this involves an animation, it gets placed on the main queue
-        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-            [self updateSearchViewWithTopRect:keyboardTopPoint andBottomRect:keyboardBottomPoint];
-        }];
-    }];
-    
-    // ... and when it disappears
-    [[NSNotificationCenter defaultCenter] addObserverForName:UIKeyboardWillHideNotification
-                                                      object:nil
-                                                       queue:keyBoardHandlingQueue
-                                                  usingBlock:^(NSNotification *note)
-    {
-        //NSLog(@"The info: %@", note.userInfo);
-        //NSLog(@"The Keyboard will disappear");
-    }];    
+    //[self.locationManager startUpdatingLocation];
 }
 
--(void)viewWillAppear:(BOOL)animated{
+- (void)viewWillAppear:(BOOL)animated
+{
     self.screenRect = [UIScreen mainScreen].bounds;
     self.tableViewIsHidden = YES; // search table begins hidden
     
@@ -92,61 +55,15 @@
     [searchViewBlur setFrame    :   [UIScreen mainScreen].bounds];
     [self.view      addSubview  :   searchViewBlur              ];
 
-    [self setUpViews];
+    [self setUpInitialViewsForSearchView];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
 
-#pragma mark - Updating Constraints based on Keyboard -
-// -- Not implemented --//
-/* 
-    The idea is to run this when theis view controller detects that the keyboard has (dis)appeared
-    Implementation Ideas:
-          1) Change the bottom inset of the tableView's content to match the height of the keyboard
-          2) Get the array of currently visible cells
-          3) Tell the tableView to scroll to the first visbile cell in that array
-
-    Effectively, this would push the content of the tableview up and then center on the visible cells
-*/
--(void)updateSearchViewWithTopRect:(CGRect)topOfRect andBottomRect:(CGRect)bottomOfRect{
-    
-    if (!self.tableViewIsHidden) {
-        
-        [self.venueTableViewController.tableView setContentInset:UIEdgeInsetsMake(0.0, 0.0, bottomOfRect.size.height, 0.0)];
-        
-        NSArray * visible = [self.venueTableViewController.tableView visibleCells];
-        [self.venueTableViewController.tableView scrollToRowAtIndexPath:[self.venueTableViewController.tableView indexPathForCell:visible[0]]
-                                                  atScrollPosition:UITableViewScrollPositionMiddle
-                                                          animated:YES];
-    }
-}
-
--(void)toggleTableViewAndUnhide:(BOOL)unHide{ 
-    
-    CGFloat alphaValue;
-    if (self.tableViewIsHidden) {
-        alphaValue = 1.0;
-    }else{
-        alphaValue = 0.0;
-    }
-    //adds a fade animation to the results disapearing
-    [UIView animateWithDuration:0.25
-                     animations:^
-     {
-         [self.venueTableViewController.tableView setAlpha:alphaValue];
-     }
-                     completion:^(BOOL finished)
-     {
-         if (finished) {
-             self.tableViewIsHidden = !self.tableViewIsHidden;
-         }
-     }];
-    
-}
-
 #pragma mark - AutoLayout -
--(void) setUpViews{
+-(void) setUpInitialViewsForSearchView
+{
     
     // ------------------------- //
     // -- Fake Nav+Status Bar -- //
@@ -209,22 +126,23 @@
     // ------------------------- //
     // --  Search Container   -- //
     // ------------------------- //
-    UIView * searchBarContainer = [[UIView alloc] init];
-    [searchBarContainer.layer setCornerRadius:4.0];
-    [searchBarContainer setTranslatesAutoresizingMaskIntoConstraints:NO];
-    [self.view addSubview:searchBarContainer];
+    self.searchBarContainer = [[UIView alloc] init];
+    [self.searchBarContainer.layer setCornerRadius:4.0];
+    [self.searchBarContainer setTranslatesAutoresizingMaskIntoConstraints:NO];
+    [self.view addSubview:self.searchBarContainer];
     
-    NSArray * searchBarContainerHorizontal = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[searchBarContainer]|"
-                                                                                options:0
-                                                                                metrics:nil
-                                                                                  views:NSDictionaryOfVariableBindings(searchBarContainer)
-                                         ];
+    NSArray * searchBarContainerHorizontal = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_searchBarContainer]|"
+                                                                                     options:0
+                                                                                     metrics:nil
+                                                                                       views:NSDictionaryOfVariableBindings(_searchBarContainer)
+                                              ];
     NSArray * searchBarContainerVertical = [NSLayoutConstraint constraintsWithVisualFormat:
-                                                    @"V:|[fakeNavBar(==64.0)][searchBarContainer(==100)]-(>=0)-|"
+                                            @"V:|[fakeNavBar(==64.0)][_searchBarContainer(==100)]-(>=0)-|"
                                                                                    options:0
                                                                                    metrics:nil
-                                                                                     views:NSDictionaryOfVariableBindings(fakeNavBar,searchBarContainer)
+                                                                                     views:NSDictionaryOfVariableBindings(fakeNavBar,_searchBarContainer)
                                             ];
+
     
     [self.view addConstraints:searchBarContainerHorizontal];
     [self.view addConstraints:searchBarContainerVertical];
@@ -246,7 +164,7 @@
     [self.searchTextField.layer setShadowRadius :   5.0                                     ];
     [self.searchTextField.layer setMasksToBounds:   NO                                      ];
     [self.searchTextField setDelegate           :   self                                    ];
-    [searchBarContainer   addSubview        :   self.searchTextField];
+    [self.searchBarContainer   addSubview        :   self.searchTextField];
 
     
     self.locationButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
@@ -257,7 +175,7 @@
     [self.locationButton setTitle:@"Use My Current Location" forState:UIControlStateNormal];
     [self.locationButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.locationButton setBackgroundColor:[UIColor blackColor]];
-    [searchBarContainer addSubview:self.locationButton];
+    [self.searchBarContainer addSubview:self.locationButton];
     
     NSArray * searchTextHorizontal = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_searchTextField]-|"
                                                                              options:0
@@ -275,83 +193,51 @@
     [self.view addConstraints:searchTextHorizontal];
     [self.view addConstraints:locationButtonHorizontal];
     [self.view addConstraints:textFieldsVertical];
-    
-    /*MAP*/
-//    [self.currentLocationView setTranslatesAutoresizingMaskIntoConstraints:NO];
-//    [self.currentLocationView setDelegate:self];
-//    [self.view addSubview:self.currentLocationView];
-//    
-//    NSArray * mapTableHorizontal = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_currentLocationView]|"
-//                                                                           options:0
-//                                                                           metrics:nil
-//                                                                             views:NSDictionaryOfVariableBindings(_currentLocationView)];
-//    NSArray * mapTableVertical = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[searchBarContainer]-[_currentLocationView]-|"
-//                                                                         options:0
-//                                                                         metrics:nil
-//                                                                           views:NSDictionaryOfVariableBindings(_currentLocationView, searchBarContainer)];
-//    
-//    [self.view addConstraints:mapTableHorizontal];
-//    [self.view addConstraints:mapTableVertical];
-    
-    // ------------------------- //
-    // --  BRKTable View      -- //
-    // ------------------------- //
-    self.venueTableViewController = [[BRKVenuesTableViewController alloc] init];
-    self.venueTableViewController.venueDetailSegueDelegate = self;
-    self.venueResultsTable = (BRKTableView *)self.venueTableViewController.tableView;
-    [self.venueResultsTable setTranslatesAutoresizingMaskIntoConstraints:NO];
-    [self.venueResultsTable setBackgroundColor:[UIColor clearColor]];
-    [self.venueResultsTable setSeparatorStyle:UITableViewCellSeparatorStyleSingleLineEtched];
-    [self.venueResultsTable setSeparatorColor:[UIColor lightGrayColor]];
-    [self.venueResultsTable setSeparatorInset:UIEdgeInsetsZero];
-    [self.venueResultsTable setAlpha:0.0];
-    
-    [self.venueResultsTable setContentInset:UIEdgeInsetsMake(300, 0, 0, 0)];
-    
-    // -- needs search logic -- //
-    [self.view addSubview:self.venueResultsTable];
-    
-    // -- DELETE THIS LATER -- //
-    UINib *dynamicCelllNib = [UINib nibWithNibName:@"BRKVenuesTableViewCell" bundle:nil];
-    [self.venueResultsTable registerNib:dynamicCelllNib forCellReuseIdentifier:@"VenueCell"];
-    
-    self.venueResultsTable.rowHeight = UITableViewAutomaticDimension;
-    self.venueResultsTable.estimatedRowHeight = 200.0;
+}
 
-    NSLayoutConstraint *venueTableLeft = [NSLayoutConstraint constraintWithItem:_venueResultsTable
+- (void) setUpResultsViewForSearchView
+{
+    [self setUpMap];
+    self.venuesViewController = [[BRKVenuesViewController alloc] initWithQuery:self.searchTextField.text andBackgroundView:self.currentLocationView];
+    self.venuesViewController.venueDetailSegueDelegate = self;
+    self.venuesViewController.location = self.locationManager.location;
+    
+    self.venuesView = self.venuesViewController.view;
+    self.venuesView.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.view addSubview:self.venuesView];
+    
+    NSLayoutConstraint *venueTableLeft = [NSLayoutConstraint constraintWithItem:_venuesView
                                                                       attribute:NSLayoutAttributeLeft
                                                                       relatedBy:NSLayoutRelationEqual
                                                                          toItem:self.view
                                                                       attribute:NSLayoutAttributeLeft
                                                                      multiplier:1.0
                                                                        constant:0];
-    NSLayoutConstraint *venueTableRight = [NSLayoutConstraint constraintWithItem:_venueResultsTable
+    NSLayoutConstraint *venueTableRight = [NSLayoutConstraint constraintWithItem:_venuesView
                                                                        attribute:NSLayoutAttributeRight
                                                                        relatedBy:NSLayoutRelationEqual
                                                                           toItem:self.view
                                                                        attribute:NSLayoutAttributeRight
                                                                       multiplier:1.0
                                                                         constant:0];
-    NSLayoutConstraint *venueTableTop = [NSLayoutConstraint constraintWithItem:_venueResultsTable
+    NSLayoutConstraint *venueTableTop = [NSLayoutConstraint constraintWithItem:_venuesView
                                                                      attribute:NSLayoutAttributeTop
                                                                      relatedBy:NSLayoutRelationEqual
-                                                                        toItem:searchBarContainer
+                                                                        toItem:self.searchBarContainer
                                                                      attribute:NSLayoutAttributeBottom
                                                                     multiplier:1.0
                                                                       constant:0];
-    NSLayoutConstraint *venueTableBottom = [NSLayoutConstraint constraintWithItem:_venueResultsTable
-                                                                       attribute:NSLayoutAttributeBottom
-                                                                       relatedBy:NSLayoutRelationEqual
-                                                                          toItem:self.view
-                                                                       attribute:NSLayoutAttributeBottom
-                                                                      multiplier:1.0
-                                                                        constant:0];
+    NSLayoutConstraint *venueTableBottom = [NSLayoutConstraint constraintWithItem:_venuesView
+                                                                        attribute:NSLayoutAttributeBottom
+                                                                        relatedBy:NSLayoutRelationEqual
+                                                                           toItem:self.view
+                                                                        attribute:NSLayoutAttributeBottom
+                                                                       multiplier:1.0
+                                                                         constant:0];
     
     [self.view addConstraints:@[venueTableLeft, venueTableRight, venueTableTop, venueTableBottom]];
-
-    self.venuesViewController = [[BRKVenuesViewController alloc] initWithQuery:<#(NSString *)#> andBackgroundView:<#(UIView *)#>]
+    
 }
-
 
 - (void)setUpMap
 {
@@ -374,33 +260,27 @@
 
 // -- shows/hides results table, needs further work
 
-- (void)cancelBarButtonItemPressed:(id)sender{
+- (void)cancelBarButtonItemPressed:(id)sender
+{
+    [self.searchTextField resignFirstResponder];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - UITextDelegate
--(BOOL)textFieldShouldReturn:(UITextField *)textField{
-    if (textField == self.searchTextField) {
-        NSString *query = self.searchTextField.text;
-        [self fetchVenuesForQuery:query withCompletionHandler:^(BOOL success) {
-            
-            if (success) {
-                [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-                    [self.venueTableViewController.tableView reloadData];
-                }];
-            }else{
-                NSLog(@"Nothing found");
-            }
-            
-        }];
-    }
-    
-    
-    [self toggleTableViewAndUnhide:YES];
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    [self.venuesView removeFromSuperview];
+    self.venuesView = nil;
+}
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [self setUpResultsViewForSearchView];
     return [textField resignFirstResponder];
 }
--(void)textFieldDidBeginEditing:(UITextField *)textField{
-    
+
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    [textField resignFirstResponder];
 }
 
 #pragma mark - DetailSegueDelegate
@@ -412,65 +292,14 @@
     [self.navigationController pushViewController:selectedVenue animated:YES];
 }
 
-#pragma mark - API call
-- (void)fetchVenuesForLocation:(CLLocation *)location withCompletionHandler:(void (^)(BOOL))success
+- (void)searchByLocation:(UIButton *)sender
 {
-    [self.foursquareClient requestVenuesForQuery:@"Restaurants" location:location limit:15 success:^(NSArray *venues) {
-        self.venues = venues;
-        if (self.venues) {
-            success(YES);
-        }
-    } failure:^(NSError *error) {
-        NSLog(@"%@", error);
-    }];
-}
-
-- (void)fetchVenuesForQuery:(NSString *)query withCompletionHandler:(void (^)(BOOL))success {
-    [self.foursquareClient requestVenuesForQuery:query location:self.locationManager.location limit:15 success:^(NSArray *venues) {
-        self.venues = venues;
-        if (self.venues) {
-            success(YES);
-        }
-    } failure:^(NSError *error) {
-        NSLog(@"%@", error);
-    }];
-    
-}
-
-
-- (void)handleLocationChange:(NSNotification *)notification {
-    
-    NSDictionary *userInfo = notification.userInfo;
-    CLLocation *newLocation = userInfo[@"newLocation"];
-    if (!self.currentLocation) {
-        self.currentLocation = newLocation;
-    }
-    
-    [self fetchVenuesForLocation:newLocation withCompletionHandler:^(BOOL success) {
-        
-        if (success) {
-            [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-                [self.venueTableViewController.tableView reloadData];
-            }];
-        }else{
-            NSLog(@"Nothing found");
-        }
-        
-    }];
-}
-
-- (void)searchByLocation:(UIButton *)sender {
     NSLog(@"I'm trying to get here!");
-    [self fetchVenuesForLocation:self.locationManager.location withCompletionHandler:^(BOOL success) {
-                    if (success) {
-                        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-                            [self.venueTableViewController.tableView reloadData];
-                        }];
-                    }else{
-                        NSLog(@"Nothing found");
-                    }
-                }];
-    [self toggleTableViewAndUnhide:YES];
+    [self.venuesView removeFromSuperview];
+    self.venuesView = nil;
+    [self.searchTextField resignFirstResponder];
+    
+    [self setUpResultsViewForSearchView];
 }
 
 @end
