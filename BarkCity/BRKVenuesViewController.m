@@ -15,6 +15,8 @@
 #import "BRKTableView.h"
 
 @interface BRKVenuesViewController () <UITableViewDelegate, UITableViewDataSource>
+@property (nonatomic) BRKTableView *tableView;
+@property (nonatomic) UIView *backgroundView;
 @property (nonatomic) NSInteger numberOfLocationsToShow;
 @property (nonatomic) BRKFoursquareClient *foursquareClient;
 @property (nonatomic) NSArray *venues;
@@ -51,10 +53,41 @@
     return self;
 }
 
+- (instancetype)initWithQuery:(NSString *)query andBackgroundView:(UIView *)view
+{
+    self = [super init];
+    if (self) {
+        _query = query;
+        
+        _tableView = [[BRKTableView alloc] init];
+        _tableView.delegate = self;
+        _tableView.dataSource = self;
+        _tableView.backgroundColor = [UIColor clearColor];
+        
+        _backgroundView = view;
+        
+        _tableView.separatorColor = [UIColor clearColor];
+        // Retrieve Nib of the two custom cell types.
+        UINib *dynamicCelllNib = [UINib nibWithNibName:@"BRKVenuesTableViewCell" bundle:nil];
+        [_tableView registerNib:dynamicCelllNib forCellReuseIdentifier:@"VenueCell"];
+        
+        _tableView.rowHeight = UITableViewAutomaticDimension;
+        _tableView.estimatedRowHeight = 200.0;
+        
+        _foursquareClient = [BRKFoursquareClient sharedClient];
+        
+        _numberOfLocationsToShow = 5;
+    }
+    return self;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
+    if (self.backgroundView) {
+        [self.view addSubview:self.backgroundView];
+    }
     [self.view addSubview:self.tableView];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -65,13 +98,26 @@
 
 - (void)viewWillLayoutSubviews
 {
-    [super viewDidLayoutSubviews];
+    [super viewWillLayoutSubviews];
+    
+    if (self.backgroundView) {
+        self.backgroundView.frame = (CGRect){
+            .origin.x = 0.0f,
+            .origin.y = 0,
+            .size.width = self.view.frame.size.width,
+            .size.height = self.view.frame.size.height / 3
+        };
+    }
+    
     self.tableView.frame = (CGRect){
         .origin.x = 0.0f,
         .origin.y = 0,
         .size.width = self.view.frame.size.width,
         .size.height = self.view.frame.size.height
     };
+    
+    self.tableView.contentInset = UIEdgeInsetsMake(self.backgroundView ? self.backgroundView.frame.size.height : 0, 0, 0, 0);
+    self.tableView.scrollIndicatorInsets = UIEdgeInsetsMake(self.backgroundView ? self.backgroundView.frame.size.height : 0, 0, 0, 0);
 }
 
 - (void)didReceiveMemoryWarning
@@ -99,21 +145,15 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return self.venues.count + 1;
+    return self.venues.count;
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
-    if (indexPath.row == 0) {
-        BRKPictureTableViewCell *cell = (BRKPictureTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"PictureCell"];
-        return cell;
-    }
-    
     BRKVenuesTableViewCell *cell = (BRKVenuesTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"VenueCell" forIndexPath:indexPath];
     
-    BRKVenue *venue = self.venues[indexPath.row - 1];
+    BRKVenue *venue = self.venues[indexPath.row];
     cell.venue = venue;
     
     // conditional to test the dynamic length of the cells

@@ -155,11 +155,13 @@
     NSMutableArray * tableViewsForCategories = [NSMutableArray array];
     for (NSInteger i= 0; i< [venues count]; i++) {
         
-        BRKVenuesViewController * newTableController = [[BRKVenuesViewController alloc] initWithQuery:self.venueCategories[i]];
+        UIImageView *backgroundImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"placeholder"]];
+        
+        BRKVenuesViewController * newTableController = [[BRKVenuesViewController alloc] initWithQuery:self.venueCategories[i] andBackgroundView:backgroundImage];
         newTableController.venueDetailSegueDelegate = self;
         [self.venueTableControllers addObject:newTableController];
         
-        [tableViewsForCategories addObject:newTableController.tableView];
+        [tableViewsForCategories addObject:newTableController.view];
     }
     
     BRKScrollView * scrollNavTables = [BRKScrollView createScrollViewFromFrame:frame withSubViews:tableViewsForCategories];

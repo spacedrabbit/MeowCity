@@ -10,8 +10,6 @@
 		07F863FE1A250D90009EAB2F /* adorable-puppy.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 07F863FD1A250D90009EAB2F /* adorable-puppy.jpeg */; };
 		109E2E8FD64C9BBFBEEE95F8 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 09C6EB0BF5BF9D0A7D566AF8 /* libPods.a */; };
 		95934F021A320F9E00E2676E /* BRKTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 95934F011A320F9E00E2676E /* BRKTableView.m */; };
-		95934F041A321F7300E2676E /* BRKSearchResultsContainerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 95934F031A321F7300E2676E /* BRKSearchResultsContainerView.xib */; };
-		95934F071A32202F00E2676E /* BRKSearchResultsContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 95934F061A32202F00E2676E /* BRKSearchResultsContainerView.m */; };
 		95934F0A1A3222F500E2676E /* BRKVenuesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95934F091A3222F500E2676E /* BRKVenuesViewController.m */; };
 		95B81A661A23C854005F9AE0 /* BRKFoursquareClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 95B81A651A23C854005F9AE0 /* BRKFoursquareClient.m */; };
 		95B81A6C1A23C951005F9AE0 /* BRKVenue.m in Sources */ = {isa = PBXBuildFile; fileRef = 95B81A6B1A23C951005F9AE0 /* BRKVenue.m */; };
@@ -63,9 +61,6 @@
 		88C440BB57B1ECE75CE0576A /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		95934F001A320F9E00E2676E /* BRKTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRKTableView.h; sourceTree = "<group>"; };
 		95934F011A320F9E00E2676E /* BRKTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRKTableView.m; sourceTree = "<group>"; };
-		95934F031A321F7300E2676E /* BRKSearchResultsContainerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BRKSearchResultsContainerView.xib; sourceTree = "<group>"; };
-		95934F051A32202F00E2676E /* BRKSearchResultsContainerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRKSearchResultsContainerView.h; sourceTree = "<group>"; };
-		95934F061A32202F00E2676E /* BRKSearchResultsContainerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRKSearchResultsContainerView.m; sourceTree = "<group>"; };
 		95934F081A3222F500E2676E /* BRKVenuesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRKVenuesViewController.h; sourceTree = "<group>"; };
 		95934F091A3222F500E2676E /* BRKVenuesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRKVenuesViewController.m; sourceTree = "<group>"; };
 		95B81A641A23C854005F9AE0 /* BRKFoursquareClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRKFoursquareClient.h; sourceTree = "<group>"; };
@@ -179,9 +174,6 @@
 				B17860211A23CAB600EBE64F /* BRKScrollView.m */,
 				95934F001A320F9E00E2676E /* BRKTableView.h */,
 				95934F011A320F9E00E2676E /* BRKTableView.m */,
-				95934F051A32202F00E2676E /* BRKSearchResultsContainerView.h */,
-				95934F061A32202F00E2676E /* BRKSearchResultsContainerView.m */,
-				95934F031A321F7300E2676E /* BRKSearchResultsContainerView.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -422,11 +414,11 @@
 				TargetAttributes = {
 					F925AC471A23C1670086F2EB = {
 						CreatedOnToolsVersion = 6.1;
-						DevelopmentTeam = 9RXLE5FXUN;
+						DevelopmentTeam = MX8253552V;
 					};
 					F925AC601A23C1670086F2EB = {
 						CreatedOnToolsVersion = 6.1;
-						DevelopmentTeam = 9RXLE5FXUN;
+						DevelopmentTeam = MX8253552V;
 						TestTargetID = F925AC471A23C1670086F2EB;
 					};
 				};
@@ -461,7 +453,6 @@
 				B1434DD71A268BB300770E29 /* barkboxLogo.png in Resources */,
 				07F863FE1A250D90009EAB2F /* adorable-puppy.jpeg in Resources */,
 				CBE36D261A26679600AD80F6 /* placeholder.png in Resources */,
-				95934F041A321F7300E2676E /* BRKSearchResultsContainerView.xib in Resources */,
 				CBBBE43C1A2F951200109C41 /* BRKReviewView.xib in Resources */,
 				CBBBE4271A27C4CB00109C41 /* BRKVenuesTableViewCell.xib in Resources */,
 				F925AC5C1A23C1670086F2EB /* LaunchScreen.xib in Resources */,
@@ -538,7 +529,6 @@
 				CBBBE4261A27C4CB00109C41 /* BRKVenuesTableViewCell.m in Sources */,
 				CBBBE43B1A2F951200109C41 /* BRKReviewView.m in Sources */,
 				CBE36D201A25069900AD80F6 /* BRKVenueDetailView.m in Sources */,
-				95934F071A32202F00E2676E /* BRKSearchResultsContainerView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
