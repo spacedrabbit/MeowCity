@@ -13,7 +13,7 @@
 #import "BRKVenueDetailTableViewController.h"
 #import "BRKScrollView.h"
 #import "BRKPictureTableViewCell.h"
-#import "BRKVenuesTableViewController.h"
+#import "BRKVenuesViewController.h"
 #import "BRKUIManager.h"
 
 @interface BRKHomeViewController () <UIScrollViewDelegate, CLLocationManagerDelegate, BRKDetailTableViewSegueDelegate>
@@ -155,7 +155,7 @@
     NSMutableArray * tableViewsForCategories = [NSMutableArray array];
     for (NSInteger i= 0; i< [venues count]; i++) {
         
-        BRKVenuesTableViewController * newTableController = [[BRKVenuesTableViewController alloc] initWithQuery:self.venueCategories[i]];
+        BRKVenuesViewController * newTableController = [[BRKVenuesViewController alloc] initWithQuery:self.venueCategories[i]];
         newTableController.venueDetailSegueDelegate = self;
         [self.venueTableControllers addObject:newTableController];
         
