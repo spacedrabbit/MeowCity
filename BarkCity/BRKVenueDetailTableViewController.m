@@ -7,8 +7,9 @@
 //
 
 #import "BRKVenueDetailTableViewController.h"
-#import "BRKVenueDetailTableViewCell.h"
 #import "BRKPictureTableViewCell.h"
+#import "BRKDetailTableViewCell.h"
+#import "BRKCommentTableViewCell.h"
 #import "BRKVenue.h"
 #import "BRKReviewViewController.h"
 
@@ -17,6 +18,7 @@
 @end
 
 @implementation BRKVenueDetailTableViewController
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -27,12 +29,21 @@
     UINib *pictureCellNib = [UINib nibWithNibName:@"BRKPictureTableViewCell" bundle:nil];
     [self.tableView registerNib:pictureCellNib forCellReuseIdentifier:@"PictureCell"];
     
-    UINib *dynamicCelllNib = [UINib nibWithNibName:@"BRKVenueDetailTableViewCell" bundle:nil];
-    [self.tableView registerNib:dynamicCelllNib forCellReuseIdentifier:@"VenueDetailCell"];
+    UINib *detailCellNib = [UINib nibWithNibName:@"BRKDetailTableViewCell" bundle:nil];
+    [self.tableView registerNib:detailCellNib forCellReuseIdentifier:@"DetailCell"];
+    
+    UINib *dynamicCelllNib = [UINib nibWithNibName:@"BRKCommentTableViewCell" bundle:nil];
+    [self.tableView registerNib:dynamicCelllNib forCellReuseIdentifier:@"CommentCell"];
     
     // Set dynamic row height and estimate for scrolling cursror
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     self.tableView.estimatedRowHeight = 200.0;
+    
+    
+    // -- SEARCH BUTTON -- //
+    UIBarButtonItem * reviewButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(displayReviewViewController)];
+    [self.navigationController.navigationBar.topItem setRightBarButtonItem:reviewButton animated:YES];
+
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
@@ -63,7 +74,12 @@
         return cell;
     }
     
-    BRKVenueDetailTableViewCell *cell = (BRKVenueDetailTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"VenueDetailCell" forIndexPath:indexPath];
+    if (indexPath.row == 1) {
+        BRKDetailTableViewCell *cell = (BRKDetailTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"DetailCell"];
+        return cell;
+    }
+    
+    BRKCommentTableViewCell *cell = (BRKCommentTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"CommentCell" forIndexPath:indexPath];
     
     // conditional to test the dynamic length of the cells
     
@@ -80,8 +96,7 @@
     return cell;
 }
 
-- (void)segueToReviewViewController
-{
+- (void) displayReviewViewController {
     BRKReviewViewController *vc = [[BRKReviewViewController alloc] init];
     [self presentViewController:vc animated:YES completion:^{
         NSLog(@"New review");
