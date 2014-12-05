@@ -8,6 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol BRKSearchBarContainerDelegate <NSObject>
+- (void)searchFieldBeganNewSearch;
+- (void)searchFieldDidReturnWithText:(NSString *)searchText;
+@end
+
 @interface BRKSearchBarContainer : UIView
+@property (nonatomic, weak) id <BRKSearchBarContainerDelegate> delegate;
 
 @end

@@ -8,6 +8,10 @@
 
 #import "BRKSearchBarContainer.h"
 
+@interface BRKSearchBarContainer()
+@property (weak, nonatomic) IBOutlet UITextField *searchField;
+@end
+
 @implementation BRKSearchBarContainer
 
 /*
@@ -17,5 +21,16 @@
     // Drawing code
 }
 */
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    [self.delegate searchFieldBeganNewSearch];
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [self.delegate searchFieldDidReturnWithText:self.searchField.text];
+    return [textField resignFirstResponder];
+}
 
 @end

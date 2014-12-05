@@ -9,20 +9,19 @@
 #import <MapKit/MapKit.h>
 #import <CoreLocation/CoreLocation.h>
 #import "BRKSearchViewController.h"
-#import "BRKScrollView.h"
+#import "BRKSearchBarContainer.h"
 #import "BRKLocationManager.h"
-#import "BRKVenuesTableViewController.h"
 #import "BRKVenuesViewController.h"
 #import "BRKUIManager.h"
 #import "BRKTableView.h"
 
-@interface BRKSearchViewController () <UITextFieldDelegate, MKMapViewDelegate, BRKDetailTableViewSegueDelegate>
+@interface BRKSearchViewController () <UITextFieldDelegate, MKMapViewDelegate, BRKDetailTableViewSegueDelegate, BRKDetailTableViewSegueDelegate, BRKSearchBarContainerDelegate>
 
 @property (strong, nonatomic) BRKLocationManager *locationManager;
 @property (strong, nonatomic) UITextField * searchTextField;
 @property (strong, nonatomic) UIButton *locationButton;
 @property (strong, nonatomic) BRKVenuesViewController *venuesViewController;
-@property (strong, nonatomic) UIView *searchBarContainer;
+@property (strong, nonatomic) UIView *searchBarContainer; //change to BRKSearchBarContainer
 @property (strong, nonatomic) UIView *venuesView;
 
 @property (strong, nonatomic) MKMapView * currentLocationView;
@@ -127,6 +126,11 @@
     // --  Search Container   -- //
     // ------------------------- //
     self.searchBarContainer = [[UIView alloc] init];
+    
+//    self.searchBarContainer = [[BRKSearchBarContainer alloc] init];
+//    self.searchBarContainer.delegate = self;
+    
+    
     [self.searchBarContainer.layer setCornerRadius:4.0];
     [self.searchBarContainer setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self.view addSubview:self.searchBarContainer];
@@ -195,7 +199,7 @@
     [self.view addConstraints:textFieldsVertical];
 }
 
-- (void) setUpResultsViewForSearchView
+- (void)setUpResultsViewForSearchView
 {
     [self setUpMap];
     self.venuesViewController = [[BRKVenuesViewController alloc] initWithQuery:self.searchTextField.text andBackgroundView:self.currentLocationView];
@@ -291,6 +295,19 @@
     
     [self.navigationController pushViewController:selectedVenue animated:YES];
 }
+
+#pragma mark - BRKSearchBarDelegate
+- (void)searchFieldBeganNewSearch
+{
+    [self.venuesView removeFromSuperview];
+    self.venuesView = nil;
+}
+
+- (void)searchFieldDidReturnWithText:(NSString *)searchText
+{
+    [self setUpResultsViewForSearchView];
+}
+
 
 - (void)searchByLocation:(UIButton *)sender
 {
