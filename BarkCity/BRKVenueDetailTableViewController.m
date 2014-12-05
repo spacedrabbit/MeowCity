@@ -40,9 +40,9 @@
     self.tableView.estimatedRowHeight = 200.0;
     
     
-    // -- SEARCH BUTTON -- //
+    // -- COMMENT BUTTON -- //
     UIBarButtonItem * reviewButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(displayReviewViewController)];
-    [self.navigationController.navigationBar.topItem setRightBarButtonItem:reviewButton animated:YES];
+    [self.navigationItem setRightBarButtonItem:reviewButton animated:YES];
 
 }
 -(void)viewWillAppear:(BOOL)animated{
