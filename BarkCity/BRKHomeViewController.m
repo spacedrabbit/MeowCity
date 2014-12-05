@@ -66,8 +66,6 @@
     
     // -- Location Start -- //
     [self.locationManager requestInUseAuthorization];
-
-    
 }
 
 -(void)didReceiveMemoryWarning {
