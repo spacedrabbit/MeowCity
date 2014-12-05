@@ -175,9 +175,8 @@
     
     NSLog(@"The table selected: %li", tableView.tag);
     NSLog(@"Selected Section:%li inRow:%li ", indexPath.section, indexPath.row);
-    if (indexPath.row != 0) {
-        [self.venueDetailSegueDelegate segueToDetailTableViewWithVenue:self.venues[indexPath.row - 1]];
-    }
+    
+    [self.venueDetailSegueDelegate segueToDetailTableViewWithVenue:self.venues[indexPath.row]];
 }
 
 - (void)fetchVenuesForLocation
