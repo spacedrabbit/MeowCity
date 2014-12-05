@@ -43,6 +43,8 @@
 		F94606701A23D86A00FF6AB0 /* BRKVenuesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F94606691A23D86A00FF6AB0 /* BRKVenuesTableViewController.m */; };
 		F94606731A23D86A00FF6AB0 /* BRKSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F946066E1A23D86A00FF6AB0 /* BRKSearchViewController.m */; };
 		F94606AF1A262DCA00FF6AB0 /* BRKLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F94606AE1A262DCA00FF6AB0 /* BRKLocationManager.m */; };
+		F9A678CF1A322CE20008921B /* BRKSearchBarContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = F9A678CE1A322CE20008921B /* BRKSearchBarContainer.m */; };
+		F9A678D11A322CF20008921B /* BRKSearchBarContainer.xib in Resources */ = {isa = PBXBuildFile; fileRef = F9A678D01A322CF20008921B /* BRKSearchBarContainer.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -117,6 +119,9 @@
 		F946066E1A23D86A00FF6AB0 /* BRKSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRKSearchViewController.m; sourceTree = "<group>"; };
 		F94606AD1A262DCA00FF6AB0 /* BRKLocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRKLocationManager.h; sourceTree = "<group>"; };
 		F94606AE1A262DCA00FF6AB0 /* BRKLocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRKLocationManager.m; sourceTree = "<group>"; };
+		F9A678CD1A322CE20008921B /* BRKSearchBarContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRKSearchBarContainer.h; sourceTree = "<group>"; };
+		F9A678CE1A322CE20008921B /* BRKSearchBarContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRKSearchBarContainer.m; sourceTree = "<group>"; };
+		F9A678D01A322CF20008921B /* BRKSearchBarContainer.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BRKSearchBarContainer.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -179,6 +184,9 @@
 				95934F051A32202F00E2676E /* BRKSearchResultsContainerView.h */,
 				95934F061A32202F00E2676E /* BRKSearchResultsContainerView.m */,
 				95934F031A321F7300E2676E /* BRKSearchResultsContainerView.xib */,
+				F9A678CD1A322CE20008921B /* BRKSearchBarContainer.h */,
+				F9A678CE1A322CE20008921B /* BRKSearchBarContainer.m */,
+				F9A678D01A322CF20008921B /* BRKSearchBarContainer.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -455,6 +463,7 @@
 				CBE36D1B1A25067A00AD80F6 /* BRKVenueDetailTableViewCell.xib in Resources */,
 				B1434DD71A268BB300770E29 /* barkboxLogo.png in Resources */,
 				07F863FE1A250D90009EAB2F /* adorable-puppy.jpeg in Resources */,
+				F9A678D11A322CF20008921B /* BRKSearchBarContainer.xib in Resources */,
 				CBE36D261A26679600AD80F6 /* placeholder.png in Resources */,
 				95934F041A321F7300E2676E /* BRKSearchResultsContainerView.xib in Resources */,
 				CBBBE43C1A2F951200109C41 /* BRKReviewView.xib in Resources */,
@@ -515,6 +524,7 @@
 			files = (
 				95B81A731A2D17AC005F9AE0 /* BRKHelper.m in Sources */,
 				CBBBE4311A2E585200109C41 /* BRKUIManager.m in Sources */,
+				F9A678CF1A322CE20008921B /* BRKSearchBarContainer.m in Sources */,
 				CBBBE4351A2F947800109C41 /* BRKPictureTableViewCell.m in Sources */,
 				95934F021A320F9E00E2676E /* BRKTableView.m in Sources */,
 				F94606731A23D86A00FF6AB0 /* BRKSearchViewController.m in Sources */,
