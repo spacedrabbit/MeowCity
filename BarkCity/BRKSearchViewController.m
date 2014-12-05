@@ -13,15 +13,15 @@
 #import "BRKLocationManager.h"
 #import "BRKVenuesTableViewController.h"
 #import "BRKUIManager.h"
+#import "BRKTableView.h"
 
-@interface BRKSearchViewController () <UITextFieldDelegate, MKMapViewDelegate, UITableViewDelegate, UITableViewDataSource>
+@interface BRKSearchViewController () <UITextFieldDelegate, MKMapViewDelegate, BRKDetailTableViewSegueDelegate>
 
 @property (strong, nonatomic) BRKVenuesTableViewController *venueTableViewController;
 @property (strong, nonatomic) BRKScrollView * scrollingContainerView;
 @property (strong, nonatomic) UITextField * searchTextField;
-//@property (strong, nonatomic) UITextField * locationTextField;
 @property (strong, nonatomic) UIButton *locationButton;
-@property (strong, nonatomic) UITableView *venueResultsTable;
+@property (strong, nonatomic) BRKTableView *venueResultsTable;
 
 @property (strong, nonatomic) MKMapView * currentLocationView;
 
@@ -90,7 +90,6 @@
     [searchViewBlur setFrame    :   [UIScreen mainScreen].bounds];
     [self.view      addSubview  :   searchViewBlur              ];
 
-    [self setUpMap];
     [self setUpViews];
 }
 - (void)didReceiveMemoryWarning {
@@ -246,22 +245,7 @@
     [self.searchTextField.layer setMasksToBounds:   NO                                      ];
     [self.searchTextField setDelegate           :   self                                    ];
     [searchBarContainer   addSubview        :   self.searchTextField];
-    
-//    self.locationTextField = [[UITextField alloc] init];
-//    [self.locationTextField setTranslatesAutoresizingMaskIntoConstraints:NO                 ];
-//    [self.locationTextField setBackgroundColor  :   [UIColor whiteColor]                    ];
-//    [self.locationTextField setLayoutMargins    :   UIEdgeInsetsMake(0.0, 8.0, 0.0, 8.0)    ];
-//    [self.locationTextField setBorderStyle      :   UITextBorderStyleRoundedRect            ];
-//    [self.locationTextField setPlaceholder      :   @"Current Location"                     ];
-//    [self.locationTextField setKeyboardType     :   UIKeyboardTypeASCIICapable              ];
-//    [self.locationTextField setReturnKeyType    :   UIReturnKeySearch                       ];
-//    [self.locationTextField.layer setShadowColor:   [UIColor blueColor].CGColor             ];
-//    [self.locationTextField.layer setShadowOffset:  CGSizeMake(0.0, 2.0)                    ];
-//    [self.locationTextField.layer setShadowOpacity: .25                                     ];
-//    [self.locationTextField.layer setShadowRadius:  5.0                                     ];
-//    [self.locationTextField.layer setMasksToBounds: NO                                      ];
-//    [self.locationTextField setDelegate         :   self                                    ];
-//    [searchBarContainer addSubview:self.locationTextField];
+
     
     self.locationButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     [self.locationButton setTranslatesAutoresizingMaskIntoConstraints:NO];
@@ -291,36 +275,39 @@
     [self.view addConstraints:textFieldsVertical];
     
     /*MAP*/
-    [self.currentLocationView setTranslatesAutoresizingMaskIntoConstraints:NO];
-    [self.currentLocationView setDelegate:self];
-    [self.view addSubview:self.currentLocationView];
-    
-    NSArray * mapTableHorizontal = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_currentLocationView]|"
-                                                                           options:0
-                                                                           metrics:nil
-                                                                             views:NSDictionaryOfVariableBindings(_currentLocationView)];
-    NSArray * mapTableVertical = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[searchBarContainer]-[_currentLocationView]-|"
-                                                                         options:0
-                                                                         metrics:nil
-                                                                           views:NSDictionaryOfVariableBindings(_currentLocationView, searchBarContainer)];
-    
-    [self.view addConstraints:mapTableHorizontal];
+//    [self.currentLocationView setTranslatesAutoresizingMaskIntoConstraints:NO];
+//    [self.currentLocationView setDelegate:self];
+//    [self.view addSubview:self.currentLocationView];
+//    
+//    NSArray * mapTableHorizontal = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_currentLocationView]|"
+//                                                                           options:0
+//                                                                           metrics:nil
+//                                                                             views:NSDictionaryOfVariableBindings(_currentLocationView)];
+//    NSArray * mapTableVertical = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[searchBarContainer]-[_currentLocationView]-|"
+//                                                                         options:0
+//                                                                         metrics:nil
+//                                                                           views:NSDictionaryOfVariableBindings(_currentLocationView, searchBarContainer)];
+//    
+//    [self.view addConstraints:mapTableHorizontal];
+//    [self.view addConstraints:mapTableVertical];
     
     // ------------------------- //
     // --  BRKTable View      -- //
     // ------------------------- //
     self.venueTableViewController = [[BRKVenuesTableViewController alloc] init];
-    self.venueResultsTable = self.venueTableViewController.tableView;
+    self.venueTableViewController.venueDetailSegueDelegate = self;
+    self.venueResultsTable = (BRKTableView *)self.venueTableViewController.tableView;
     [self.venueResultsTable setTranslatesAutoresizingMaskIntoConstraints:NO];
-    [self.venueResultsTable setBackgroundColor:[UIColor blueColor]];
+    [self.venueResultsTable setBackgroundColor:[UIColor clearColor]];
     [self.venueResultsTable setSeparatorStyle:UITableViewCellSeparatorStyleSingleLineEtched];
     [self.venueResultsTable setSeparatorColor:[UIColor lightGrayColor]];
     [self.venueResultsTable setSeparatorInset:UIEdgeInsetsZero];
     [self.venueResultsTable setAlpha:0.0];
+    
+    [self.venueResultsTable setContentInset:UIEdgeInsetsMake(300, 0, 0, 0)];
+    
     // -- needs search logic -- //
     [self.view addSubview:self.venueResultsTable];
-
-    [self.view addConstraints:mapTableVertical];
     
     // -- DELETE THIS LATER -- //
     UINib *dynamicCelllNib = [UINib nibWithNibName:@"BRKVenuesTableViewCell" bundle:nil];
@@ -328,22 +315,6 @@
     
     self.venueResultsTable.rowHeight = UITableViewAutomaticDimension;
     self.venueResultsTable.estimatedRowHeight = 200.0;
-    
-    [self.venueResultsTable setDelegate:self];
-    [self.venueResultsTable setDataSource:self];
-    
-    // -- DELETE THIS LATER -- //
-    
-//    NSArray * venuesTableHorizontal = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_venueResultsTable]|"
-//                                                                              options:0
-//                                                                              metrics:nil
-//                                                                                views:NSDictionaryOfVariableBindings(_venueResultsTable)];
-//    NSArray * venuesTableVertical = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[searchBarContainer]-[_venueResultsTable]-|"
-//                                                                              options:0
-//                                                                              metrics:nil
-//                                                                                views:NSDictionaryOfVariableBindings(_venueResultsTable, searchBarContainer)];
-//    [self.view addConstraints:venuesTableHorizontal];
-//    [self.view addConstraints:venuesTableVertical];
 
     NSLayoutConstraint *venueTableLeft = [NSLayoutConstraint constraintWithItem:_venueResultsTable
                                                                       attribute:NSLayoutAttributeLeft
@@ -365,7 +336,7 @@
                                                                         toItem:searchBarContainer
                                                                      attribute:NSLayoutAttributeBottom
                                                                     multiplier:1.0
-                                                                      constant:300];
+                                                                      constant:0];
     NSLayoutConstraint *venueTableBottom = [NSLayoutConstraint constraintWithItem:_venueResultsTable
                                                                        attribute:NSLayoutAttributeBottom
                                                                        relatedBy:NSLayoutRelationEqual
@@ -418,18 +389,6 @@
             }
             
         }];
-//        
-//    } else if (textField == self.locationTextField) {
-//        
-//        [self fetchVenuesForLocation:self.locationManager.location withCompletionHandler:^(BOOL success) {
-//            if (success) {
-//                [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-//                    [self.venueTableViewController.tableView reloadData];
-//                }];
-//            }else{
-//                NSLog(@"Nothing found");
-//            }
-//        }];
     }
     
     
@@ -438,6 +397,15 @@
 }
 -(void)textFieldDidBeginEditing:(UITextField *)textField{
     
+}
+
+#pragma mark - DetailSegueDelegate
+- (void)segueToDetailTableViewWithVenue:(BRKVenue *)venue
+{
+    BRKVenueDetailTableViewController * selectedVenue = [[BRKVenueDetailTableViewController alloc] init];
+    selectedVenue.venue = venue;
+    
+    [self.navigationController pushViewController:selectedVenue animated:YES];
 }
 
 #pragma mark - API call
@@ -485,32 +453,6 @@
         }
         
     }];
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.numberOfLocationsToShow;
-}
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    BRKVenuesTableViewCell *cell = (BRKVenuesTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"VenueCell" forIndexPath:indexPath];
-    
-    BRKVenue *venue = self.venues[indexPath.row];
-    cell.venue = venue;
-    
-    // conditional to test the dynamic length of the cells
-    
-    if (indexPath.row %2 == 0) {
-        cell.descriptiveBody.text = @"This restaurant is great for dogs";
-    } else {
-        cell.descriptiveBody.text = @"This is a very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very long version of the cell";
-    }
-    
-    return cell;
 }
 
 - (void)searchByLocation:(UIButton *)sender {

@@ -12,6 +12,7 @@
 #import "BRKPictureTableViewCell.h"
 #import "BRKVenuesTableViewCell.h"
 #import "BRKVenueDetailTableViewController.h"
+#import "BRKTableView.h"
 
 @interface BRKVenuesTableViewController ()
 
@@ -35,7 +36,7 @@
 - (void)viewDidLoad {
      [super viewDidLoad];
 
-     
+    self.tableView = [[BRKTableView alloc] init];
      self.tableView.separatorColor = [UIColor clearColor];
      // Retrieve Nib of the two custom cell types.
      UINib *pictureCellNib = [UINib nibWithNibName:@"BRKPictureTableViewCell" bundle:nil];
