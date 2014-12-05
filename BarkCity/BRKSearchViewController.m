@@ -12,16 +12,18 @@
 #import "BRKScrollView.h"
 #import "BRKLocationManager.h"
 #import "BRKVenuesTableViewController.h"
+#import "BRKVenuesViewController.h"
 #import "BRKUIManager.h"
 #import "BRKTableView.h"
 
 @interface BRKSearchViewController () <UITextFieldDelegate, MKMapViewDelegate, BRKDetailTableViewSegueDelegate>
 
-@property (strong, nonatomic) BRKVenuesTableViewController *venueTableViewController;
 @property (strong, nonatomic) BRKScrollView * scrollingContainerView;
 @property (strong, nonatomic) UITextField * searchTextField;
 @property (strong, nonatomic) UIButton *locationButton;
+@property (strong, nonatomic) BRKVenuesTableViewController *venueTableViewController;
 @property (strong, nonatomic) BRKTableView *venueResultsTable;
+@property (strong, nonatomic) BRKVenuesViewController *venuesViewController;
 
 @property (strong, nonatomic) MKMapView * currentLocationView;
 
@@ -346,6 +348,8 @@
                                                                         constant:0];
     
     [self.view addConstraints:@[venueTableLeft, venueTableRight, venueTableTop, venueTableBottom]];
+
+    self.venuesViewController = [[BRKVenuesViewController alloc] initWithQuery:<#(NSString *)#> andBackgroundView:<#(UIView *)#>]
 }
 
 
