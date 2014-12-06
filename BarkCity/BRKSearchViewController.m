@@ -38,14 +38,14 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+
     self.locationManager = [BRKLocationManager sharedLocationManager];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     self.screenRect = [UIScreen mainScreen].bounds;
-    
+
     // -- modal blur view -- //
     UIVisualEffectView * searchViewBlur = [[UIVisualEffectView alloc] initWithEffect:[UIBlurEffect effectWithStyle:UIBlurEffectStyleLight]];
     [searchViewBlur setFrame    :   [UIScreen mainScreen].bounds];
@@ -64,31 +64,30 @@
     // --  Search Container   -- //
     // ------------------------- //
     self.searchBarContainer = [[UIView alloc] init];
-    
+
 //    self.searchBarContainer = [[BRKSearchBarContainer alloc] init];
 //    self.searchBarContainer.delegate = self;
-    
-    
+
+
     [self.searchBarContainer.layer setCornerRadius:4.0];
     [self.searchBarContainer setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self.view addSubview:self.searchBarContainer];
-    
+
     NSArray * searchBarContainerHorizontal = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_searchBarContainer]|"
                                                                                      options:0
                                                                                      metrics:nil
                                                                                        views:NSDictionaryOfVariableBindings(_searchBarContainer)
                                               ];
-    NSArray * searchBarContainerVertical = [NSLayoutConstraint constraintsWithVisualFormat:
-                                            @"V:|-64.0-[_searchBarContainer(==100)]-(>=0)-|"
+    NSArray * searchBarContainerVertical = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-64.0-[_searchBarContainer(==100)]-(>=0)-|"
                                                                                    options:0
                                                                                    metrics:nil
                                                                                      views:NSDictionaryOfVariableBindings(_searchBarContainer)
                                             ];
 
-    
+
     [self.view addConstraints:searchBarContainerHorizontal];
     [self.view addConstraints:searchBarContainerVertical];
-    
+
     // ------------------------- //
     // --  UIText SearchField -- //
     // ------------------------- //
@@ -108,7 +107,7 @@
     [self.searchTextField setDelegate           :   self                                    ];
     [self.searchBarContainer   addSubview        :   self.searchTextField];
 
-    
+
     self.locationButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     [self.locationButton setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self.locationButton addTarget:self
@@ -118,12 +117,12 @@
     [self.locationButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.locationButton setBackgroundColor:[UIColor blackColor]];
     [self.searchBarContainer addSubview:self.locationButton];
-    
+
     NSArray * searchTextHorizontal = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_searchTextField]-|"
                                                                              options:0
                                                                              metrics:nil
                                                                                views:NSDictionaryOfVariableBindings(_searchTextField)];
-    
+
     NSArray * locationButtonHorizontal = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_locationButton]-|"
                                                                              options:0
                                                                              metrics:nil
@@ -143,11 +142,11 @@
     self.venuesViewController = [[BRKVenuesViewController alloc] initWithQuery:self.searchTextField.text andBackgroundView:self.currentLocationView];
     self.venuesViewController.venueDetailSegueDelegate = self;
     self.venuesViewController.location = self.locationManager.location;
-    
+
     self.venuesView = self.venuesViewController.view;
     self.venuesView.translatesAutoresizingMaskIntoConstraints = NO;
     [self.view addSubview:self.venuesView];
-    
+
     NSLayoutConstraint *venueTableLeft = [NSLayoutConstraint constraintWithItem:_venuesView
                                                                       attribute:NSLayoutAttributeLeft
                                                                       relatedBy:NSLayoutRelationEqual
@@ -176,9 +175,9 @@
                                                                         attribute:NSLayoutAttributeBottom
                                                                        multiplier:1.0
                                                                          constant:0];
-    
+
     [self.view addConstraints:@[venueTableLeft, venueTableRight, venueTableTop, venueTableBottom]];
-    
+
 }
 
 - (void)setUpMap
@@ -186,17 +185,17 @@
     self.currentLocationView  = [[MKMapView alloc] init];
     CLLocation * currentLocation = [[BRKLocationManager sharedLocationManager] location];
     CLLocationCoordinate2D zoomLocation = currentLocation.coordinate;
-    
-    
+
+
     MKCoordinateRegion region = MKCoordinateRegionMake(zoomLocation , MKCoordinateSpanMake(0.003, 0.003));
-    
+
     [self.currentLocationView setRegion:region animated:YES];
-    
+
     MKPointAnnotation *point = [[MKPointAnnotation alloc] init];
     point.coordinate = zoomLocation;
-    
+
     NSLog(@"The lat: %f, the long: %f", currentLocation.coordinate.latitude, currentLocation.coordinate.longitude);
-    
+
     [self.currentLocationView addAnnotation:point];
 }
 
@@ -222,7 +221,7 @@
 {
     BRKVenueDetailTableViewController * selectedVenue = [[BRKVenueDetailTableViewController alloc] init];
     selectedVenue.venue = venue;
-    
+
     [self.navigationController pushViewController:selectedVenue animated:YES];
 }
 
@@ -238,14 +237,13 @@
     [self setUpResultsViewForSearchView];
 }
 
-
 - (void)searchByLocation:(UIButton *)sender
 {
     NSLog(@"I'm trying to get here!");
     [self.venuesView removeFromSuperview];
     self.venuesView = nil;
     [self.searchTextField resignFirstResponder];
-    
+
     [self setUpResultsViewForSearchView];
 }
 

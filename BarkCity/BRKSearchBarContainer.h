@@ -15,5 +15,4 @@
 
 @interface BRKSearchBarContainer : UIView
 @property (nonatomic, weak) id <BRKSearchBarContainerDelegate> delegate;
-
 @end
