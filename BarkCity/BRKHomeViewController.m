@@ -72,12 +72,17 @@
     [super didReceiveMemoryWarning];
 }
 
--(void)displaySearchViewController{
-    
+- (void)displaySearchViewController
+{
     BRKSearchViewController * searchViewController = [[BRKSearchViewController alloc] init];
-    [searchViewController setModalPresentationStyle:UIModalPresentationOverCurrentContext];
     
-    [self presentViewController:searchViewController animated:YES completion:nil];
+    UINavigationController * navControl = [[UINavigationController alloc] initWithRootViewController:searchViewController ];
+    navControl.navigationBar.topItem.title = @"Sniff Around!";
+    navControl.navigationBar.topItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:searchViewController action:@selector(dismissModalViewControllerAnimated:)];
+    [navControl.navigationBar setTitleTextAttributes:[BRKUIManager navBarAttributes]];
+    [navControl setModalPresentationStyle:UIModalPresentationOverCurrentContext];
+    
+    [self presentViewController:navControl animated:YES completion:nil];
     
 }
 

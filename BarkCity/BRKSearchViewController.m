@@ -15,7 +15,7 @@
 #import "BRKUIManager.h"
 #import "BRKTableView.h"
 
-@interface BRKSearchViewController () <UITextFieldDelegate, MKMapViewDelegate, BRKDetailTableViewSegueDelegate, BRKDetailTableViewSegueDelegate, BRKSearchBarContainerDelegate>
+@interface BRKSearchViewController () <UITextFieldDelegate, MKMapViewDelegate, BRKDetailTableViewSegueDelegate, BRKSearchBarContainerDelegate>
 
 @property (strong, nonatomic) BRKLocationManager *locationManager;
 @property (strong, nonatomic) UITextField * searchTextField;
@@ -29,7 +29,6 @@
 @property (strong, nonatomic) CLLocation * currentLocation;
 
 @property (nonatomic) CGRect screenRect;
-@property (nonatomic) BOOL tableViewIsHidden;
 
 @end
 
@@ -41,13 +40,11 @@
     [super viewDidLoad];
     
     self.locationManager = [BRKLocationManager sharedLocationManager];
-    //[self.locationManager startUpdatingLocation];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     self.screenRect = [UIScreen mainScreen].bounds;
-    self.tableViewIsHidden = YES; // search table begins hidden
     
     // -- modal blur view -- //
     UIVisualEffectView * searchViewBlur = [[UIVisualEffectView alloc] initWithEffect:[UIBlurEffect effectWithStyle:UIBlurEffectStyleLight]];
@@ -63,65 +60,6 @@
 #pragma mark - AutoLayout -
 -(void) setUpInitialViewsForSearchView
 {
-    
-    // ------------------------- //
-    // -- Fake Nav+Status Bar -- //
-    // ------------------------- //
-    
-    UIView * fakeNavBar = [[UIView alloc] init];
-    [fakeNavBar setTranslatesAutoresizingMaskIntoConstraints:NO];
-    [self.view addSubview:fakeNavBar];
-    
-    NSArray * fakeNavBarHorizontal = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[fakeNavBar]|"
-                                                                                     options:0
-                                                                                     metrics:nil
-                                                                                       views:NSDictionaryOfVariableBindings(fakeNavBar)];
-    
-    [self.view addConstraints:fakeNavBarHorizontal];
-    
-    // ------------------------- //
-    // --  Fake NavBar Items  -- //
-    // ------------------------- //
-    UILabel * barkCityLabel = [[UILabel alloc] init];
-    [barkCityLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
-    [barkCityLabel setTextAlignment:NSTextAlignmentCenter];
-    [barkCityLabel setFont:[BRKUIManager sniffAroundLabelFont]];
-    [barkCityLabel setText:@"Sniff Around!"];
-    [fakeNavBar addSubview:barkCityLabel];
-    
-    // -- Just the label -- //
-    NSArray * fakeNavBarItemsHorizontal = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[barkCityLabel]|"
-                                                                                  options:0
-                                                                                  metrics:nil
-                                                                                    views:NSDictionaryOfVariableBindings(barkCityLabel)];
-    // 20pts from top since this sits in the UINavBar, which is under the status bar
-    NSArray * fakeNavBarItemsVertical = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(==20)-[barkCityLabel]|"
-                                                                                options:0
-                                                                                metrics:nil
-                                                                                  views:NSDictionaryOfVariableBindings(barkCityLabel)];
-    [fakeNavBar addConstraints:fakeNavBarItemsHorizontal];
-    [fakeNavBar addConstraints:fakeNavBarItemsVertical];
-    
-    // -- The Close Button -- //
-    // pinned to right + 8pts, set to a width of 40pts. pinned to bottom, with top space at least 20pts.
-    UIButton * closeButton = [UIButton buttonWithType:UIButtonTypeSystem];
-    [closeButton setTranslatesAutoresizingMaskIntoConstraints:NO];
-    [closeButton setTitle:@"Close" forState:UIControlStateNormal];
-    closeButton.titleLabel.font = [BRKUIManager closeButtonFont];
-    [closeButton addTarget:self action:@selector(cancelBarButtonItemPressed:) forControlEvents:UIControlEventTouchUpInside];
-    [fakeNavBar addSubview:closeButton];
-    
-    NSArray * fakeNavBarCloseButtonHorizontal = [NSLayoutConstraint constraintsWithVisualFormat:@"H:[closeButton]-|"
-                                                                                        options:0
-                                                                                        metrics:nil
-                                                                                          views:NSDictionaryOfVariableBindings(closeButton)];
-    NSArray * fakeNavBarCloseButtonVertical = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(==20)-[closeButton]|"
-                                                                                        options:0
-                                                                                        metrics:nil
-                                                                                          views:NSDictionaryOfVariableBindings(closeButton)];
-    [fakeNavBar addConstraints:fakeNavBarCloseButtonHorizontal];
-    [fakeNavBar addConstraints:fakeNavBarCloseButtonVertical];
-    
     // ------------------------- //
     // --  Search Container   -- //
     // ------------------------- //
@@ -141,10 +79,10 @@
                                                                                        views:NSDictionaryOfVariableBindings(_searchBarContainer)
                                               ];
     NSArray * searchBarContainerVertical = [NSLayoutConstraint constraintsWithVisualFormat:
-                                            @"V:|[fakeNavBar(==64.0)][_searchBarContainer(==100)]-(>=0)-|"
+                                            @"V:|-64.0-[_searchBarContainer(==100)]-(>=0)-|"
                                                                                    options:0
                                                                                    metrics:nil
-                                                                                     views:NSDictionaryOfVariableBindings(fakeNavBar,_searchBarContainer)
+                                                                                     views:NSDictionaryOfVariableBindings(_searchBarContainer)
                                             ];
 
     
@@ -260,14 +198,6 @@
     NSLog(@"The lat: %f, the long: %f", currentLocation.coordinate.latitude, currentLocation.coordinate.longitude);
     
     [self.currentLocationView addAnnotation:point];
-}
-
-// -- shows/hides results table, needs further work
-
-- (void)cancelBarButtonItemPressed:(id)sender
-{
-    [self.searchTextField resignFirstResponder];
-    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - UITextDelegate

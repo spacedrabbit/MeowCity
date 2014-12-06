@@ -16,6 +16,5 @@
 @property (nonatomic, weak) id <BRKDetailTableViewSegueDelegate> venueDetailSegueDelegate;
 @property (strong, nonatomic) CLLocation * location;
 
-- (instancetype) initWithQuery:(NSString *) query;
 - (instancetype) initWithQuery:(NSString *) query andBackgroundView:(UIView *)view;
 @end
