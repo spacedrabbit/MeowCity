@@ -25,32 +25,8 @@
 @end
 
 @implementation BRKVenuesViewController
-
-- (instancetype) initWithQuery:(NSString *) query
 {
-    self = [super init];
-    if (self) {
-        _query = query;
-        _tableView = [[BRKTableView alloc] init];
-        _tableView.delegate = self;
-        _tableView.dataSource = self;
-        
-        _tableView.separatorColor = [UIColor clearColor];
-        // Retrieve Nib of the two custom cell types.
-        UINib *pictureCellNib = [UINib nibWithNibName:@"BRKPictureTableViewCell" bundle:nil];
-        [_tableView registerNib:pictureCellNib forCellReuseIdentifier:@"PictureCell"];
-        
-        UINib *dynamicCelllNib = [UINib nibWithNibName:@"BRKVenuesTableViewCell" bundle:nil];
-        [_tableView registerNib:dynamicCelllNib forCellReuseIdentifier:@"VenueCell"];
-        
-        _tableView.rowHeight = UITableViewAutomaticDimension;
-        _tableView.estimatedRowHeight = 200.0;
-        
-        _foursquareClient = [BRKFoursquareClient sharedClient];
-        
-        _numberOfLocationsToShow = 5;
-    }
-    return self;
+    UIActivityIndicatorView *_activityIndicatorView;
 }
 
 - (instancetype)initWithQuery:(NSString *)query andBackgroundView:(UIView *)view
@@ -75,8 +51,13 @@
         _tableView.estimatedRowHeight = 200.0;
         
         _foursquareClient = [BRKFoursquareClient sharedClient];
-        
         _numberOfLocationsToShow = 5;
+        
+        _activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+        _activityIndicatorView.frame = CGRectMake(0.0f, 0.0f, 40.0f, 40.0f);
+        _activityIndicatorView.center = self.view.center;
+        [_activityIndicatorView startAnimating];
+        [self.view addSubview:_activityIndicatorView];
     }
     return self;
 }
@@ -89,11 +70,6 @@
         [self.view addSubview:self.backgroundView];
     }
     [self.view addSubview:self.tableView];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(handleLocationChange:)
-                                                 name:@"locationChanged"
-                                               object:nil];
 }
 
 - (void)viewWillLayoutSubviews
@@ -105,7 +81,7 @@
             .origin.x = 0.0f,
             .origin.y = 0,
             .size.width = self.view.frame.size.width,
-            .size.height = self.view.frame.size.height / 3
+            .size.height = (self.view.frame.size.height / 3)
         };
     }
     
@@ -192,20 +168,11 @@
         }
         
         [self.tableView reloadData];
+        [_activityIndicatorView stopAnimating];
+        [_activityIndicatorView removeFromSuperview];
     } failure:^(NSError *error) {
         NSLog(@"%@", error);
     }];
-}
-
-- (void)handleLocationChange:(NSNotification *)notification
-{
-    
-    NSDictionary *userInfo = notification.userInfo;
-    CLLocation *newLocation = userInfo[@"newLocation"];
-    if (!self.location) {
-        self.location = newLocation;
-    }
-    [self fetchVenuesForLocation];
 }
 
 @end
