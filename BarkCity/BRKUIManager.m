@@ -78,7 +78,7 @@
     return [UIFont fontWithName:fontName size:fontSize];
 }
 
-#pragma warning - searchFieldPlaceHolderAttributes doesn't work right now
+#pragma warning - searchFieldPlaceHolderAttributes doesnt work right now
 + (NSDictionary *) searchFieldPlaceHolderAttributes {
     NSString *fontName = @"AvenirNext-UltraLight";
     CGFloat fontSize = 148.0f;
@@ -91,5 +91,36 @@
     return attributes;
 }
 
+
+
+#pragma mark - MockUp Colors -
+
+// -- Category Colors From Mock-Ups -- //
++(UIColor *) shoppingCategoryYellow{
+    return [UIColor colorWithRed:0.9059 green:0.7490 blue:0.3569 alpha:1.0];
+}
++(UIColor *) snackCategoryBlue{
+    return [UIColor colorWithRed:0.1176 green:0.7137 blue:0.8941 alpha:1.0];
+}
++(UIColor *) cafeCategoryTeal{
+    return [UIColor colorWithRed:0.0039 green:0.6627 blue:0.6392 alpha:1.0];
+}
++(UIColor *) playOutsideCategorySalmon{
+    return [UIColor colorWithRed:0.9961 green:0.4196 blue:0.4000 alpha:1.0];
+}
++(UIColor *) doSomethingAwesomeCerulean{
+    return [UIColor colorWithRed:0.0000 green:0.5765 blue:0.6980 alpha:1.0];
+}
++(UIColor *) categoryDotOrage{
+    return [UIColor colorWithRed:0.9686 green:0.4431 blue:0.0510 alpha:1.0];
+}
+
+// -- Font Colors from Mock-Ups -- //
++(UIColor *) venueTitleTextColor{
+    return [UIColor colorWithRed:0.0471 green:0.6980 blue:0.8980 alpha:1.0];
+}
++(UIColor *) allOtherTextGray{
+    return [UIColor colorWithRed:0.2941 green:0.3020 blue:0.3098 alpha:1.0];
+}
 
 @end

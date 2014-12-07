@@ -179,9 +179,6 @@
 				B17860211A23CAB600EBE64F /* BRKScrollView.m */,
 				95934F001A320F9E00E2676E /* BRKTableView.h */,
 				95934F011A320F9E00E2676E /* BRKTableView.m */,
-				95934F051A32202F00E2676E /* BRKSearchResultsContainerView.h */,
-				95934F061A32202F00E2676E /* BRKSearchResultsContainerView.m */,
-				95934F031A321F7300E2676E /* BRKSearchResultsContainerView.xib */,
 				F9A678CD1A322CE20008921B /* BRKSearchBarContainer.h */,
 				F9A678CE1A322CE20008921B /* BRKSearchBarContainer.m */,
 				F9A678D01A322CF20008921B /* BRKSearchBarContainer.xib */,
@@ -425,11 +422,11 @@
 				TargetAttributes = {
 					F925AC471A23C1670086F2EB = {
 						CreatedOnToolsVersion = 6.1;
-						DevelopmentTeam = MX8253552V;
+						DevelopmentTeam = 3457AE227Q;
 					};
 					F925AC601A23C1670086F2EB = {
 						CreatedOnToolsVersion = 6.1;
-						DevelopmentTeam = MX8253552V;
+						DevelopmentTeam = 3457AE227Q;
 						TestTargetID = F925AC471A23C1670086F2EB;
 					};
 				};

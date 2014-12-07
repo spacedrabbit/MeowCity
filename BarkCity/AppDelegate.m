@@ -22,10 +22,15 @@
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     
     BRKHomeViewController * rootViewController = [[BRKHomeViewController alloc] init];
-    UINavigationController * navControl = [[UINavigationController alloc] initWithRootViewController:rootViewController ];
-    navControl.navigationBar.topItem.title = @"Bark City";
-    [navControl.navigationBar setTitleTextAttributes:[BRKUIManager navBarAttributes]];
-    self.window.rootViewController = navControl;
+    UITabBarController * tabController = [[UITabBarController alloc] init];
+    
+    [tabController setViewControllers:@[rootViewController]];
+    self.window.rootViewController = tabController;
+    
+    //UINavigationController * navControl = [[UINavigationController alloc] initWithRootViewController:rootViewController ];
+    //navControl.navigationBar.topItem.title = @"Bark City";
+    //[navControl.navigationBar setTitleTextAttributes:[BRKUIManager navBarAttributes]];
+    //self.window.rootViewController = navControl;
 
     [self.window makeKeyAndVisible];
     
