@@ -54,3 +54,9 @@
 #define COCOAPODS_VERSION_MINOR_Masonry 5
 #define COCOAPODS_VERSION_PATCH_Masonry 3
 
+// PKRevealController
+#define COCOAPODS_POD_AVAILABLE_PKRevealController
+#define COCOAPODS_VERSION_MAJOR_PKRevealController 2
+#define COCOAPODS_VERSION_MINOR_PKRevealController 0
+#define COCOAPODS_VERSION_PATCH_PKRevealController 6
+

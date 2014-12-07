@@ -21,13 +21,16 @@ PODS:
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
   - Masonry (0.5.3)
+  - PKRevealController (2.0.6)
 
 DEPENDENCIES:
   - AFNetworking
   - Masonry
+  - PKRevealController
 
 SPEC CHECKSUMS:
   AFNetworking: 0f54cb5d16ce38c1b76948faffb8d5fb705021c7
   Masonry: 35368c2ca9577ca87722c12fc52c4bad9b1c1516
+  PKRevealController: 4f175a432ad868c806dce1ebb3fd8a35d228bdb5
 
-COCOAPODS: 0.35.0.rc2
+COCOAPODS: 0.35.0
