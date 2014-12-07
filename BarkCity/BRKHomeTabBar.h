@@ -9,7 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface BRKHomeTabBar : UIView
-@property (weak, nonatomic) IBOutlet UIView *tabBarView;
+
+@property (strong, nonatomic) IBOutlet UIView *tabBarView;
 
 @property (weak, nonatomic) IBOutlet UIButton *firstTabButton;
 @property (weak, nonatomic) IBOutlet UIButton *secondTabButton;
@@ -17,7 +18,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *fourthTabButton;
 @property (weak, nonatomic) IBOutlet UIButton *fifthTabButton;
 
-@property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *allTabButtons;
 
 
 @end

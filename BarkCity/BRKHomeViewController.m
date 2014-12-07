@@ -15,6 +15,7 @@
 #import "BRKPictureTableViewCell.h"
 #import "BRKVenuesViewController.h"
 #import "BRKUIManager.h"
+#import "BRKHomeTabBar.h"
 #import <Parse/Parse.h>
 #import <ParseUI/ParseUI.h>
 
@@ -42,22 +43,18 @@
     [super viewDidLoad];
     
     self.venueTableControllers = [[NSMutableArray alloc] init];
+    self.navigationController.navigationBar.topItem.title = @"Bark City";
     
     // -- getting info -- //
     self.foursquareClient = [BRKFoursquareClient sharedClient];
-    
     self.numberOfLocationsToShow = 5;
-    
     self.locationManager = [BRKLocationManager sharedLocationManager];
-    
     [self.locationManager startUpdatingLocation];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(handleLocationChange:)
                                                  name:@"locationChanged"
                                                object:nil];
-    
-    self.navigationController.navigationBar.topItem.title = @"Bark City";
     
     // -- SEARCH BUTTON -- //
     UIBarButtonItem * searchButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(displaySearchViewController)];
@@ -104,12 +101,12 @@
 -(void)createAndArrangeScrollViews{
     
     // -- Category details are filled in from API -- //
-    self.venueCategories = @[ @"Bars", @"Parks", @"Bakery", @"Shopping", @"Cookies" ];
+    self.venueCategories = @[ @"Restaurant", @"Cafe", @"Bar", @"Shopping", @"Outdoors" ];
     
     // -- Setting up some rects -- //
     CGRect screenRect = [UIScreen mainScreen].bounds;
     CGPoint originWithNavBarAndMenu = CGPointMake(0.0, 64.0);
-    CGFloat categoryBarHeight = 60.0;
+    CGFloat categoryBarHeight = 44.0;
     
     CGRect categoryScrollViewFrame = CGRectMake(originWithNavBarAndMenu.x , originWithNavBarAndMenu.y, [UIScreen mainScreen].bounds.size.width, categoryBarHeight);
     CGRect tableScrollViewFrame = CGRectMake(originWithNavBarAndMenu.x, originWithNavBarAndMenu.y + categoryBarHeight, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - categoryBarHeight - originWithNavBarAndMenu.y);
@@ -119,16 +116,20 @@
     [background setBackgroundColor:[UIColor lightGrayColor]];
     
     self.resultsView = [[UIView alloc] initWithFrame:screenRect];
-    
     [self.resultsView addSubview:background];
-    
     [self setView:self.resultsView];
     
     // -- creating scroll views -- //
-    self.venueCategoryScroll = [self createCategoryScrollWithCategories:self.venueCategories inFrame:categoryScrollViewFrame];
+    BRKHomeTabBar * categoryTabs = [[[NSBundle mainBundle] loadNibNamed:@"BRKHomeTabBar" owner:self options:nil] firstObject];
+    [self.venueCategoryScroll setTranslatesAutoresizingMaskIntoConstraints:NO];
+    self.venueCategoryScroll = [BRKScrollView createScrollViewFromFrame:categoryScrollViewFrame
+                                                           withSubViews:@[categoryTabs]
+                                                            ofFullWidth:YES];
+    [categoryTabs.tabBarView setBackgroundColor:[BRKUIManager snackCategoryBlue]];
     [self.view addSubview:self.venueCategoryScroll];
     
-    self.venueTableScroll = [self createScrollingTableFromVenues:self.venueCategories inFrame:tableScrollViewFrame];
+    self.venueTableScroll = [self createScrollingTableFromVenues:self.venueCategories
+                                                         inFrame:tableScrollViewFrame];
     [self.view addSubview:self.venueTableScroll];
     
     // -- setting scroll delegates -- //
@@ -137,35 +138,10 @@
     
 }
 
--(BRKScrollView *) createCategoryScrollWithCategories:(NSArray *)categories inFrame:(CGRect)labelRect {
-    
-    NSMutableArray * labelsForCategories = [NSMutableArray array];
-    for (NSInteger i= 0; i<[categories count]; i++) {
-        
-        UILabel * newLabel = [[UILabel alloc] init];
-        newLabel.attributedText = [[NSAttributedString alloc] initWithString:categories[i] attributes:@{ NSFontAttributeName: [BRKUIManager venueCategoryScrollFont]}];
-
-        
-        newLabel.accessibilityLabel = categories[i];
-        [newLabel setAdjustsFontSizeToFitWidth:YES];
-        [newLabel setTextAlignment:NSTextAlignmentCenter];
-        [newLabel setBackgroundColor:[BRKUIManager venueCategoryScrollColor]];
-        
-        [labelsForCategories addObject:newLabel];
-        
-    }
-    
-    BRKScrollView * scrollNav = [BRKScrollView createScrollViewFromFrame:labelRect withSubViews:labelsForCategories ofFullWidth:YES];
-    [scrollNav setShowsVerticalScrollIndicator:NO];
-    [scrollNav setShowsHorizontalScrollIndicator:NO];
-  
-    return scrollNav;
-}
-
 -(BRKScrollView *) createScrollingTableFromVenues:(NSArray *)venues inFrame:(CGRect)frame{
 
     NSMutableArray * tableViewsForCategories = [NSMutableArray array];
-    for (NSInteger i= 0; i< [venues count]; i++) {
+    for (NSInteger i= 0; i<[venues count]; i++) {
         
         UIImageView *backgroundImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"placeholder"]];
         
@@ -189,17 +165,17 @@
 #pragma mark - Scroll Delegate -
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView{
     
-    CGPoint offset = scrollView.contentOffset;
-    if (scrollView == self.venueCategoryScroll) {
-        
-        self.venueTableScroll.contentOffset = offset;
-        
-    } else if (scrollView == self.venueTableScroll){
-        [self.venueCategoryScroll setContentOffset:CGPointMake(offset.x, 0.0)]; // we don't need to translate the Y offset for labels
-    }else{
-        //this case is for each vertical scroll of the tableview.. do not remove this logic
-        //NSLog(@"This is a different scroll!");
-    }
+//    CGPoint offset = scrollView.contentOffset;
+//    if (scrollView == self.venueCategoryScroll) {
+//        
+//        self.venueTableScroll.contentOffset = offset;
+//        
+//    } else if (scrollView == self.venueTableScroll){
+//        [self.venueCategoryScroll setContentOffset:CGPointMake(offset.x, 0.0)]; // we don't need to translate the Y offset for labels
+//    }else{
+//        //this case is for each vertical scroll of the tableview.. do not remove this logic
+//        //NSLog(@"This is a different scroll!");
+//    }
 
 }
 

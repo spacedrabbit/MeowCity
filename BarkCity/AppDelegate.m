@@ -42,11 +42,6 @@
     self.revealController.animationDuration = 0.25;
     
     self.window.rootViewController = self.revealController;
-    
-    
-//    navControl.navigationBar.topItem.title = @"Bark City";
-//    [navControl.navigationBar setTitleTextAttributes:[BRKUIManager navBarAttributes]];
-//    self.window.rootViewController = navControl;
 
     [self.window makeKeyAndVisible];
     
