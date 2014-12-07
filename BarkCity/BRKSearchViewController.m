@@ -36,6 +36,7 @@
     [super viewDidLoad];
     self.locationManager = [BRKLocationManager sharedLocationManager];
 }
+
 - (void)viewWillAppear:(BOOL)animated
 {
     self.screenRect = [UIScreen mainScreen].bounds;
@@ -45,23 +46,23 @@
     [self.view addSubview : searchViewBlur ];
     [self setUpInitialViewsForSearchView];
 }
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
+
 - (void)dismiss
 {
     [self.searchBarContainer resignFirstResponder];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
+
 #pragma mark - AutoLayout -
 -(void) setUpInitialViewsForSearchView
 {
     // ------------------------- //
     // -- Search Container -- //
     // ------------------------- //
-    self.searchBarContainer = [[UIView alloc] init];
-    // self.searchBarContainer = [[BRKSearchBarContainer alloc] init];
-    // self.searchBarContainer.delegate = self;
     NSArray *subviewArray = [[NSBundle mainBundle] loadNibNamed:@"BRKSearchBarContainer" owner:self options:nil];
     self.searchBarContainer = [subviewArray objectAtIndex:0];
     self.searchBarContainer.delegate = self;
@@ -81,48 +82,7 @@
                                             ];
     [self.view addConstraints:searchBarContainerHorizontal];
     [self.view addConstraints:searchBarContainerVertical];
-    // ------------------------- //
-    // -- UIText SearchField -- //
-    // ------------------------- //
-    self.searchTextField = [[UITextField alloc] init];
-    [self.searchTextField setTranslatesAutoresizingMaskIntoConstraints:NO ];
-    [self.searchTextField setBackgroundColor : [UIColor whiteColor] ];
-    [self.searchTextField setBorderStyle : UITextBorderStyleRoundedRect ];
-    [self.searchTextField setLayoutMargins : UIEdgeInsetsMake(0.0, 8.0, 0.0, 8.0) ];
-    [self.searchTextField setPlaceholder : @"What are you looking for?" ];
-    [self.searchTextField setKeyboardType : UIKeyboardTypeASCIICapable ];
-    [self.searchTextField setReturnKeyType : UIReturnKeySearch ];
-    [self.searchTextField.layer setShadowColor : [UIColor blueColor].CGColor ];
-    [self.searchTextField.layer setShadowOffset : CGSizeMake(0.0, -2.0) ];
-    [self.searchTextField.layer setShadowOpacity: .25 ];
-    [self.searchTextField.layer setShadowRadius : 5.0 ];
-    [self.searchTextField.layer setMasksToBounds: NO ];
-    [self.searchTextField setDelegate : self ];
-    [self.searchBarContainer addSubview : self.searchTextField];
-    self.locationButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    [self.locationButton setTranslatesAutoresizingMaskIntoConstraints:NO];
-    [self.locationButton addTarget:self
-                            action:@selector(searchByLocation:)
-                  forControlEvents:UIControlEventTouchUpInside];
-    [self.locationButton setTitle:@"Use My Current Location" forState:UIControlStateNormal];
-    [self.locationButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [self.locationButton setBackgroundColor:[UIColor blackColor]];
-    [self.searchBarContainer addSubview:self.locationButton];
-    NSArray * searchTextHorizontal = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_searchTextField]-|"
-                                                                             options:0
-                                                                             metrics:nil
-                                                                               views:NSDictionaryOfVariableBindings(_searchTextField)];
-    NSArray * locationButtonHorizontal = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_locationButton]-|"
-                                                                                 options:0
-                                                                                 metrics:nil
-                                                                                   views:NSDictionaryOfVariableBindings(_locationButton)];
-    NSArray * textFieldsVertical = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[_searchTextField(==40)]-(>=0)-[_locationButton(==40)]-|"
-                                                                           options:0
-                                                                           metrics:nil
-                                                                             views:NSDictionaryOfVariableBindings(_locationButton, _searchTextField)];
-    [self.view addConstraints:searchTextHorizontal];
-    [self.view addConstraints:locationButtonHorizontal];
-    [self.view addConstraints:textFieldsVertical];
+
 }
 
 - (void)setUpResultsViewForSearchViewWithQuery:(NSString *)query
@@ -164,6 +124,7 @@
                                                                          constant:0];
     [self.view addConstraints:@[venueTableLeft, venueTableRight, venueTableTop, venueTableBottom]];
 }
+
 - (void)setUpMap
 {
     self.currentLocationView = [[MKMapView alloc] init];
@@ -176,6 +137,7 @@
     NSLog(@"The lat: %f, the long: %f", currentLocation.coordinate.latitude, currentLocation.coordinate.longitude);
     [self.currentLocationView addAnnotation:point];
 }
+
 #pragma mark - DetailSegueDelegate
 - (void)segueToDetailTableViewWithVenue:(BRKVenue *)venue
 {
@@ -193,23 +155,12 @@
 {
     [self setUpResultsViewForSearchViewWithQuery:searchText];
 }
-- (void)searchByLocation:(UIButton *)sender
-{
-    NSLog(@"I'm trying to get here!");
+
+- (void)searchByLocation:(UIButton *)sender {
     [self.venuesView removeFromSuperview];
     self.venuesView = nil;
-    [self.searchTextField resignFirstResponder];
-    [self.searchBarContainer.searchField resignFirstResponder];
-    [self setUpResultsViewForSearchViewWithQuery:];
+    [self.searchBarContainer resignFirstResponder];
+    [self setUpResultsViewForSearchViewWithQuery:self.searchTextField.text];
 }
 
 @end
-//- (void)searchByLocation:(UIButton *)sender
-//{
-// NSLog(@"I'm trying to get here!");
-// [self.venuesView removeFromSuperview];
-// self.venuesView = nil;
-// [self.searchBarContainer.searchField resignFirstResponder];
-//
-// [self setUpResultsViewForSearchViewWithQuery:searchText];
-//}
