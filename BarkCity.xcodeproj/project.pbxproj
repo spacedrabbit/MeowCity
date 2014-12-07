@@ -17,6 +17,8 @@
 		B1434DD71A268BB300770E29 /* barkboxLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = B1434DD61A268BB300770E29 /* barkboxLogo.png */; };
 		B17860221A23CAB600EBE64F /* BRKScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = B17860211A23CAB600EBE64F /* BRKScrollView.m */; };
 		B17860331A251C7F00EBE64F /* BRKHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B17860301A251C7F00EBE64F /* BRKHomeViewController.m */; };
+		B1AB09F91A34D0EB00ECDB18 /* BRKHomeTabBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = B1AB09F81A34D0EB00ECDB18 /* BRKHomeTabBar.xib */; };
+		B1AB09FD1A34D1CA00ECDB18 /* BRKHomeTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = B1AB09FC1A34D1CA00ECDB18 /* BRKHomeTabBar.m */; };
 		CBBBE4261A27C4CB00109C41 /* BRKVenuesTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CBBBE4221A27C4CB00109C41 /* BRKVenuesTableViewCell.m */; };
 		CBBBE4271A27C4CB00109C41 /* BRKVenuesTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBBBE4231A27C4CB00109C41 /* BRKVenuesTableViewCell.xib */; };
 		CBBBE4311A2E585200109C41 /* BRKUIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CBBBE4301A2E585200109C41 /* BRKUIManager.m */; };
@@ -76,6 +78,9 @@
 		B17860211A23CAB600EBE64F /* BRKScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRKScrollView.m; sourceTree = "<group>"; };
 		B178602F1A251C7F00EBE64F /* BRKHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRKHomeViewController.h; sourceTree = "<group>"; };
 		B17860301A251C7F00EBE64F /* BRKHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRKHomeViewController.m; sourceTree = "<group>"; };
+		B1AB09F81A34D0EB00ECDB18 /* BRKHomeTabBar.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BRKHomeTabBar.xib; sourceTree = "<group>"; };
+		B1AB09FB1A34D1CA00ECDB18 /* BRKHomeTabBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRKHomeTabBar.h; sourceTree = "<group>"; };
+		B1AB09FC1A34D1CA00ECDB18 /* BRKHomeTabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRKHomeTabBar.m; sourceTree = "<group>"; };
 		CBBBE4211A27C4CB00109C41 /* BRKVenuesTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRKVenuesTableViewCell.h; sourceTree = "<group>"; };
 		CBBBE4221A27C4CB00109C41 /* BRKVenuesTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRKVenuesTableViewCell.m; sourceTree = "<group>"; };
 		CBBBE4231A27C4CB00109C41 /* BRKVenuesTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BRKVenuesTableViewCell.xib; sourceTree = "<group>"; };
@@ -197,12 +202,23 @@
 			name = Utils;
 			sourceTree = "<group>";
 		};
+		B1AB09FA1A34D0F300ECDB18 /* Custom Tab Bar */ = {
+			isa = PBXGroup;
+			children = (
+				B1AB09F81A34D0EB00ECDB18 /* BRKHomeTabBar.xib */,
+				B1AB09FB1A34D1CA00ECDB18 /* BRKHomeTabBar.h */,
+				B1AB09FC1A34D1CA00ECDB18 /* BRKHomeTabBar.m */,
+			);
+			name = "Custom Tab Bar";
+			sourceTree = "<group>";
+		};
 		CBBBE41D1A27C4A400109C41 /* BRKHomeView */ = {
 			isa = PBXGroup;
 			children = (
 				CBE36D291A266F2A00AD80F6 /* BRKHome.xib */,
 				B178602F1A251C7F00EBE64F /* BRKHomeViewController.h */,
 				B17860301A251C7F00EBE64F /* BRKHomeViewController.m */,
+				B1AB09FA1A34D0F300ECDB18 /* Custom Tab Bar */,
 			);
 			name = BRKHomeView;
 			sourceTree = "<group>";
@@ -455,6 +471,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B1AB09F91A34D0EB00ECDB18 /* BRKHomeTabBar.xib in Resources */,
 				CBBBE4361A2F947800109C41 /* BRKPictureTableViewCell.xib in Resources */,
 				CBE36D1F1A25069900AD80F6 /* BRKVenueDetail.xib in Resources */,
 				CBE36D1B1A25067A00AD80F6 /* BRKVenueDetailTableViewCell.xib in Resources */,
@@ -528,6 +545,7 @@
 				95B81A6C1A23C951005F9AE0 /* BRKVenue.m in Sources */,
 				F94606AF1A262DCA00FF6AB0 /* BRKLocationManager.m in Sources */,
 				F925AC511A23C1670086F2EB /* AppDelegate.m in Sources */,
+				B1AB09FD1A34D1CA00ECDB18 /* BRKHomeTabBar.m in Sources */,
 				CBE36D1A1A25067A00AD80F6 /* BRKVenueDetailTableViewCell.m in Sources */,
 				F94606701A23D86A00FF6AB0 /* BRKVenuesTableViewController.m in Sources */,
 				B17860331A251C7F00EBE64F /* BRKHomeViewController.m in Sources */,

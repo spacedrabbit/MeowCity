@@ -39,12 +39,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    UITabBarItem * foodTabItem = [[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemFavorites tag:1];
-    UITabBarItem * coffeTabItem = [[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemTopRated tag:2];
-    UITabBarItem * barTabItem = [[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemSearch tag:3];
-    UITabBarItem * shoppingTabItem = [[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemMostViewed tag:4];
-    UITabBarItem * soccerTabItem = [[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemHistory tag:5];
-    
     self.venueTableControllers = [[NSMutableArray alloc] init];
     
     // -- getting info -- //
@@ -61,11 +55,11 @@
                                                  name:@"locationChanged"
                                                object:nil];
     
-    //self.navigationController.navigationBar.topItem.title = @"Bark City";
+    self.navigationController.navigationBar.topItem.title = @"Bark City";
     
     // -- SEARCH BUTTON -- //
-    //UIBarButtonItem * searchButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(displaySearchViewController)];
-    //[self.navigationController.navigationBar.topItem setRightBarButtonItem:searchButton animated:YES];
+    UIBarButtonItem * searchButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(displaySearchViewController)];
+    [self.navigationController.navigationBar.topItem setRightBarButtonItem:searchButton animated:YES];
     
     // -- Scroll Views -- //
     [self createAndArrangeScrollViews];
@@ -103,7 +97,7 @@
     CGPoint originWithNavBarAndMenu = CGPointMake(0.0, 64.0);
     CGFloat categoryBarHeight = 60.0;
     
-    //CGRect categoryScrollViewFrame = CGRectMake(originWithNavBarAndMenu.x , originWithNavBarAndMenu.y, [UIScreen mainScreen].bounds.size.width, categoryBarHeight);
+    CGRect categoryScrollViewFrame = CGRectMake(originWithNavBarAndMenu.x , originWithNavBarAndMenu.y, [UIScreen mainScreen].bounds.size.width, categoryBarHeight);
     CGRect tableScrollViewFrame = CGRectMake(originWithNavBarAndMenu.x, originWithNavBarAndMenu.y + categoryBarHeight, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - categoryBarHeight - originWithNavBarAndMenu.y);
     
     // -- Adding a background image -- //
@@ -117,14 +111,14 @@
     [self setView:self.resultsView];
     
     // -- creating scroll views -- //
-    //self.venueCategoryScroll = [self createCategoryScrollWithCategories:self.venueCategories inFrame:categoryScrollViewFrame];
-    //[self.view addSubview:self.venueCategoryScroll];
+    self.venueCategoryScroll = [self createCategoryScrollWithCategories:self.venueCategories inFrame:categoryScrollViewFrame];
+    [self.view addSubview:self.venueCategoryScroll];
     
     self.venueTableScroll = [self createScrollingTableFromVenues:self.venueCategories inFrame:tableScrollViewFrame];
     [self.view addSubview:self.venueTableScroll];
     
     // -- setting scroll delegates -- //
-    //self.venueCategoryScroll.delegate = self;
+    self.venueCategoryScroll.delegate = self;
     self.venueTableScroll.delegate = self;
     
 }
