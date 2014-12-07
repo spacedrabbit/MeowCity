@@ -10,7 +10,11 @@
 #import "BRKHomeViewController.h"
 #import "BRKUIManager.h"
 
-@interface AppDelegate ()
+@interface AppDelegate () <PKRevealing>
+
+#pragma mark - Properties
+@property (nonatomic, strong, readwrite) PKRevealController *revealController;
+
 
 @end
 
@@ -28,9 +32,20 @@
     
     BRKHomeViewController * rootViewController = [[BRKHomeViewController alloc] init];
     UINavigationController * navControl = [[UINavigationController alloc] initWithRootViewController:rootViewController ];
-    navControl.navigationBar.topItem.title = @"Bark City";
-    [navControl.navigationBar setTitleTextAttributes:[BRKUIManager navBarAttributes]];
-    self.window.rootViewController = navControl;
+    
+    UIViewController *leftViewController = [[UIViewController alloc] init];
+    leftViewController.view.backgroundColor = [UIColor blueColor];
+    
+    self.revealController = [PKRevealController revealControllerWithFrontViewController:navControl leftViewController:leftViewController];
+    self.revealController.delegate = self;
+    self.revealController.animationDuration = 0.25;
+    
+    self.window.rootViewController = self.revealController;
+    
+    
+//    navControl.navigationBar.topItem.title = @"Bark City";
+//    [navControl.navigationBar setTitleTextAttributes:[BRKUIManager navBarAttributes]];
+//    self.window.rootViewController = navControl;
 
     [self.window makeKeyAndVisible];
     

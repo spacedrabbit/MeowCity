@@ -63,8 +63,8 @@
     UIBarButtonItem * searchButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(displaySearchViewController)];
     [self.navigationController.navigationBar.topItem setRightBarButtonItem:searchButton animated:YES];
     
-    // - LOGOUT BUTTON --//
-    UIBarButtonItem *logoutButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarStyleDefault target:self action:@selector(logout:)];
+    // - LOGOUT BUTTON/HAMBURGER MENU/SORRY --//
+    UIBarButtonItem *logoutButton = [[UIBarButtonItem alloc] initWithTitle:@"|||" style:UIBarStyleBlackTranslucent target:self action:@selector(logout:)];
     [self.navigationController.navigationBar.topItem setLeftBarButtonItem:logoutButton animated:YES];
     
     // -- Scroll Views -- //
