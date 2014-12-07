@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <Parse/Parse.h>
+#import <PKRevealController/PKRevealController.h>
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 

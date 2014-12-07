@@ -14,13 +14,13 @@
 
 @implementation BRKSearchBarContainer
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
+- (void)awakeFromNib {
+    self.searchField.delegate = self;
 }
-*/
+
+- (BOOL)resignFirstResponder {
+    return [self.searchField resignFirstResponder];
+}
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
