@@ -19,6 +19,11 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 
+    [Parse setApplicationId:@"ectwGYNTEmjRYLV28j81qdTElHyt98jiq3WWjWRO"
+                  clientKey:@"hGtJ9IBGaI7auYteKjm6lynoLoB4KUhFmbwAOzTo"];
+    
+    [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
+    
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     
     BRKHomeViewController * rootViewController = [[BRKHomeViewController alloc] init];

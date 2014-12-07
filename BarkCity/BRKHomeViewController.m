@@ -15,8 +15,10 @@
 #import "BRKPictureTableViewCell.h"
 #import "BRKVenuesViewController.h"
 #import "BRKUIManager.h"
+#import <Parse/Parse.h>
+#import <ParseUI/ParseUI.h>
 
-@interface BRKHomeViewController () <UIScrollViewDelegate, CLLocationManagerDelegate, BRKDetailTableViewSegueDelegate>
+@interface BRKHomeViewController () <UIScrollViewDelegate, CLLocationManagerDelegate, BRKDetailTableViewSegueDelegate, PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate>
 
 @property (strong, nonatomic) UIView * resultsView;
 @property (strong, nonatomic) BRKScrollView * venueCategoryScroll;
@@ -61,11 +63,23 @@
     UIBarButtonItem * searchButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(displaySearchViewController)];
     [self.navigationController.navigationBar.topItem setRightBarButtonItem:searchButton animated:YES];
     
+    // - LOGOUT BUTTON --//
+    UIBarButtonItem *logoutButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarStyleDefault target:self action:@selector(logout:)];
+    [self.navigationController.navigationBar.topItem setLeftBarButtonItem:logoutButton animated:YES];
+    
     // -- Scroll Views -- //
     [self createAndArrangeScrollViews];
     
     // -- Location Start -- //
     [self.locationManager requestInUseAuthorization];
+}
+
+- (void)logout:(UIBarButtonItem *)sender {
+    PFUser *currentUser = [PFUser currentUser];
+    if (currentUser) {
+        [PFUser logOut];
+    }
+    NSLog(@"User logged out!");
 }
 
 -(void)didReceiveMemoryWarning {
