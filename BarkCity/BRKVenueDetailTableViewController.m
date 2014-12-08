@@ -76,6 +76,7 @@
     
     if (indexPath.row == 1) {
         BRKDetailTableViewCell *cell = (BRKDetailTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"DetailCell"];
+        [cell setVenue:self.venue];
         return cell;
     }
     

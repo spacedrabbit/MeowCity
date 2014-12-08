@@ -16,26 +16,14 @@
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="placeholder.png" translatesAutoresizingMaskIntoConstraints="NO" id="QTO-ge-Cwz">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                     </imageView>
-                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="heo-CB-fhM">
-                        <rect key="frame" x="282" y="13" width="30" height="30"/>
-                        <state key="normal" title="Review" image="speech-bubble.png">
-                            <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                        </state>
-                        <connections>
-                            <action selector="reviewButtonTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="hyc-3d-ojo"/>
-                        </connections>
-                    </button>
                 </subviews>
             </tableViewCellContentView>
             <connections>
                 <outlet property="picture" destination="QTO-ge-Cwz" id="2kZ-OI-U3J"/>
-                <outlet property="reviewButton" destination="heo-CB-fhM" id="zdz-7V-62n"/>
             </connections>
         </tableViewCell>
     </objects>
     <resources>
         <image name="placeholder.png" width="640" height="640"/>
-        <image name="speech-bubble.png" width="1200" height="1200"/>
     </resources>
 </document>
