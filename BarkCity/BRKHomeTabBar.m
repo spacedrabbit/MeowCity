@@ -10,6 +10,7 @@
 @interface BRKHomeTabBar()
 
 @property (strong, nonatomic) NSArray * iconImagesArray;
+@property (strong, nonatomic) NSArray * iconHighlightedArray;
 @property (nonatomic) NSInteger lastSelectedTab;
 
 @end
@@ -87,20 +88,31 @@
     [self addConstraints:fourthVertical];
     [self addConstraints:fifthVertical];
     
-    self.iconImagesArray = @[ [UIImage imageNamed:@"snack_ico"],
-                              [UIImage imageNamed:@"cafe_ico"],
-                              [UIImage imageNamed:@"drink_ico"],
-                              [UIImage imageNamed:@"shop_ico"],
-                              [UIImage imageNamed:@"outside_ico"]
+    self.iconImagesArray = @[ [UIImage imageNamed:@"eat"],
+                              [UIImage imageNamed:@"cafe"],
+                              [UIImage imageNamed:@"bar"],
+                              [UIImage imageNamed:@"shopping"],
+                              [UIImage imageNamed:@"play"]
                               ];
+    self.iconHighlightedArray = @[ [UIImage imageNamed:@"eat_highlight"],
+                                   [UIImage imageNamed:@"cafe_highlight"],
+                                   [UIImage imageNamed:@"bar_highlight"],
+                                   [UIImage imageNamed:@"shopping_highlight"],
+                                   [UIImage imageNamed:@"play_highlight"]
+                                  ];
+    
     // -- Yea we fancy -- //
     [[self.tabBarView subviews] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         UIButton * currentButton = (UIButton *) obj;
         [currentButton setImage:self.iconImagesArray[idx] forState:UIControlStateNormal];
+        [currentButton setImage:self.iconHighlightedArray[idx] forState:UIControlStateHighlighted];
         [currentButton setTag:idx];
-        [currentButton setContentMode:UIViewContentModeScaleAspectFit];
+        [currentButton.imageView setContentMode:UIViewContentModeScaleToFill];
+        [currentButton setTitle:@"" forState:UIControlStateNormal];
         [currentButton setBackgroundColor:[UIColor clearColor]];
-        [currentButton addTarget:self action:@selector(tabWasSelected:) forControlEvents:UIControlEventTouchUpInside];
+        [currentButton addTarget:self
+                          action:@selector(tabWasSelected:)
+                forControlEvents:UIControlEventTouchUpInside];
     }];
     
 }

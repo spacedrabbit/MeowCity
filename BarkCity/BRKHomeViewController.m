@@ -153,11 +153,11 @@
 -(BRKHomeTabBar *) createBRKTabBarInFrame:(CGRect) frame{
 
     self.venueCategories = @[ @"Restaurant", @"Cafe", @"Bar", @"Shopping", @"Outdoors" ];
-    self.venueCategoryHeroImages = @[ [UIImage imageNamed:@"snack_hero"],
-                                      [UIImage imageNamed:@"cafe_hero"],
-                                      [UIImage imageNamed:@"drink_hero"],
-                                      [UIImage imageNamed:@"shop_hero"],
-                                      [UIImage imageNamed:@"outside_hero"]
+    self.venueCategoryHeroImages = @[ [UIImage imageNamed:@"snackHero"],
+                                      [UIImage imageNamed:@"cafeHero"],
+                                      [UIImage imageNamed:@"drinkHero"],
+                                      [UIImage imageNamed:@"shopHero"],
+                                      [UIImage imageNamed:@"playHero"]
                                       ];
 
     BRKHomeTabBar * categoryTabs = [[[NSBundle mainBundle] loadNibNamed:@"BRKHomeTabBar"
