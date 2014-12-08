@@ -8,6 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol BRKHomeTabBarDelegate <NSObject>
+@required
+-(NSInteger)didSelectTabButton;
+
+@end
+
 @interface BRKHomeTabBar : UIView
 
 @property (strong, nonatomic) IBOutlet UIView *tabBarView;
@@ -18,6 +24,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *fourthTabButton;
 @property (weak, nonatomic) IBOutlet UIButton *fifthTabButton;
 
-
+@property (weak, nonatomic) id<BRKHomeTabBarDelegate> delegate;
 
 @end

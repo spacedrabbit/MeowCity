@@ -19,7 +19,7 @@
 #import <Parse/Parse.h>
 #import <ParseUI/ParseUI.h>
 
-@interface BRKHomeViewController () <UIScrollViewDelegate, CLLocationManagerDelegate, BRKDetailTableViewSegueDelegate, PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate>
+@interface BRKHomeViewController () <UIScrollViewDelegate, CLLocationManagerDelegate, BRKDetailTableViewSegueDelegate, PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate, BRKHomeTabBarDelegate>
 
 @property (strong, nonatomic) UIView * resultsView;
 @property (strong, nonatomic) BRKScrollView * venueCategoryScroll;
@@ -27,6 +27,7 @@
 @property (strong, nonatomic) CLLocation * currentLocation;
 
 @property (strong, nonatomic) NSArray * venueCategories;
+@property (strong, nonatomic) NSArray * venueCategoryHeroImages;
 @property (strong, nonatomic) NSMutableArray * venueTableControllers;
 
 @end
@@ -61,7 +62,7 @@
     [self.navigationController.navigationBar.topItem setRightBarButtonItem:searchButton animated:YES];
     
     // - LOGOUT BUTTON/HAMBURGER MENU/SORRY --//
-    UIBarButtonItem *logoutButton = [[UIBarButtonItem alloc] initWithTitle:@"|||" style:UIBarStyleBlackTranslucent target:self action:@selector(logout:)];
+    UIBarButtonItem *logoutButton = [[UIBarButtonItem alloc] initWithTitle:@"| | |" style:UIBarButtonItemStylePlain target:self action:@selector(logout:)];
     [self.navigationController.navigationBar.topItem setLeftBarButtonItem:logoutButton animated:YES];
     
     // -- Scroll Views -- //
@@ -91,6 +92,12 @@
     [self presentViewController:searchViewController animated:YES completion:nil];
     
 }
+-(NSInteger)didSelectTabButton{
+    
+    
+    
+    return 0;
+}
 
 /**********************************************************************************
  *
@@ -102,6 +109,12 @@
     
     // -- Category details are filled in from API -- //
     self.venueCategories = @[ @"Restaurant", @"Cafe", @"Bar", @"Shopping", @"Outdoors" ];
+    self.venueCategoryHeroImages = @[ [UIImage imageNamed:@"snack_hero"],
+                                      [UIImage imageNamed:@"cafe_hero"],
+                                      [UIImage imageNamed:@"drink_hero"],
+                                      [UIImage imageNamed:@"shop_hero"],
+                                      [UIImage imageNamed:@"outside_hero"]
+                                     ];
     
     // -- Setting up some rects -- //
     CGRect screenRect = [UIScreen mainScreen].bounds;
@@ -119,31 +132,30 @@
     [self.resultsView addSubview:background];
     [self setView:self.resultsView];
     
-    // -- creating scroll views -- //
-    BRKHomeTabBar * categoryTabs = [[[NSBundle mainBundle] loadNibNamed:@"BRKHomeTabBar" owner:self options:nil] firstObject];
-    [self.venueCategoryScroll setTranslatesAutoresizingMaskIntoConstraints:NO];
-    self.venueCategoryScroll = [BRKScrollView createScrollViewFromFrame:categoryScrollViewFrame
-                                                           withSubViews:@[categoryTabs]
-                                                            ofFullWidth:YES];
-    [categoryTabs.tabBarView setBackgroundColor:[BRKUIManager snackCategoryBlue]];
-    [self.view addSubview:self.venueCategoryScroll];
+    // -- Tab Bar -- //
+    BRKHomeTabBar * categoryTabs = [[[NSBundle mainBundle] loadNibNamed:@"BRKHomeTabBar"
+                                                                  owner:self
+                                                                options:nil] firstObject];
     
+    [categoryTabs setFrame:categoryScrollViewFrame];
+    [self.view addSubview:categoryTabs];
+    
+    // -- creating scroll views -- //
     self.venueTableScroll = [self createScrollingTableFromVenues:self.venueCategories
                                                          inFrame:tableScrollViewFrame];
     [self.view addSubview:self.venueTableScroll];
-    
     // -- setting scroll delegates -- //
-    self.venueCategoryScroll.delegate = self;
     self.venueTableScroll.delegate = self;
     
 }
 
 -(BRKScrollView *) createScrollingTableFromVenues:(NSArray *)venues inFrame:(CGRect)frame{
-
+    
     NSMutableArray * tableViewsForCategories = [NSMutableArray array];
     for (NSInteger i= 0; i<[venues count]; i++) {
         
-        UIImageView *backgroundImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"placeholder"]];
+        UIImageView *backgroundImage = [[UIImageView alloc] initWithImage:self.venueCategoryHeroImages[i]];
+        [backgroundImage setContentMode:UIViewContentModeScaleAspectFit];
         
         BRKVenuesViewController * newTableController = [[BRKVenuesViewController alloc] initWithQuery:self.venueCategories[i] andBackgroundView:backgroundImage];
         newTableController.venueDetailSegueDelegate = self;

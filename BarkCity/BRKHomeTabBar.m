@@ -7,14 +7,16 @@
 //
 
 #import "BRKHomeTabBar.h"
+@interface BRKHomeTabBar()
+
+@property (strong, nonatomic) NSArray * iconImagesArray;
+
+@end
 
 @implementation BRKHomeTabBar
 
 -(void)awakeFromNib{
     [super awakeFromNib];
-    [self removeConstraints:self.constraints];
-    
-    NSLog(@"Awaking from Nib");
     
     CGRect screenWidth = [UIScreen mainScreen].bounds;
     CGFloat buttonWidth = screenWidth.size.width / 5.0;
@@ -23,7 +25,6 @@
     self.tabBarView = [[UIView alloc] init];
     [self addSubview:self.tabBarView];
     
-    [self setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self.tabBarView setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self.firstTabButton setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self.secondTabButton setTranslatesAutoresizingMaskIntoConstraints:NO];
@@ -41,10 +42,6 @@
                                                                         views:NSDictionaryOfVariableBindings(_tabBarView)];
     [self addConstraints:tabViewHorizontal];
     [self addConstraints:tabViewVertical];
-    
-    
-    [self.tabBarView setBackgroundColor:[UIColor redColor]];
-    [self.firstTabButton setBackgroundColor:[UIColor greenColor]];
     
     [self.tabBarView addSubview:self.firstTabButton];
     [self.tabBarView addSubview:self.secondTabButton];
@@ -89,6 +86,21 @@
     [self addConstraints:fourthVertical];
     [self addConstraints:fifthVertical];
     
+    self.iconImagesArray = @[ [UIImage imageNamed:@"snack_ico"],
+                              [UIImage imageNamed:@"cafe_ico"],
+                              [UIImage imageNamed:@"drink_ico"],
+                              [UIImage imageNamed:@"shop_ico"],
+                              [UIImage imageNamed:@"outside_ico"]
+                              ];
+    // -- Yea we fancy -- //
+    [[self.tabBarView subviews] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        UIButton * currentButton = (UIButton *) obj;
+        [currentButton setImage:self.iconImagesArray[idx] forState:UIControlStateNormal];
+        [currentButton setContentMode:UIViewContentModeScaleAspectFit];
+        [currentButton setBackgroundColor:[UIColor clearColor]];
+        [currentButton addTarget:self action:@selector(tabWasSelected:) forControlEvents:UIControlEventTouchUpInside];
+    }];
+    
 }
 
 -(id)initWithCoder:(NSCoder *)aDecoder{
@@ -107,4 +119,10 @@
     return self;
 }
 
+-(void) tabWasSelected:(id) sender{
+    UIButton * senderButton = (UIButton *)sender;
+    
+    NSLog(@"%@ was selected !!", senderButton);
+    
+}
 @end
