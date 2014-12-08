@@ -45,38 +45,25 @@
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <view contentMode="scaleToFill" placeholderIntrinsicWidth="50" placeholderIntrinsicHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="6cs-Y9-H4s">
-                        <rect key="frame" x="212" y="108" width="100" height="12"/>
-                        <accessibility key="accessibilityConfiguration" label=""/>
-                    </view>
                 </subviews>
                 <constraints>
                     <constraint firstItem="OFH-1U-sXe" firstAttribute="top" secondItem="NYY-9V-xOO" secondAttribute="bottom" constant="8" id="2Hs-f4-svF"/>
-                    <constraint firstItem="6cs-Y9-H4s" firstAttribute="top" secondItem="bYW-n3-Nh8" secondAttribute="bottom" id="4Kc-8x-Mbb"/>
                     <constraint firstItem="bYW-n3-Nh8" firstAttribute="leading" secondItem="NYY-9V-xOO" secondAttribute="trailing" constant="8" id="8Gu-H2-Vi3"/>
                     <constraint firstItem="LMd-vo-6Bo" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="8cM-Yk-WmD"/>
                     <constraint firstItem="NYY-9V-xOO" firstAttribute="top" secondItem="LMd-vo-6Bo" secondAttribute="bottom" constant="8" id="AnC-Yr-9om"/>
                     <constraint firstItem="bYW-n3-Nh8" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="CrV-RD-t7f"/>
                     <constraint firstItem="bYW-n3-Nh8" firstAttribute="leading" secondItem="OFH-1U-sXe" secondAttribute="trailing" constant="8" id="JF4-Qb-GzS"/>
                     <constraint firstItem="OFH-1U-sXe" firstAttribute="top" secondItem="mps-fT-ECz" secondAttribute="bottom" constant="8" id="K8q-1s-RbG"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="6cs-Y9-H4s" secondAttribute="trailing" id="ONH-jY-GwY"/>
                     <constraint firstItem="bYW-n3-Nh8" firstAttribute="leading" secondItem="LMd-vo-6Bo" secondAttribute="trailing" constant="8" id="Ods-p1-pOh"/>
-                    <constraint firstItem="bYW-n3-Nh8" firstAttribute="leading" secondItem="6cs-Y9-H4s" secondAttribute="trailing" id="WfO-dD-iRR"/>
                     <constraint firstItem="mps-fT-ECz" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="d2t-5V-Rsu"/>
                     <constraint firstAttribute="bottomMargin" secondItem="OFH-1U-sXe" secondAttribute="bottom" id="eZ9-Rv-fG8"/>
-                    <constraint firstItem="6cs-Y9-H4s" firstAttribute="bottom" secondItem="H2p-sc-9uM" secondAttribute="bottomMargin" id="fEP-e3-hSz"/>
-                    <constraint firstItem="6cs-Y9-H4s" firstAttribute="leading" secondItem="OFH-1U-sXe" secondAttribute="trailing" constant="8" id="fbB-MK-chg"/>
                     <constraint firstItem="bYW-n3-Nh8" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="hCR-HM-YcC"/>
+                    <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="bYW-n3-Nh8" secondAttribute="bottom" id="nS9-yV-s59"/>
                     <constraint firstItem="NYY-9V-xOO" firstAttribute="leading" secondItem="mps-fT-ECz" secondAttribute="trailing" constant="8" id="qaj-0F-d0e"/>
                     <constraint firstItem="OFH-1U-sXe" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="v2B-vy-tWd"/>
                     <constraint firstItem="mps-fT-ECz" firstAttribute="top" secondItem="LMd-vo-6Bo" secondAttribute="bottom" constant="8" id="woX-0p-To1"/>
                     <constraint firstItem="LMd-vo-6Bo" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="xdw-ot-S1t"/>
                 </constraints>
-                <variation key="default">
-                    <mask key="constraints">
-                        <exclude reference="WfO-dD-iRR"/>
-                    </mask>
-                </variation>
             </tableViewCellContentView>
             <connections>
                 <outlet property="descriptiveBody" destination="OFH-1U-sXe" id="7MK-9s-iGD"/>
