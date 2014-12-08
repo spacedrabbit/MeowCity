@@ -546,11 +546,11 @@
 				TargetAttributes = {
 					F925AC471A23C1670086F2EB = {
 						CreatedOnToolsVersion = 6.1;
-						DevelopmentTeam = 3457AE227Q;
+						DevelopmentTeam = 9RXLE5FXUN;
 					};
 					F925AC601A23C1670086F2EB = {
 						CreatedOnToolsVersion = 6.1;
-						DevelopmentTeam = 3457AE227Q;
+						DevelopmentTeam = 9RXLE5FXUN;
 						TestTargetID = F925AC471A23C1670086F2EB;
 					};
 				};
