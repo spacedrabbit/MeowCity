@@ -98,7 +98,7 @@
 
 + (UIFont *) detailRatingFont {
     NSString *fontName = @"Avenir-Light";
-    CGFloat fontSize = 16.0f;
+    CGFloat fontSize = 14.0f;
     return [UIFont fontWithName:fontName size:fontSize];
 }
 
@@ -112,6 +112,25 @@
 
 + (UIFont *) detailOtherFont {
     return [BRKUIManager detailRatingFont];
+}
+
+// BRKCommentTableViewCell
++ (UIFont *) commentUserNameFont {
+    NSString *fontName = @"Avenir-Medium";
+    CGFloat fontSize = 16.0f;
+    return [UIFont fontWithName:fontName size:fontSize];
+}
+
++ (UIFont *) commentCommentFont {
+    NSString *fontName = @"AvenirNext-UltraLight";
+    CGFloat fontSize = 14.0f;
+    return [UIFont fontWithName:fontName size:fontSize];
+}
+
++ (UIFont *) commentDateFont {
+    NSString *fontName = @"AvenirNext-UltraLight";
+    CGFloat fontSize = 14.0f;
+    return [UIFont fontWithName:fontName size:fontSize];
 }
 
 

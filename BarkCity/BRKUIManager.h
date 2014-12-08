@@ -36,6 +36,11 @@
 + (UIFont *) detailDistanceFont;
 + (UIFont *) detailOtherFont;
 
+// BRKCommentTableViewCell
++ (UIFont *) commentUserNameFont;
++ (UIFont *) commentCommentFont;
++ (UIFont *) commentDateFont;
+
 // BRKHomeTabBar
 +(UIColor *) shoppingCategoryYellow;
 +(UIColor *) snackCategoryBlue;
