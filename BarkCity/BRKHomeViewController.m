@@ -26,6 +26,8 @@
 @property (strong, nonatomic) BRKScrollView * venueTableScroll;
 @property (strong, nonatomic) CLLocation * currentLocation;
 
+@property (strong, nonatomic) BRKHomeTabBar * homeTabBar;
+
 @property (strong, nonatomic) NSArray * venueCategories;
 @property (strong, nonatomic) NSArray * venueCategoryHeroImages;
 @property (strong, nonatomic) NSMutableArray * venueTableControllers;
@@ -92,11 +94,10 @@
     [self presentViewController:searchViewController animated:YES completion:nil];
     
 }
--(NSInteger)didSelectTabButton{
+-(void)didSelectTabButton:(NSInteger)tabButtonIndex{
     
+    NSLog(@"Did select: %li  !!!!!", tabButtonIndex );
     
-    
-    return 0;
 }
 
 /**********************************************************************************
@@ -106,21 +107,11 @@
  ***********************************************************************************/
 #pragma mark - Creating Scroll Views -
 -(void)createAndArrangeScrollViews{
-    
-    // -- Category details are filled in from API -- //
-    self.venueCategories = @[ @"Restaurant", @"Cafe", @"Bar", @"Shopping", @"Outdoors" ];
-    self.venueCategoryHeroImages = @[ [UIImage imageNamed:@"snack_hero"],
-                                      [UIImage imageNamed:@"cafe_hero"],
-                                      [UIImage imageNamed:@"drink_hero"],
-                                      [UIImage imageNamed:@"shop_hero"],
-                                      [UIImage imageNamed:@"outside_hero"]
-                                     ];
-    
+
     // -- Setting up some rects -- //
     CGRect screenRect = [UIScreen mainScreen].bounds;
     CGPoint originWithNavBarAndMenu = CGPointMake(0.0, 64.0);
     CGFloat categoryBarHeight = 44.0;
-    
     CGRect categoryScrollViewFrame = CGRectMake(originWithNavBarAndMenu.x , originWithNavBarAndMenu.y, [UIScreen mainScreen].bounds.size.width, categoryBarHeight);
     CGRect tableScrollViewFrame = CGRectMake(originWithNavBarAndMenu.x, originWithNavBarAndMenu.y + categoryBarHeight, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - categoryBarHeight - originWithNavBarAndMenu.y);
     
@@ -132,21 +123,37 @@
     [self.resultsView addSubview:background];
     [self setView:self.resultsView];
     
+    
+    // -- creating scroll views -- //
+    self.homeTabBar = [self createBRKTabBarInFrame:categoryScrollViewFrame];
+    [self.view addSubview:self.homeTabBar];
+    self.venueTableScroll = [self createScrollingTableFromVenues:self.venueCategories
+                                                         inFrame:tableScrollViewFrame];
+    [self.view addSubview:self.venueTableScroll];
+    
+    // -- setting scroll delegates -- //
+    self.venueTableScroll.delegate  = self;
+    self.homeTabBar.delegate        = self;
+    
+}
+
+-(BRKHomeTabBar *) createBRKTabBarInFrame:(CGRect) frame{
+    
+    // -- Category details are filled in from API -- //
+    self.venueCategories = @[ @"Restaurant", @"Cafe", @"Bar", @"Shopping", @"Outdoors" ];
+    self.venueCategoryHeroImages = @[ [UIImage imageNamed:@"snack_hero"],
+                                      [UIImage imageNamed:@"cafe_hero"],
+                                      [UIImage imageNamed:@"drink_hero"],
+                                      [UIImage imageNamed:@"shop_hero"],
+                                      [UIImage imageNamed:@"outside_hero"]
+                                      ];
     // -- Tab Bar -- //
     BRKHomeTabBar * categoryTabs = [[[NSBundle mainBundle] loadNibNamed:@"BRKHomeTabBar"
                                                                   owner:self
                                                                 options:nil] firstObject];
+    [categoryTabs setFrame:frame];
     
-    [categoryTabs setFrame:categoryScrollViewFrame];
-    [self.view addSubview:categoryTabs];
-    
-    // -- creating scroll views -- //
-    self.venueTableScroll = [self createScrollingTableFromVenues:self.venueCategories
-                                                         inFrame:tableScrollViewFrame];
-    [self.view addSubview:self.venueTableScroll];
-    // -- setting scroll delegates -- //
-    self.venueTableScroll.delegate = self;
-    
+    return categoryTabs;
 }
 
 -(BRKScrollView *) createScrollingTableFromVenues:(NSArray *)venues inFrame:(CGRect)frame{

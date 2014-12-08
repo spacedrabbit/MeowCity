@@ -10,7 +10,10 @@
 
 @protocol BRKHomeTabBarDelegate <NSObject>
 @required
--(NSInteger)didSelectTabButton;
+-(void)didSelectTabButton:(NSInteger)tabButtonIndex;
+
+@optional
+-(void) checkForSelectedTab;
 
 @end
 

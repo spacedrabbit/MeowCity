@@ -96,6 +96,7 @@
     [[self.tabBarView subviews] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         UIButton * currentButton = (UIButton *) obj;
         [currentButton setImage:self.iconImagesArray[idx] forState:UIControlStateNormal];
+        [currentButton setTag:idx];
         [currentButton setContentMode:UIViewContentModeScaleAspectFit];
         [currentButton setBackgroundColor:[UIColor clearColor]];
         [currentButton addTarget:self action:@selector(tabWasSelected:) forControlEvents:UIControlEventTouchUpInside];
@@ -120,9 +121,11 @@
 }
 
 -(void) tabWasSelected:(id) sender{
-    UIButton * senderButton = (UIButton *)sender;
     
-    NSLog(@"%@ was selected !!", senderButton);
+    UIButton * senderButton = (UIButton *)sender;
+    NSInteger indexOfButton = senderButton.tag;
+    
+    [self.delegate didSelectTabButton:indexOfButton];
     
 }
 @end
