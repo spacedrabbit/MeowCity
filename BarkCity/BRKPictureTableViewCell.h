@@ -20,8 +20,6 @@
 
 @property (nonatomic, strong) id delegate;
 @property (weak, nonatomic) IBOutlet UIImageView *picture;
-@property (strong, nonatomic) IBOutlet UIButton *reviewButton;
-- (IBAction)reviewButtonTapped:(id)sender;
 
 
 @end

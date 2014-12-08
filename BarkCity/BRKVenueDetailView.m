@@ -7,7 +7,7 @@
 //
 
 #import "BRKVenueDetailView.h"
-#import "BRKVenueDetailTableViewCell.h"
+#import "BRKCommentTableViewCell.h"
 
 @interface BRKVenueDetailView()
 
@@ -53,10 +53,10 @@
 - (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     static NSString *CellIdentifer = @"CellIdentifier";
-    BRKVenueDetailTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifer];
+    BRKCommentTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifer];
     
     if (cell == nil) {
-        cell = [[BRKVenueDetailTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifer];
+        cell = [[BRKCommentTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifer];
     }
     
     cell.userNameLabel.text = [NSString stringWithFormat:@"%ld", indexPath.row];
