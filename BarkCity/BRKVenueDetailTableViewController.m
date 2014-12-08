@@ -37,8 +37,7 @@
     
     // Set dynamic row height and estimate for scrolling cursror
     self.tableView.rowHeight = UITableViewAutomaticDimension;
-    self.tableView.estimatedRowHeight = 200.0;
-    
+    self.tableView.estimatedRowHeight = 100.0;
     
     // -- COMMENT BUTTON -- //
     UIBarButtonItem * reviewButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(displayReviewViewController)];
