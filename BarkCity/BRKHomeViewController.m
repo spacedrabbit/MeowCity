@@ -91,10 +91,6 @@
     NSLog(@"User logged out!");
 }
 
--(void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-}
-
 - (void)displaySearchViewController
 {
     BRKSearchViewController * searchViewController = [[BRKSearchViewController alloc] init];
@@ -196,7 +192,8 @@
     return scrollNavTables;
 }
 
--(UIColor *) updateTabColor:(NSInteger)tabIndex {
+- (UIColor *)updateTabColor:(NSInteger)tabIndex
+{
     UIColor * updatedColor;
     switch (tabIndex) {
         case 0:
@@ -243,7 +240,8 @@
  *
  ***********************************************************************************/
 
--(void)didSelectTabButton:(NSInteger)tabButtonIndex{
+-(void)didSelectTabButton:(NSInteger)tabButtonIndex
+{
 
     UIColor * newTabColor = [self updateTabColor:tabButtonIndex];
     NSInteger tabDistanceChange = labs(self.previousTab - tabButtonIndex);
@@ -256,7 +254,6 @@
     } completion:^(BOOL finished) {
         self.previousTab = tabButtonIndex;
     }];
-
 }
 
 /**********************************************************************************
@@ -265,17 +262,21 @@
  *
  ***********************************************************************************/
 #pragma mark - Scroll Delegate -
--(void)scrollViewDidScroll:(UIScrollView *)scrollView{
-
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    CGFloat pageWidth = scrollView.frame.size.width;
     CGPoint offset = scrollView.contentOffset;
-    if (scrollView == self.venueTableScroll) {
-
-
-    }else{
-        //this case is for each vertical scroll of the tableview.. do not remove this logic
-        //NSLog(@"This is a different scroll!");
-    }
-
+    NSInteger pageNumber = lroundf(offset.x / pageWidth);
+    
+    UIColor * newTabColor = [self updateTabColor:pageNumber];
+    NSInteger tabDistanceChange = labs(self.previousTab - pageNumber);
+    CGFloat timeInterval = .25 + (tabDistanceChange * 0.11); //smooths the change for larger distances
+    
+    [UIView animateWithDuration:timeInterval animations:^{
+        [self.homeTabBar.tabBarView setBackgroundColor:newTabColor];
+    } completion:^(BOOL finished) {
+        self.previousTab = pageNumber;
+    }];
 }
 
 
@@ -308,15 +309,5 @@
 
     [self.navigationController pushViewController:selectedVenue animated:YES];
 }
-
--(void)displaySearchViewController{
-
-    BRKSearchViewController * searchViewController = [[BRKSearchViewController alloc] init];
-    [searchViewController setModalPresentationStyle:UIModalPresentationOverCurrentContext];
-
-    [self presentViewController:searchViewController animated:YES completion:nil];
-
-}
-
 
 @end

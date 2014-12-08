@@ -38,8 +38,12 @@
     _venue = venue;
     
     if (_venue) {
+        NSNumberFormatter *ratingFormatter = [[NSNumberFormatter alloc] init];
+        [ratingFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
+        [ratingFormatter setMaximumSignificantDigits:3];
+        
         self.name.text = venue.name;
-        self.rating.text = [venue.rating description];
+        self.rating.text = [ratingFormatter stringFromNumber:venue.rating];
         self.distance.text = @"1.0 mi";
         if (venue.previewImage) {
             self.picture.image = venue.previewImage;
