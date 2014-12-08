@@ -47,6 +47,10 @@
         self.distance.text = @"1.0 mi";
         if (venue.previewImage) {
             self.picture.image = venue.previewImage;
+            self.picture.layer.cornerRadius = 5.0;
+            self.picture.layer.masksToBounds = YES;
+            self.picture.layer.borderColor = [UIColor lightGrayColor].CGColor;
+            self.picture.layer.borderWidth = 1.0; // SORRY CHARLES // THIS IS GLITCHY 
         } else {
             [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(venueImageDidUpdate:) name:BRKVenueImageDidUpdateNotification object:venue];
         }

@@ -20,6 +20,11 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
     if (![PFUser currentUser]) {
         PFLogInViewController *loginViewController = [[PFLogInViewController alloc] init];
         [loginViewController setDelegate:self];
@@ -33,7 +38,6 @@
     } else {
         NSLog(@"Current user is %@:", [PFUser currentUser]);
     }
-    
 }
 
 - (void)viewDidLoad {
@@ -42,6 +46,8 @@
 //    NSArray *xibContents = [[NSBundle mainBundle] loadNibNamed:@"BRKReviewView" owner:self options:nil];
 //    BRKReviewView *newReviewView = [xibContents lastObject];
 //    [self.view addSubview:newReviewView];
+    
+    
     
 }
 
