@@ -91,6 +91,29 @@
     return attributes;
 }
 
+// BRKDetailTableViewCell
++ (UIFont *) detailNameFont {
+    return [BRKUIManager venueNameFont];
+}
+
++ (UIFont *) detailRatingFont {
+    NSString *fontName = @"Avenir-Light";
+    CGFloat fontSize = 16.0f;
+    return [UIFont fontWithName:fontName size:fontSize];
+}
+
++ (UIFont *) detailPriceFont {
+    return [BRKUIManager detailRatingFont];
+}
+
++ (UIFont *) detailDistanceFont {
+    return [BRKUIManager detailRatingFont];
+}
+
++ (UIFont *) detailOtherFont {
+    return [BRKUIManager detailRatingFont];
+}
+
 
 
 #pragma mark - MockUp Colors -

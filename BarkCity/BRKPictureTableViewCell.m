@@ -13,14 +13,13 @@
 
 - (void)awakeFromNib {
     // Initialization code
+    self.picture.contentMode = UIViewContentModeScaleAspectFill;
     [self autoLayout];
-    self.picture.contentMode = UIViewContentModeScaleAspectFit;
+    
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
 }
 
 - (void) autoLayout {
@@ -64,27 +63,17 @@
                                   constant:0];
     
     // Set picture height to 200 points
-    NSLayoutConstraint *pictureHeight =
-    [NSLayoutConstraint constraintWithItem:self.picture
-                                 attribute:NSLayoutAttributeHeight
-                                 relatedBy:NSLayoutRelationEqual
-                                    toItem:self.contentView
-                                 attribute:NSLayoutAttributeHeight
-                                multiplier:0
-                                  constant:200];
+//    NSLayoutConstraint *pictureHeight =
+//    [NSLayoutConstraint constraintWithItem:self.picture
+//                                 attribute:NSLayoutAttributeHeight
+//                                 relatedBy:NSLayoutRelationEqual
+//                                    toItem:self.contentView
+//                                 attribute:NSLayoutAttributeHeight
+//                                multiplier:0
+//                                  constant:200];
     
-    [self.contentView addConstraints:@[pictureLeading, pictureTrailing, pictureTop, pictureBottom, pictureHeight]];
+    [self.contentView addConstraints:@[pictureLeading, pictureTrailing, pictureTop, pictureBottom]];
     
-    [self.reviewButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.height.mas_equalTo(30);
-        make.width.mas_equalTo(30);
-        make.bottom.equalTo(self.contentView.mas_bottom).with.offset(-2);
-        make.right.equalTo(self.contentView.mas_right).with.offset(-2);
-    }];
-}
-
-- (IBAction)reviewButtonTapped:(id)sender {
-    [self.delegate segueToReviewViewController];
 }
 
 @end

@@ -31,6 +31,8 @@
 		B1CAAE2A1A352151002E6EEC /* shop_ico.png in Resources */ = {isa = PBXBuildFile; fileRef = B1CAAE251A352151002E6EEC /* shop_ico.png */; };
 		B1CAAE2B1A352151002E6EEC /* snack_ico.png in Resources */ = {isa = PBXBuildFile; fileRef = B1CAAE261A352151002E6EEC /* snack_ico.png */; };
 		B1CAAE2C1A352151002E6EEC /* cafe_ico.png in Resources */ = {isa = PBXBuildFile; fileRef = B1CAAE271A352151002E6EEC /* cafe_ico.png */; };
+		CBB50D491A35F34B00005B23 /* BRKCommentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE36D181A25067A00AD80F6 /* BRKCommentTableViewCell.m */; };
+		CBB50D4A1A35F34B00005B23 /* BRKCommentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBE36D191A25067A00AD80F6 /* BRKCommentTableViewCell.xib */; };
 		CBBBE4261A27C4CB00109C41 /* BRKVenuesTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CBBBE4221A27C4CB00109C41 /* BRKVenuesTableViewCell.m */; };
 		CBBBE4271A27C4CB00109C41 /* BRKVenuesTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBBBE4231A27C4CB00109C41 /* BRKVenuesTableViewCell.xib */; };
 		CBBBE4311A2E585200109C41 /* BRKUIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CBBBE4301A2E585200109C41 /* BRKUIManager.m */; };
@@ -41,8 +43,10 @@
 		CBBBE43F1A2F957A00109C41 /* BRKVenueDetailTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBBBE43E1A2F957A00109C41 /* BRKVenueDetailTableViewController.m */; };
 		CBBBE4421A2F959000109C41 /* BRKReviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBBBE4411A2F959000109C41 /* BRKReviewViewController.m */; };
 		CBBBE4441A2F95FE00109C41 /* speech-bubble.png in Resources */ = {isa = PBXBuildFile; fileRef = CBBBE4431A2F95FE00109C41 /* speech-bubble.png */; };
-		CBE36D1A1A25067A00AD80F6 /* BRKVenueDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE36D181A25067A00AD80F6 /* BRKVenueDetailTableViewCell.m */; };
-		CBE36D1B1A25067A00AD80F6 /* BRKVenueDetailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBE36D191A25067A00AD80F6 /* BRKVenueDetailTableViewCell.xib */; };
+		CBBBE4471A2FCCDB00109C41 /* bone_blank.png in Resources */ = {isa = PBXBuildFile; fileRef = CBBBE4451A2FCCDB00109C41 /* bone_blank.png */; };
+		CBBBE4481A2FCCDB00109C41 /* bone_blue.png in Resources */ = {isa = PBXBuildFile; fileRef = CBBBE4461A2FCCDB00109C41 /* bone_blue.png */; };
+		CBCEA2821A30BE9C00E219E2 /* BRKDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CBCEA2801A30BE9C00E219E2 /* BRKDetailTableViewCell.m */; };
+		CBCEA2831A30BE9C00E219E2 /* BRKDetailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBCEA2811A30BE9C00E219E2 /* BRKDetailTableViewCell.xib */; };
 		CBE36D1F1A25069900AD80F6 /* BRKVenueDetail.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBE36D1C1A25069900AD80F6 /* BRKVenueDetail.xib */; };
 		CBE36D201A25069900AD80F6 /* BRKVenueDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE36D1E1A25069900AD80F6 /* BRKVenueDetailView.m */; };
 		CBE36D261A26679600AD80F6 /* placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = CBE36D251A26679600AD80F6 /* placeholder.png */; };
@@ -133,9 +137,14 @@
 		CBBBE4401A2F959000109C41 /* BRKReviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRKReviewViewController.h; sourceTree = "<group>"; };
 		CBBBE4411A2F959000109C41 /* BRKReviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRKReviewViewController.m; sourceTree = "<group>"; };
 		CBBBE4431A2F95FE00109C41 /* speech-bubble.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "speech-bubble.png"; sourceTree = "<group>"; };
-		CBE36D171A25067A00AD80F6 /* BRKVenueDetailTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRKVenueDetailTableViewCell.h; sourceTree = "<group>"; };
-		CBE36D181A25067A00AD80F6 /* BRKVenueDetailTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRKVenueDetailTableViewCell.m; sourceTree = "<group>"; };
-		CBE36D191A25067A00AD80F6 /* BRKVenueDetailTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BRKVenueDetailTableViewCell.xib; sourceTree = "<group>"; };
+		CBBBE4451A2FCCDB00109C41 /* bone_blank.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bone_blank.png; sourceTree = "<group>"; };
+		CBBBE4461A2FCCDB00109C41 /* bone_blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bone_blue.png; sourceTree = "<group>"; };
+		CBCEA27F1A30BE9C00E219E2 /* BRKDetailTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRKDetailTableViewCell.h; sourceTree = "<group>"; };
+		CBCEA2801A30BE9C00E219E2 /* BRKDetailTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRKDetailTableViewCell.m; sourceTree = "<group>"; };
+		CBCEA2811A30BE9C00E219E2 /* BRKDetailTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BRKDetailTableViewCell.xib; sourceTree = "<group>"; };
+		CBE36D171A25067A00AD80F6 /* BRKCommentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRKCommentTableViewCell.h; sourceTree = "<group>"; };
+		CBE36D181A25067A00AD80F6 /* BRKCommentTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRKCommentTableViewCell.m; sourceTree = "<group>"; };
+		CBE36D191A25067A00AD80F6 /* BRKCommentTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BRKCommentTableViewCell.xib; sourceTree = "<group>"; };
 		CBE36D1C1A25069900AD80F6 /* BRKVenueDetail.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BRKVenueDetail.xib; sourceTree = "<group>"; };
 		CBE36D1D1A25069900AD80F6 /* BRKVenueDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRKVenueDetailView.h; sourceTree = "<group>"; };
 		CBE36D1E1A25069900AD80F6 /* BRKVenueDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRKVenueDetailView.m; sourceTree = "<group>"; };
@@ -351,14 +360,14 @@
 			name = BRKVenueDetailView;
 			sourceTree = "<group>";
 		};
-		CBBBE42B1A27C87600109C41 /* BRKVenueDetailTableViewCell */ = {
+		CBBBE42B1A27C87600109C41 /* BRKCommentTableViewCell */ = {
 			isa = PBXGroup;
 			children = (
-				CBE36D171A25067A00AD80F6 /* BRKVenueDetailTableViewCell.h */,
-				CBE36D181A25067A00AD80F6 /* BRKVenueDetailTableViewCell.m */,
-				CBE36D191A25067A00AD80F6 /* BRKVenueDetailTableViewCell.xib */,
+				CBE36D171A25067A00AD80F6 /* BRKCommentTableViewCell.h */,
+				CBE36D181A25067A00AD80F6 /* BRKCommentTableViewCell.m */,
+				CBE36D191A25067A00AD80F6 /* BRKCommentTableViewCell.xib */,
 			);
-			name = BRKVenueDetailTableViewCell;
+			name = BRKCommentTableViewCell;
 			sourceTree = "<group>";
 		};
 		CBBBE4371A2F950200109C41 /* BRKReview */ = {
@@ -371,6 +380,16 @@
 				CBBBE4411A2F959000109C41 /* BRKReviewViewController.m */,
 			);
 			name = BRKReview;
+			sourceTree = "<group>";
+		};
+		CBCEA2841A30F0D500E219E2 /* BRKDetailTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				CBCEA27F1A30BE9C00E219E2 /* BRKDetailTableViewCell.h */,
+				CBCEA2801A30BE9C00E219E2 /* BRKDetailTableViewCell.m */,
+				CBCEA2811A30BE9C00E219E2 /* BRKDetailTableViewCell.xib */,
+			);
+			name = BRKDetailTableViewCell;
 			sourceTree = "<group>";
 		};
 		CBE36D211A25138D00AD80F6 /* Home */ = {
@@ -394,7 +413,8 @@
 				CBBBE43E1A2F957A00109C41 /* BRKVenueDetailTableViewController.m */,
 				CBBBE4371A2F950200109C41 /* BRKReview */,
 				CBBBE42A1A27C86B00109C41 /* BRKVenueDetailView */,
-				CBBBE42B1A27C87600109C41 /* BRKVenueDetailTableViewCell */,
+				CBBBE42B1A27C87600109C41 /* BRKCommentTableViewCell */,
+				CBCEA2841A30F0D500E219E2 /* BRKDetailTableViewCell */,
 			);
 			name = "Venue Detail";
 			sourceTree = "<group>";
@@ -414,6 +434,8 @@
 				145620B61A3565F40024B3C1 /* bark_fis.001.png */,
 				B1CAAE161A351F9A002E6EEC /* Tab Icons */,
 				B1CAAE071A3517E1002E6EEC /* Heros */,
+				CBBBE4451A2FCCDB00109C41 /* bone_blank.png */,
+				CBBBE4461A2FCCDB00109C41 /* bone_blue.png */,
 				CBBBE4431A2F95FE00109C41 /* speech-bubble.png */,
 				CBE36D251A26679600AD80F6 /* placeholder.png */,
 			);
@@ -556,6 +578,7 @@
 					F925AC601A23C1670086F2EB = {
 						CreatedOnToolsVersion = 6.1;
 						DevelopmentTeam = 9RXLE5FXUN;
+						DevelopmentTeam = Z7MS44448J;
 						TestTargetID = F925AC471A23C1670086F2EB;
 					};
 				};
@@ -592,15 +615,18 @@
 				CBE36D1F1A25069900AD80F6 /* BRKVenueDetail.xib in Resources */,
 				B1CAAE281A352151002E6EEC /* outside_ico.png in Resources */,
 				145620B71A3565F40024B3C1 /* bark_fis.001.png in Resources */,
-				CBE36D1B1A25067A00AD80F6 /* BRKVenueDetailTableViewCell.xib in Resources */,
+				CBB50D4A1A35F34B00005B23 /* BRKCommentTableViewCell.xib in Resources */,
+				CBBBE4471A2FCCDB00109C41 /* bone_blank.png in Resources */,
 				B1434DD71A268BB300770E29 /* barkboxLogo.png in Resources */,
 				B1CAAE151A351977002E6EEC /* shop_hero.png in Resources */,
 				07F863FE1A250D90009EAB2F /* adorable-puppy.jpeg in Resources */,
 				F9A678D11A322CF20008921B /* BRKSearchBarContainer.xib in Resources */,
 				CBE36D261A26679600AD80F6 /* placeholder.png in Resources */,
 				B1CAAE111A3517F2002E6EEC /* drink_hero.png in Resources */,
+				CBBBE4481A2FCCDB00109C41 /* bone_blue.png in Resources */,
 				CBBBE43C1A2F951200109C41 /* BRKReviewView.xib in Resources */,
 				B1CAAE2A1A352151002E6EEC /* shop_ico.png in Resources */,
+				CBCEA2831A30BE9C00E219E2 /* BRKDetailTableViewCell.xib in Resources */,
 				CBBBE4271A27C4CB00109C41 /* BRKVenuesTableViewCell.xib in Resources */,
 				B1CAAE2C1A352151002E6EEC /* cafe_ico.png in Resources */,
 				B1CAAE131A3517F2002E6EEC /* snack_hero.png in Resources */,
@@ -671,7 +697,7 @@
 				F94606AF1A262DCA00FF6AB0 /* BRKLocationManager.m in Sources */,
 				F925AC511A23C1670086F2EB /* AppDelegate.m in Sources */,
 				B1AB09FD1A34D1CA00ECDB18 /* BRKHomeTabBar.m in Sources */,
-				CBE36D1A1A25067A00AD80F6 /* BRKVenueDetailTableViewCell.m in Sources */,
+				CBB50D491A35F34B00005B23 /* BRKCommentTableViewCell.m in Sources */,
 				F94606701A23D86A00FF6AB0 /* BRKVenuesTableViewController.m in Sources */,
 				B17860331A251C7F00EBE64F /* BRKHomeViewController.m in Sources */,
 				CBBBE4421A2F959000109C41 /* BRKReviewViewController.m in Sources */,
@@ -681,6 +707,7 @@
 				B17860221A23CAB600EBE64F /* BRKScrollView.m in Sources */,
 				CBBBE4261A27C4CB00109C41 /* BRKVenuesTableViewCell.m in Sources */,
 				CBBBE43B1A2F951200109C41 /* BRKReviewView.m in Sources */,
+				CBCEA2821A30BE9C00E219E2 /* BRKDetailTableViewCell.m in Sources */,
 				CBE36D201A25069900AD80F6 /* BRKVenueDetailView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

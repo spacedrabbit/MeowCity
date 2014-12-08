@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface BRKVenueDetailTableViewCell : UITableViewCell
+@interface BRKCommentTableViewCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UIImageView *userProfileImage;
 @property (weak, nonatomic) IBOutlet UILabel *userNameLabel;

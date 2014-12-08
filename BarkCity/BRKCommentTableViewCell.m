@@ -6,12 +6,16 @@
 //  Copyright (c) 2014 com.rosamcgee. All rights reserved.
 //
 
-#import "BRKVenueDetailTableViewCell.h"
+#import "BRKCommentTableViewCell.h"
 
-@implementation BRKVenueDetailTableViewCell
+@implementation BRKCommentTableViewCell
 
 - (void)awakeFromNib {
     // Initialization code
+    
+    // Make profile image circular
+    self.userProfileImage.layer.cornerRadius = self.userProfileImage.frame.size.width / 2;
+    self.userProfileImage.clipsToBounds = YES;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

@@ -29,6 +29,13 @@
 + (UIFont *) closeButtonFont;
 + (NSDictionary *) searchFieldPlaceHolderAttributes;
 
+// BRKDetailTableViewCell
++ (UIFont *) detailNameFont;
++ (UIFont *) detailRatingFont;
++ (UIFont *) detailPriceFont;
++ (UIFont *) detailDistanceFont;
++ (UIFont *) detailOtherFont;
+
 // BRKHomeTabBar
 +(UIColor *) shoppingCategoryYellow;
 +(UIColor *) snackCategoryBlue;
