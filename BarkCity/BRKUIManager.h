@@ -29,4 +29,11 @@
 + (UIFont *) closeButtonFont;
 + (NSDictionary *) searchFieldPlaceHolderAttributes;
 
+// BRKHomeTabBar
++(UIColor *) shoppingCategoryYellow;
++(UIColor *) snackCategoryBlue;
++(UIColor *) cafeCategoryTeal;
++(UIColor *) playOutsideCategorySalmon;
++(UIColor *) doSomethingAwesomeCerulean;
++(UIColor *) categoryDotOrage;
 @end

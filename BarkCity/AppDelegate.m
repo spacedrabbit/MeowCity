@@ -31,6 +31,7 @@
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     
     BRKHomeViewController * rootViewController = [[BRKHomeViewController alloc] init];
+    
     UINavigationController * navControl = [[UINavigationController alloc] initWithRootViewController:rootViewController ];
     
     UIViewController *leftViewController = [[UIViewController alloc] init];
@@ -41,11 +42,6 @@
     self.revealController.animationDuration = 0.25;
     
     self.window.rootViewController = self.revealController;
-    
-    
-//    navControl.navigationBar.topItem.title = @"Bark City";
-//    [navControl.navigationBar setTitleTextAttributes:[BRKUIManager navBarAttributes]];
-//    self.window.rootViewController = navControl;
 
     [self.window makeKeyAndVisible];
     
