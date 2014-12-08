@@ -128,12 +128,6 @@
     [self.homeView addSubview:background];
     [self setView:self.homeView];
 
-    UIImageView * homeBackground = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bark_fis.001"]];
-    [homeBackground setFrame:tableScrollViewFrame];
-    [homeBackground setContentMode:UIViewContentModeScaleAspectFit];
-    [self.view addSubview:homeBackground];
-
-
         // -- TABBAR -- //
     self.homeTabBar = [self createBRKTabBarInFrame:categoryScrollViewFrame];
     [self.view addSubview:self.homeTabBar];

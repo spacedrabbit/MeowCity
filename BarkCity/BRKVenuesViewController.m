@@ -53,6 +53,7 @@
         _foursquareClient = [BRKFoursquareClient sharedClient];
         _numberOfLocationsToShow = 5;
         
+        // loading network data activity
         _activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
         _activityIndicatorView.frame = CGRectMake(0.0f, 0.0f, 40.0f, 40.0f);
         _activityIndicatorView.center = self.view.center;
@@ -92,6 +93,7 @@
         .size.height = self.view.frame.size.height
     };
     
+    // checking for background image to adjust insets
     self.tableView.contentInset = UIEdgeInsetsMake(self.backgroundView ? self.backgroundView.frame.size.height : 0, 0, 0, 0);
     self.tableView.scrollIndicatorInsets = UIEdgeInsetsMake(self.backgroundView ? self.backgroundView.frame.size.height : 0, 0, 0, 0);
 }
@@ -114,13 +116,11 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    // Return the number of sections.
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    // Return the number of rows in the section.
     return self.venues.count;
 }
 
