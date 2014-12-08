@@ -29,4 +29,5 @@
 
 @property (weak, nonatomic) id<BRKHomeTabBarDelegate> delegate;
 
+-(NSInteger) currentlySelectedTab;
 @end

@@ -10,6 +10,7 @@
 @interface BRKHomeTabBar()
 
 @property (strong, nonatomic) NSArray * iconImagesArray;
+@property (nonatomic) NSInteger lastSelectedTab;
 
 @end
 
@@ -114,18 +115,23 @@
 -(instancetype)init{
     self = [super init];
     if (self) {
-        NSLog(@"Inited");
+        _lastSelectedTab = 0;
         
     }
     return self;
 }
-
 -(void) tabWasSelected:(id) sender{
     
     UIButton * senderButton = (UIButton *)sender;
     NSInteger indexOfButton = senderButton.tag;
     
+    self.lastSelectedTab = indexOfButton;
+    
     [self.delegate didSelectTabButton:indexOfButton];
     
 }
+-(NSInteger) currentlySelectedTab{
+    return self.lastSelectedTab;
+}
+
 @end
