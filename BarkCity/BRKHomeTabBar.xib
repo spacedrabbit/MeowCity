@@ -16,21 +16,21 @@
                         <button autoresizesSubviews="NO" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N9S-76-wnm">
                             <rect key="frame" x="210" y="0.0" width="44" height="44"/>
                             <color key="backgroundColor" red="0.69505697470000005" green="0.90708397419999998" blue="1" alpha="0.5" colorSpace="calibratedRGB"/>
-                            <state key="normal" title="Button" image="shop_ico.png">
+                            <state key="normal" title="Button">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                         </button>
                         <button autoresizesSubviews="NO" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j53-Mr-TZx">
                             <rect key="frame" x="276" y="0.0" width="44" height="44"/>
                             <color key="backgroundColor" red="1" green="0.40000000600000002" blue="0.40000000600000002" alpha="0.5" colorSpace="calibratedRGB"/>
-                            <state key="normal" title="Button" image="outside_ico.png">
+                            <state key="normal" title="Button">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                         </button>
                         <button autoresizesSubviews="NO" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ax0-Yo-eIu">
                             <rect key="frame" x="71" y="0.0" width="44" height="44"/>
                             <color key="backgroundColor" red="0.58732031200000001" green="0.71360979599999996" blue="0.76042330989999996" alpha="1" colorSpace="calibratedRGB"/>
-                            <state key="normal" title="Button" image="cafe_ico.png">
+                            <state key="normal" title="Button">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                         </button>
@@ -38,14 +38,14 @@
                             <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
                             <color key="backgroundColor" red="0.58732031200000001" green="0.71360979599999996" blue="0.76042330989999996" alpha="1" colorSpace="calibratedRGB"/>
                             <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="-3" maxY="0.0"/>
-                            <state key="normal" image="snack_ico.png">
+                            <state key="normal">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                         </button>
                         <button autoresizesSubviews="NO" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uSr-Yz-yal">
                             <rect key="frame" x="138" y="0.0" width="44" height="44"/>
                             <color key="backgroundColor" red="1" green="0.3940319927" blue="0.89170959149999995" alpha="0.5" colorSpace="calibratedRGB"/>
-                            <state key="normal" title="Button" image="drink_ico.png">
+                            <state key="normal" title="Button">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                         </button>
@@ -70,11 +70,4 @@
             <point key="canvasLocation" x="184" y="295"/>
         </view>
     </objects>
-    <resources>
-        <image name="cafe_ico.png" width="80" height="80"/>
-        <image name="drink_ico.png" width="80" height="80"/>
-        <image name="outside_ico.png" width="80" height="80"/>
-        <image name="shop_ico.png" width="120" height="118"/>
-        <image name="snack_ico.png" width="80" height="80"/>
-    </resources>
 </document>

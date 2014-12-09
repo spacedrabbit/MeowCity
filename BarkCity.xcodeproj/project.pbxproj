@@ -20,17 +20,8 @@
 		B17860331A251C7F00EBE64F /* BRKHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B17860301A251C7F00EBE64F /* BRKHomeViewController.m */; };
 		B1AB09F91A34D0EB00ECDB18 /* BRKHomeTabBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = B1AB09F81A34D0EB00ECDB18 /* BRKHomeTabBar.xib */; };
 		B1AB09FD1A34D1CA00ECDB18 /* BRKHomeTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = B1AB09FC1A34D1CA00ECDB18 /* BRKHomeTabBar.m */; };
-		B1CAAE0E1A3517F2002E6EEC /* awesome_hero.png in Resources */ = {isa = PBXBuildFile; fileRef = B1CAAE081A3517F2002E6EEC /* awesome_hero.png */; };
-		B1CAAE101A3517F2002E6EEC /* outside_hero.png in Resources */ = {isa = PBXBuildFile; fileRef = B1CAAE0A1A3517F2002E6EEC /* outside_hero.png */; };
-		B1CAAE111A3517F2002E6EEC /* drink_hero.png in Resources */ = {isa = PBXBuildFile; fileRef = B1CAAE0B1A3517F2002E6EEC /* drink_hero.png */; };
-		B1CAAE121A3517F2002E6EEC /* cafe_hero.png in Resources */ = {isa = PBXBuildFile; fileRef = B1CAAE0C1A3517F2002E6EEC /* cafe_hero.png */; };
-		B1CAAE131A3517F2002E6EEC /* snack_hero.png in Resources */ = {isa = PBXBuildFile; fileRef = B1CAAE0D1A3517F2002E6EEC /* snack_hero.png */; };
-		B1CAAE151A351977002E6EEC /* shop_hero.png in Resources */ = {isa = PBXBuildFile; fileRef = B1CAAE141A351977002E6EEC /* shop_hero.png */; };
-		B1CAAE281A352151002E6EEC /* outside_ico.png in Resources */ = {isa = PBXBuildFile; fileRef = B1CAAE231A352151002E6EEC /* outside_ico.png */; };
-		B1CAAE291A352151002E6EEC /* drink_ico.png in Resources */ = {isa = PBXBuildFile; fileRef = B1CAAE241A352151002E6EEC /* drink_ico.png */; };
-		B1CAAE2A1A352151002E6EEC /* shop_ico.png in Resources */ = {isa = PBXBuildFile; fileRef = B1CAAE251A352151002E6EEC /* shop_ico.png */; };
-		B1CAAE2B1A352151002E6EEC /* snack_ico.png in Resources */ = {isa = PBXBuildFile; fileRef = B1CAAE261A352151002E6EEC /* snack_ico.png */; };
-		B1CAAE2C1A352151002E6EEC /* cafe_ico.png in Resources */ = {isa = PBXBuildFile; fileRef = B1CAAE271A352151002E6EEC /* cafe_ico.png */; };
+		B1CAAE111A3517F2002E6EEC /* (null) in Resources */ = {isa = PBXBuildFile; };
+		B1CAAE2A1A352151002E6EEC /* (null) in Resources */ = {isa = PBXBuildFile; };
 		CBB50D491A35F34B00005B23 /* BRKCommentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE36D181A25067A00AD80F6 /* BRKCommentTableViewCell.m */; };
 		CBB50D4A1A35F34B00005B23 /* BRKCommentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBE36D191A25067A00AD80F6 /* BRKCommentTableViewCell.xib */; };
 		CBBBE4261A27C4CB00109C41 /* BRKVenuesTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CBBBE4221A27C4CB00109C41 /* BRKVenuesTableViewCell.m */; };
@@ -396,8 +387,6 @@
 			isa = PBXGroup;
 			children = (
 				145620B61A3565F40024B3C1 /* bark_fis.001.png */,
-				B1CAAE161A351F9A002E6EEC /* Tab Icons */,
-				B1CAAE071A3517E1002E6EEC /* Heros */,
 				CBBBE4451A2FCCDB00109C41 /* bone_blank.png */,
 				CBBBE4461A2FCCDB00109C41 /* bone_blue.png */,
 				CBBBE4431A2F95FE00109C41 /* speech-bubble.png */,
@@ -532,12 +521,11 @@
 				TargetAttributes = {
 					F925AC471A23C1670086F2EB = {
 						CreatedOnToolsVersion = 6.1;
-						DevelopmentTeam = MX8253552V;
+						DevelopmentTeam = 3457AE227Q;
 					};
 					F925AC601A23C1670086F2EB = {
 						CreatedOnToolsVersion = 6.1;
-						DevelopmentTeam = 9RXLE5FXUN;
-						DevelopmentTeam = Z7MS44448J;
+						DevelopmentTeam = 3457AE227Q;
 						TestTargetID = F925AC471A23C1670086F2EB;
 					};
 				};
@@ -577,10 +565,10 @@
 				F9A678D11A322CF20008921B /* BRKSearchBarContainer.xib in Resources */,
 				CBE36D261A26679600AD80F6 /* placeholder.png in Resources */,
 				CBBBE43C1A2F951200109C41 /* BRKReviewView.xib in Resources */,
-				B1CAAE111A3517F2002E6EEC /* drink_hero.png in Resources */,
+				B1CAAE111A3517F2002E6EEC /* (null) in Resources */,
 				CBBBE4481A2FCCDB00109C41 /* bone_blue.png in Resources */,
 				CBBBE43C1A2F951200109C41 /* BRKReviewView.xib in Resources */,
-				B1CAAE2A1A352151002E6EEC /* shop_ico.png in Resources */,
+				B1CAAE2A1A352151002E6EEC /* (null) in Resources */,
 				CBCEA2831A30BE9C00E219E2 /* BRKDetailTableViewCell.xib in Resources */,
 				CBBBE4271A27C4CB00109C41 /* BRKVenuesTableViewCell.xib in Resources */,
 				F925AC5C1A23C1670086F2EB /* LaunchScreen.xib in Resources */,
