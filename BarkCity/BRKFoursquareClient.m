@@ -9,6 +9,7 @@
 #import "BRKFoursquareClient.h"
 #import "AFHTTPRequestOperationManager.h"
 #import "BRKVenue.h"
+#import "BRKTip.h"
 
 #define CLIENT_ID @"BLU5G2IFZJ03ITEMFCFSCNFQHHE5ZCV0H3F24IWSBX0PPRC5"
 #define CLIENT_SECRET @"MRLRF0F3XOU00440F1CONS2TSE5B12J2J02TS4B5FJB3JXJC"
@@ -116,6 +117,39 @@
                 [[NSOperationQueue mainQueue] addOperationWithBlock:^{
                         success(venues);
                 }];
+            }
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        if (failure) {
+            failure(error);
+        }
+    }];
+}
+
+- (void)requestTipsForPlace:(BRKVenue *)venue limit:(NSUInteger)limit success:(void (^)(NSArray *tips))success failure:(void (^)(NSError *error))failure
+{
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    parameters[@"client_id"] = CLIENT_ID;
+    parameters[@"client_secret"] = CLIENT_SECRET;
+    parameters[@"v"] = @"20140408";
+    parameters[@"limit"] = @(limit);
+    
+    NSString *venueString = [NSString stringWithFormat:@"https://api.foursquare.com/v2/venues/%@/tips", venue.foursquareId];
+    [_requestOperationManager GET:venueString parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        if (success) {
+            NSArray *tips = responseObject[@"response"][@"tips"][@"items"];
+            if (tips) {
+                NSMutableArray *array = [NSMutableArray array];
+                for (NSDictionary *tipDictionary in tips) {
+                    BRKTip *tip = [[BRKTip alloc] initWithText:tipDictionary[@"text"] createdAt:tipDictionary[@"createdAt"] likes:tipDictionary[@"likes"][@"count"] firstName:tipDictionary[@"user"][@"firstName"] lastName:tipDictionary[@"user"][@"lastName"]];
+                    
+                    [array addObject:tip];
+                }
+                success(array);
+            } else {
+                // FIXME: this is probably an error, not empty success?
+                success(@[]);
             }
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {

@@ -10,6 +10,7 @@
 		07F863FE1A250D90009EAB2F /* adorable-puppy.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 07F863FD1A250D90009EAB2F /* adorable-puppy.jpeg */; };
 		109E2E8FD64C9BBFBEEE95F8 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 09C6EB0BF5BF9D0A7D566AF8 /* libPods.a */; };
 		145620B71A3565F40024B3C1 /* bark_fis.001.png in Resources */ = {isa = PBXBuildFile; fileRef = 145620B61A3565F40024B3C1 /* bark_fis.001.png */; };
+		954AE8F11A37B22800EAC657 /* BRKTip.m in Sources */ = {isa = PBXBuildFile; fileRef = 954AE8F01A37B22800EAC657 /* BRKTip.m */; };
 		95934F021A320F9E00E2676E /* BRKTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 95934F011A320F9E00E2676E /* BRKTableView.m */; };
 		95934F0A1A3222F500E2676E /* BRKVenuesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95934F091A3222F500E2676E /* BRKVenuesViewController.m */; };
 		95B81A661A23C854005F9AE0 /* BRKFoursquareClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 95B81A651A23C854005F9AE0 /* BRKFoursquareClient.m */; };
@@ -83,6 +84,8 @@
 		0B8B6E31379FF2590C47AA20 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		145620B61A3565F40024B3C1 /* bark_fis.001.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bark_fis.001.png; sourceTree = "<group>"; };
 		88C440BB57B1ECE75CE0576A /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		954AE8EF1A37B22800EAC657 /* BRKTip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRKTip.h; sourceTree = "<group>"; };
+		954AE8F01A37B22800EAC657 /* BRKTip.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRKTip.m; sourceTree = "<group>"; };
 		95934F001A320F9E00E2676E /* BRKTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRKTableView.h; sourceTree = "<group>"; };
 		95934F011A320F9E00E2676E /* BRKTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRKTableView.m; sourceTree = "<group>"; };
 		95934F081A3222F500E2676E /* BRKVenuesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRKVenuesViewController.h; sourceTree = "<group>"; };
@@ -235,6 +238,8 @@
 				95B81A651A23C854005F9AE0 /* BRKFoursquareClient.m */,
 				95B81A6A1A23C951005F9AE0 /* BRKVenue.h */,
 				95B81A6B1A23C951005F9AE0 /* BRKVenue.m */,
+				954AE8EF1A37B22800EAC657 /* BRKTip.h */,
+				954AE8F01A37B22800EAC657 /* BRKTip.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -632,6 +637,7 @@
 				95934F021A320F9E00E2676E /* BRKTableView.m in Sources */,
 				95934F0A1A3222F500E2676E /* BRKVenuesViewController.m in Sources */,
 				F94606731A23D86A00FF6AB0 /* BRKSearchViewController.m in Sources */,
+				954AE8F11A37B22800EAC657 /* BRKTip.m in Sources */,
 				95B81A6C1A23C951005F9AE0 /* BRKVenue.m in Sources */,
 				F94606AF1A262DCA00FF6AB0 /* BRKLocationManager.m in Sources */,
 				F925AC511A23C1670086F2EB /* AppDelegate.m in Sources */,
