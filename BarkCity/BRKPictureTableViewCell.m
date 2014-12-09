@@ -13,7 +13,7 @@
 
 - (void)awakeFromNib {
     // Initialization code
-    self.picture.contentMode = UIViewContentModeScaleAspectFill;
+    self.picture.contentMode = UIViewContentModeScaleToFill;
     [self autoLayout];
     
 }
@@ -62,17 +62,17 @@
                                 multiplier:1
                                   constant:0];
     
-    // Set picture height to 200 points
-//    NSLayoutConstraint *pictureHeight =
-//    [NSLayoutConstraint constraintWithItem:self.picture
-//                                 attribute:NSLayoutAttributeHeight
-//                                 relatedBy:NSLayoutRelationEqual
-//                                    toItem:self.contentView
-//                                 attribute:NSLayoutAttributeHeight
-//                                multiplier:0
-//                                  constant:200];
+     //Set picture height to 200 points
+    NSLayoutConstraint *pictureHeight =
+    [NSLayoutConstraint constraintWithItem:self.picture
+                                 attribute:NSLayoutAttributeHeight
+                                 relatedBy:NSLayoutRelationEqual
+                                    toItem:self.contentView
+                                 attribute:NSLayoutAttributeHeight
+                                multiplier:0
+                                  constant:200];
     
-    [self.contentView addConstraints:@[pictureLeading, pictureTrailing, pictureTop, pictureBottom]];
+    [self.contentView addConstraints:@[pictureLeading, pictureTrailing, pictureTop, pictureBottom, pictureHeight]];
     
 }
 
