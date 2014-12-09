@@ -75,6 +75,7 @@
     
     if (indexPath.row == 1) {
         BRKDetailTableViewCell *cell = (BRKDetailTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"DetailCell"];
+        cell.delegate = self;
         [cell setVenue:self.venue];
         return cell;
     }
@@ -101,6 +102,42 @@
     [self presentViewController:vc animated:YES completion:^{
         NSLog(@"New review");
     }];
+}
+
+- (void) call:(BRKDetailTableViewCell *)sender phone:(NSString *)phone {
+    
+    NSString *cleanPhone = [phone stringByReplacingOccurrencesOfString:@"(" withString:@""];
+    cleanPhone = [cleanPhone stringByReplacingOccurrencesOfString:@")" withString:@""];
+    cleanPhone = [cleanPhone stringByReplacingOccurrencesOfString:@" " withString:@""];
+    cleanPhone = [cleanPhone stringByReplacingOccurrencesOfString:@"-" withString:@""];
+    
+    UIAlertController *alertController = [UIAlertController
+                                          alertControllerWithTitle:@"Call"
+                                          message:phone
+                                          preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *cancelAction = [UIAlertAction
+                                   actionWithTitle:NSLocalizedString(@"Cancel", @"Cancel action")
+                                   style:UIAlertActionStyleCancel
+                                   handler:^(UIAlertAction *action)
+                                   {
+                                       NSLog(@"Cancel action");
+                                   }];
+    
+    UIAlertAction *okAction = [UIAlertAction
+                               actionWithTitle:NSLocalizedString(@"OK", @"OK action")
+                               style:UIAlertActionStyleDefault
+                               handler:^(UIAlertAction *action)
+                               {
+                                   NSLog(@"OK action");
+                                   NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"tel://%@", cleanPhone]];
+                                   [[UIApplication  sharedApplication] openURL:url];
+                               }];
+    
+    [alertController addAction:cancelAction];
+    [alertController addAction:okAction];
+    
+    [self presentViewController:alertController animated:YES completion:nil];
 }
 
 @end

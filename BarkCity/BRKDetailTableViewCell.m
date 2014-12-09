@@ -21,6 +21,8 @@
 
 @implementation BRKDetailTableViewCell
 
+@synthesize delegate;
+
 - (void)awakeFromNib {
     // Initialization code
     [self setLook];
@@ -38,13 +40,24 @@
     self.price.font = [BRKUIManager detailPriceFont];
     self.distance.font = [BRKUIManager detailDistanceFont];
     self.address.font = [BRKUIManager detailOtherFont];
-    self.phoneNumber.font = [BRKUIManager detailOtherFont];
-    self.website.font = [BRKUIManager detailOtherFont];
+    self.phone.titleLabel.font = [BRKUIManager detailPhoneFont];
+    //
+    [self.phone setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    self.website.titleLabel.font = [BRKUIManager detailWebsiteFont];
+    //
+    [self.website setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     self.hours.font = [BRKUIManager detailOtherFont];
 }
 
-- (void) setAutoLayout {
+- (IBAction)phoneButtonTapped:(id)sender {
     
+    [self.delegate call:self phone:self.phone.titleLabel.text];
+    
+}
+
+- (IBAction)websiteButtonTapped:(id)sender {
+    NSURL *url = [NSURL URLWithString:self.website.titleLabel.text];
+    [[UIApplication  sharedApplication] openURL:url];
 }
 
 - (void) setVenue:(BRKVenue *) venue{
@@ -54,69 +67,66 @@
     // Name
     if (venue.name) {
         self.name.text = venue.name;
-        [self.name sizeToFit];
+        //[self.name sizeToFit];
     } else {
-        self.name.text = @"No name to show";
+        [self shrinkHorizontally:self.name];
     }
     
     // Rating
     if (venue.rating) {
-        self.rating.text = [NSString stringWithFormat:@"%@", venue.rating];
-        [self.rating sizeToFit];
+        self.rating.text = [NSString stringWithFormat:@"%.1f", [venue.rating floatValue]];
+        //[self.rating sizeToFit];
     } else {
-        self.rating.text = @"No rating to show";
+        [self shrinkHorizontally:self.rating];
     }
     
     // Price
     if (venue.price) {
         self.price.text = [NSString stringWithFormat:@"%@", venue.price];
-        [self.price sizeToFit];
+        //[self.price sizeToFit];
     } else {
-        self.price.text = @"No price to show";
+        [self shrinkHorizontally:self.price];
     }
     
     // Distance
-    if (NO) {
-        //self.distance.text = [NSString stringWithFormat:@"%@", venue.distance];
+    if (venue.distance) {
+        self.distance.text = [NSString stringWithFormat:@"%@", venue.distance];
         //[self.distance sizeToFit];
     } else {
-        self.distance.text = @"No distance to show";
+        [self shrinkHorizontally:self.distance];
     }
     
     // Address
-    if (venue.address) {
-        self.address.text = venue.address;
-        [self fitIcon:self.addressIcon andLabel:self.address];
+    if (venue.formattedAddress) {
+        self.address.text = venue.formattedAddress;
+        [self fitText:self.address andIcon:self.addressIcon];
     } else {
-        [self shrinkLabel:self.address andIcon:self.addressIcon];
+        [self shrinkText:self.address andIcon:self.addressIcon];
     }
     
     // Phone number
-    if (venue.phone) {
-        self.phoneNumber.text = venue.phone;
-        [self.phoneNumber sizeToFit];
-        [self fitIcon:self.phoneIcon andLabel:self.phoneNumber];
+    if (venue.formattedPhone) {
+        [self.phone setTitle:venue.formattedPhone forState:UIControlStateNormal];
+        [self fitText:self.phone andIcon:self.phoneIcon];
         
     } else {
-        [self shrinkLabel:self.phoneNumber andIcon:self.phoneIcon];
+        [self shrinkText:self.phone andIcon:self.phoneIcon];
     }
     
     // Website
-    if (YES) {
-        self.website.text = @"www.testdata.com";
-        [self.website sizeToFit];
-        [self fitIcon:self.websiteIcon andLabel:self.website];
+    if (venue.website) {
+        [self.website setTitle:venue.website forState:UIControlStateNormal];
+        [self fitText:self.website andIcon:self.websiteIcon];
     } else {
-        //[self shrinkLabel:self.website andIcon:self.websiteIcon];
+        [self shrinkText:self.website andIcon:self.websiteIcon];
     }
     
     // Hours of operation
     if (venue.hours) {
         self.hours.text = venue.hours;
-        [self.hours sizeToFit];
-        [self fitIcon:self.hoursIcon andLabel:self.hours];
+        [self fitText:self.hours andIcon:self.hoursIcon];
     } else {
-        [self shrinkLabel:self.hours andIcon:self.hoursIcon];
+        [self shrinkText:self.hours andIcon:self.hoursIcon];
     }
     
     [self completeAutoLayout];
@@ -124,7 +134,7 @@
 
 - (void) completeAutoLayout {
     
-    NSDictionary *views = NSDictionaryOfVariableBindings(_name, _rating, _price, _distance, _address, _addressIcon, _phoneNumber, _phoneIcon, _website, _websiteIcon, _hours, _hoursIcon);
+    NSDictionary *views = NSDictionaryOfVariableBindings(_name, _rating, _price, _distance, _address, _addressIcon, _phone, _phoneIcon, _website, _websiteIcon, _hours, _hoursIcon);
     
     NSArray *iconColumn = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[_name]-[_rating]-[_addressIcon]-[_phoneIcon]-[_websiteIcon]-[_hoursIcon]-|"
                                                                           options:0
@@ -169,6 +179,9 @@
 
     [self.contentView addConstraints:ratingRow];
     
+    [self.rating setContentHuggingPriority:1000 forAxis:UILayoutConstraintAxisHorizontal];
+    [self.price setContentHuggingPriority:1000 forAxis:UILayoutConstraintAxisHorizontal];
+    
     NSArray *addressRow = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_addressIcon]-[_address]-|"
                                                                  options:0
                                                                  metrics:nil
@@ -176,12 +189,18 @@
     
     [self.contentView addConstraints:addressRow];
     
-    NSArray *phoneRow = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_phoneIcon]-[_phoneNumber]-|"
+//    [self.address setContentCompressionResistancePriority:1000 forAxis:UILayoutConstraintAxisHorizontal];
+//    [self.address setContentCompressionResistancePriority:1000 forAxis:UILayoutConstraintAxisVertical];
+    
+    NSArray *phoneRow = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_phoneIcon]-[_phone]-|"
                                                                   options:0
                                                                   metrics:nil
                                                                     views:views];
     
     [self.contentView addConstraints:phoneRow];
+    
+    [self.phone setContentCompressionResistancePriority:1000 forAxis:UILayoutConstraintAxisHorizontal];
+    self.phone.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     
     NSArray *websiteRow = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_websiteIcon]-[_website]-|"
                                                                   options:0
@@ -189,6 +208,9 @@
                                                                     views:views];
     
     [self.contentView addConstraints:websiteRow];
+    
+    [self.website setContentCompressionResistancePriority:1000 forAxis:UILayoutConstraintAxisHorizontal];
+    self.website.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     
     NSArray *hoursRow = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_hoursIcon]-[_hours]-|"
                                                                   options:0
@@ -199,7 +221,7 @@
     
 }
 
-- (void) fitIcon:(UIImageView *)icon andLabel:(UILabel *)label {
+- (void) fitText:(id)text andIcon:(UIImageView *)icon {
     NSLayoutConstraint *iconHeight =
     [NSLayoutConstraint constraintWithItem:icon
                                  attribute:NSLayoutAttributeHeight
@@ -217,8 +239,8 @@
                                  attribute:NSLayoutAttributeWidth
                                 multiplier:0
                                   constant:30];
-    NSLayoutConstraint *labelInLine =
-    [NSLayoutConstraint constraintWithItem:label
+    NSLayoutConstraint *textInLine =
+    [NSLayoutConstraint constraintWithItem:text
                                  attribute:NSLayoutAttributeCenterY
                                  relatedBy:NSLayoutRelationEqual
                                     toItem:icon
@@ -226,12 +248,24 @@
                                 multiplier:1
                                   constant:0];
     
-    [self.contentView addConstraints:@[iconHeight, iconWidth, labelInLine]];
+    [self.contentView addConstraints:@[iconHeight, iconWidth, textInLine]];
 }
 
-- (void) shrinkLabel:(UILabel *)label andIcon:(UIImageView *)icon {
+- (void) shrinkHorizontally:(UILabel *)label {
     NSLayoutConstraint *labelZero =
     [NSLayoutConstraint constraintWithItem:label
+                                 attribute:NSLayoutAttributeWidth
+                                 relatedBy:NSLayoutRelationEqual
+                                    toItem:self.contentView
+                                 attribute:NSLayoutAttributeWidth
+                                multiplier:0
+                                  constant:0];
+    [self.contentView addConstraints:@[labelZero]];
+}
+
+- (void) shrinkText:(id)text andIcon:(UIImageView *)icon {
+    NSLayoutConstraint *textZero =
+    [NSLayoutConstraint constraintWithItem:text
                                  attribute:NSLayoutAttributeHeight
                                  relatedBy:NSLayoutRelationEqual
                                     toItem:self.contentView
@@ -248,7 +282,7 @@
                                 multiplier:0
                                   constant:0];
     
-    [self.contentView addConstraints:@[labelZero, iconZero]];
+    [self.contentView addConstraints:@[textZero, iconZero]];
 }
 
 @end

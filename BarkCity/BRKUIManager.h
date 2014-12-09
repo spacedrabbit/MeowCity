@@ -34,6 +34,8 @@
 + (UIFont *) detailRatingFont;
 + (UIFont *) detailPriceFont;
 + (UIFont *) detailDistanceFont;
++ (UIFont *) detailPhoneFont;
++ (UIFont *) detailWebsiteFont;
 + (UIFont *) detailOtherFont;
 
 // BRKCommentTableViewCell

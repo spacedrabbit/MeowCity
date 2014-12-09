@@ -8,18 +8,31 @@
 
 #import <UIKit/UIKit.h>
 
+@class BRKDetailTableViewCell;
+
+@protocol BRKDetailTableViewCellDelegate <NSObject>
+
+- (void) call:(BRKDetailTableViewCell *)sender phone:(NSString*)phone;
+
+@end
+
 @class BRKVenue;
 
 @interface BRKDetailTableViewCell : UITableViewCell
+
+@property (strong, nonatomic) id <BRKDetailTableViewCellDelegate> delegate;
 
 @property (weak, nonatomic) IBOutlet UILabel *name;
 @property (weak, nonatomic) IBOutlet UILabel *rating;
 @property (weak, nonatomic) IBOutlet UILabel *price;
 @property (weak, nonatomic) IBOutlet UILabel *distance;
 @property (weak, nonatomic) IBOutlet UILabel *address;
-@property (weak, nonatomic) IBOutlet UILabel *phoneNumber;
-@property (weak, nonatomic) IBOutlet UILabel *website;
+@property (weak, nonatomic) IBOutlet UIButton *phone;
+@property (weak, nonatomic) IBOutlet UIButton *website;
 @property (weak, nonatomic) IBOutlet UILabel *hours;
+
+- (IBAction)phoneButtonTapped:(id)sender;
+- (IBAction)websiteButtonTapped:(id)sender;
 
 - (void) setVenue:(BRKVenue*)venue;
 

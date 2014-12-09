@@ -56,12 +56,15 @@
                 for (NSDictionary *groupDictionary in groups) {
                     if ([groupDictionary[@"name"] isEqualToString:@"recommended"]) {
                         for (NSDictionary *itemDictionary in groupDictionary[@"items"]) {
+                            
+                            // Venue dictionary is the first layer of dictionary we receive from Foursquare
                             NSDictionary *venueDictionary = itemDictionary[@"venue"];
                             
                             BRKVenue *venue = [[BRKVenue alloc] init];
                             venue.foursquareId = [venueDictionary objectForKey:@"id"];
                             venue.name = [venueDictionary objectForKey:@"name"];
                             venue.rating = [venueDictionary objectForKey:@"rating"];
+                            venue.website = [venueDictionary objectForKey:@"url"];
                             
                             NSDictionary *locationDictionary = [venueDictionary objectForKey:@"location"];
                             venue.address = [locationDictionary objectForKey:@"address"];
@@ -70,12 +73,41 @@
                             venue.postalCode = [locationDictionary objectForKey:@"postalCode"];
                             venue.latitude = [locationDictionary objectForKey:@"lat"];
                             venue.longitude = [locationDictionary objectForKey:@"lng"];
+                            venue.distance = [locationDictionary objectForKey:@"distance"];
+                            // Formatted address is an array. Need to convert in a string.
+                            NSArray *formattedAddressArray = [locationDictionary objectForKey:@"formattedAddress"];
+                            if ([formattedAddressArray count] > 1) {
+                                //Just taking the address (0th element) and city (1st element).
+                                venue.formattedAddress = [NSString stringWithFormat:@"%@, %@", formattedAddressArray[0], formattedAddressArray[1]];
+                            } else if ([formattedAddressArray count] == 1) {
+                                venue.formattedAddress = venue.address;
+                            }
                             
                             NSDictionary *photoGroupDictionary = [venueDictionary[@"photos"][@"groups"] firstObject];
                             NSDictionary *photoDictionary = [photoGroupDictionary[@"items"] firstObject];
                             
                             venue.foursquareImagePrefix = [photoDictionary objectForKey:@"prefix"];
                             venue.foursquareImageSuffix = [photoDictionary objectForKey:@"suffix"];
+                            
+                            // Contact dictionary
+                            NSDictionary *contactDictionary = [venueDictionary objectForKey:@"contact"];
+                            venue.phone = [contactDictionary objectForKey:@"phone"];
+                            venue.formattedPhone = [contactDictionary objectForKey:@"formattedPhone"];
+                            
+                            // Hours dictionary
+                            NSDictionary *hoursDictionary = [venueDictionary objectForKey:@"hours"];
+                            venue.hours = [hoursDictionary objectForKey:@"status"];
+                            
+                            // Price dictionary
+                            NSDictionary *priceDictionary = [venueDictionary objectForKey:@"price"];
+                            venue.price = [priceDictionary objectForKey:@"tier"];
+                            
+                            // Tips Array contains dictionaries for each tip
+                            venue.tips = [venueDictionary objectForKey:@"tips"];
+                            if ([venue.tips count] > 0) {
+                                NSDictionary *firstTipDictionary = venue.tips[0];
+                                venue.firstTip = [firstTipDictionary objectForKey:@"text"];
+                            }
                             
                             [venues addObject:venue];
                         }

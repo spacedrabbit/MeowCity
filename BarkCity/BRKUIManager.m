@@ -110,6 +110,18 @@
     return [BRKUIManager detailRatingFont];
 }
 
++ (UIFont *) detailPhoneFont {
+    NSString *fontName = @"Avenir-Medium";
+    CGFloat fontSize = 14.0f;
+    return [UIFont fontWithName:fontName size:fontSize];
+}
+
++ (UIFont *) detailWebsiteFont {
+    NSString *fontName = @"Avenir-Medium";
+    CGFloat fontSize = 14.0f;
+    return [UIFont fontWithName:fontName size:fontSize];
+}
+
 + (UIFont *) detailOtherFont {
     return [BRKUIManager detailRatingFont];
 }

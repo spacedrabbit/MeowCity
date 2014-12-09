@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "BRKPictureTableViewCell.h"
+#import "BRKDetailTableViewCell.h"
 
 @class BRKVenue;
 
@@ -17,7 +18,7 @@
 
 @end
 
-@interface BRKVenueDetailTableViewController : UITableViewController <BRKPictureTableViewCellDelegate>
+@interface BRKVenueDetailTableViewController : UITableViewController <BRKPictureTableViewCellDelegate, BRKDetailTableViewCellDelegate>
 
 @property (strong, nonatomic) BRKVenue *venue;
 
