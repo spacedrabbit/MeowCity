@@ -9,7 +9,7 @@
 #import "AppDelegate.h"
 #import "BRKHomeViewController.h"
 #import "BRKUIManager.h"
-
+#import "MenuViewController.h"
 @interface AppDelegate () <PKRevealing>
 
 #pragma mark - Properties
@@ -30,19 +30,16 @@
     
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     
-    BRKHomeViewController * rootViewController = [[BRKHomeViewController alloc] init];
+    BRKHomeViewController *rootViewController = [[BRKHomeViewController alloc] init];
     
-    UINavigationController * navControl = [[UINavigationController alloc] initWithRootViewController:rootViewController ];
-    
-    UIViewController *leftViewController = [[UIViewController alloc] init];
-    leftViewController.view.backgroundColor = [UIColor blueColor];
-    
-    self.revealController = [PKRevealController revealControllerWithFrontViewController:navControl leftViewController:leftViewController];
+    UINavigationController *navControl = [[UINavigationController alloc] initWithRootViewController:rootViewController ];
+    MenuViewController *menuVC = [[MenuViewController alloc] init];
+    self.revealController = [PKRevealController revealControllerWithFrontViewController:navControl leftViewController:menuVC];
     self.revealController.delegate = self;
     self.revealController.animationDuration = 0.25;
+    [self.revealController setMinimumWidth:140.0 maximumWidth:140.0 forViewController:menuVC];
     
     self.window.rootViewController = self.revealController;
-
     [self.window makeKeyAndVisible];
     
     return YES;

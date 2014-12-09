@@ -52,6 +52,8 @@
 		F94606701A23D86A00FF6AB0 /* BRKVenuesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F94606691A23D86A00FF6AB0 /* BRKVenuesTableViewController.m */; };
 		F94606731A23D86A00FF6AB0 /* BRKSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F946066E1A23D86A00FF6AB0 /* BRKSearchViewController.m */; };
 		F94606AF1A262DCA00FF6AB0 /* BRKLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F94606AE1A262DCA00FF6AB0 /* BRKLocationManager.m */; };
+		F956AFAD1A3780A600DA1E66 /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F956AFAC1A3780A600DA1E66 /* MenuViewController.m */; };
+		F956AFB01A37926400DA1E66 /* MenuCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F956AFAF1A37926400DA1E66 /* MenuCollectionViewCell.m */; };
 		F9A678CF1A322CE20008921B /* BRKSearchBarContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = F9A678CE1A322CE20008921B /* BRKSearchBarContainer.m */; };
 		F9A678D11A322CF20008921B /* BRKSearchBarContainer.xib in Resources */ = {isa = PBXBuildFile; fileRef = F9A678D01A322CF20008921B /* BRKSearchBarContainer.xib */; };
 		F9A678DA1A33D58B0008921B /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9A678D91A33D58B0008921B /* Parse.framework */; };
@@ -150,6 +152,10 @@
 		F946066E1A23D86A00FF6AB0 /* BRKSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRKSearchViewController.m; sourceTree = "<group>"; };
 		F94606AD1A262DCA00FF6AB0 /* BRKLocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRKLocationManager.h; sourceTree = "<group>"; };
 		F94606AE1A262DCA00FF6AB0 /* BRKLocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRKLocationManager.m; sourceTree = "<group>"; };
+		F956AFAB1A3780A600DA1E66 /* MenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuViewController.h; sourceTree = "<group>"; };
+		F956AFAC1A3780A600DA1E66 /* MenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuViewController.m; sourceTree = "<group>"; };
+		F956AFAE1A37926400DA1E66 /* MenuCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuCollectionViewCell.h; sourceTree = "<group>"; };
+		F956AFAF1A37926400DA1E66 /* MenuCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuCollectionViewCell.m; sourceTree = "<group>"; };
 		F9A678CD1A322CE20008921B /* BRKSearchBarContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRKSearchBarContainer.h; sourceTree = "<group>"; };
 		F9A678CE1A322CE20008921B /* BRKSearchBarContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRKSearchBarContainer.m; sourceTree = "<group>"; };
 		F9A678D01A322CF20008921B /* BRKSearchBarContainer.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BRKSearchBarContainer.xib; sourceTree = "<group>"; };
@@ -423,6 +429,7 @@
 		F925AC4A1A23C1670086F2EB /* BarkCity */ = {
 			isa = PBXGroup;
 			children = (
+				F956AF861A37591D00DA1E66 /* Hamburger Menu */,
 				F9A678D81A33D4120008921B /* Login */,
 				95B81A701A2D1793005F9AE0 /* Utils */,
 				CBE36D241A26678100AD80F6 /* Image Resources */,
@@ -466,6 +473,17 @@
 				F925AC661A23C1670086F2EB /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		F956AF861A37591D00DA1E66 /* Hamburger Menu */ = {
+			isa = PBXGroup;
+			children = (
+				F956AFAB1A3780A600DA1E66 /* MenuViewController.h */,
+				F956AFAC1A3780A600DA1E66 /* MenuViewController.m */,
+				F956AFAE1A37926400DA1E66 /* MenuCollectionViewCell.h */,
+				F956AFAF1A37926400DA1E66 /* MenuCollectionViewCell.m */,
+			);
+			name = "Hamburger Menu";
 			sourceTree = "<group>";
 		};
 		F9A678D81A33D4120008921B /* Login */ = {
@@ -531,6 +549,11 @@
 					F925AC601A23C1670086F2EB = {
 						CreatedOnToolsVersion = 6.1;
 						DevelopmentTeam = Z7MS44448J;
+						DevelopmentTeam = 9RXLE5FXUN;
+					};
+					F925AC601A23C1670086F2EB = {
+						CreatedOnToolsVersion = 6.1;
+						DevelopmentTeam = 9RXLE5FXUN;
 						TestTargetID = F925AC471A23C1670086F2EB;
 					};
 				};
@@ -641,6 +664,7 @@
 				95B81A6C1A23C951005F9AE0 /* BRKVenue.m in Sources */,
 				F94606AF1A262DCA00FF6AB0 /* BRKLocationManager.m in Sources */,
 				F925AC511A23C1670086F2EB /* AppDelegate.m in Sources */,
+				F956AFB01A37926400DA1E66 /* MenuCollectionViewCell.m in Sources */,
 				B1AB09FD1A34D1CA00ECDB18 /* BRKHomeTabBar.m in Sources */,
 				CBB50D491A35F34B00005B23 /* BRKCommentTableViewCell.m in Sources */,
 				F94606701A23D86A00FF6AB0 /* BRKVenuesTableViewController.m in Sources */,
@@ -648,6 +672,7 @@
 				CBBBE4421A2F959000109C41 /* BRKReviewViewController.m in Sources */,
 				CBBBE43F1A2F957A00109C41 /* BRKVenueDetailTableViewController.m in Sources */,
 				F925AC4E1A23C1670086F2EB /* main.m in Sources */,
+				F956AFAD1A3780A600DA1E66 /* MenuViewController.m in Sources */,
 				95B81A661A23C854005F9AE0 /* BRKFoursquareClient.m in Sources */,
 				B17860221A23CAB600EBE64F /* BRKScrollView.m in Sources */,
 				CBBBE4261A27C4CB00109C41 /* BRKVenuesTableViewCell.m in Sources */,
