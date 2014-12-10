@@ -262,8 +262,10 @@
     NSInteger tabDistanceChange = labs(self.previousTab - pageNumber);
     CGFloat timeInterval = .25 + (tabDistanceChange * 0.11); //smooths the change for larger distances
     
+    
     [UIView animateWithDuration:timeInterval animations:^{
         [self.homeTabBar.tabBarView setBackgroundColor:newTabColor];
+        [self.homeTabBar updateTabSelectedTo:pageNumber];
     } completion:^(BOOL finished) {
         self.previousTab = pageNumber;
     }];

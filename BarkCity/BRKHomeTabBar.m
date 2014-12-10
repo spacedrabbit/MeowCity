@@ -161,6 +161,20 @@ enum tabLocations   {
     UIButton * senderButton = (UIButton *)sender;
     NSInteger indexOfButton = senderButton.tag;
     
+    [self updateTabSelectedTo:indexOfButton];
+    
+    [self.delegate didSelectTabButton:indexOfButton];
+    
+}
+-(void) tabSelectedAtIndex:(NSInteger)index{
+    UIButton * simulatedButton = self.buttonsArray[index];
+    [self tabWasSelected:simulatedButton];
+}
+-(NSInteger) currentlySelectedTab{
+    return self.lastSelectedTab;
+}
+
+-(void) updateTabSelectedTo:(NSInteger)indexOfButton{
     CGAffineTransform selectedTabScale = CGAffineTransformMakeScale(1.5, 1.5);
     
     [self.buttonsArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
@@ -177,14 +191,11 @@ enum tabLocations   {
         }
         self.lastSelectedTab = indexOfButton;
     }];
-    
-    [self.delegate didSelectTabButton:indexOfButton];
-    
+
 }
--(NSInteger) currentlySelectedTab{
-    return self.lastSelectedTab;
-}
-// deprecated
+
+
+// deprecated, was used for slider indicator
 -(void) updateTabIndicatorTo:(NSInteger)tabIndex animated:(BOOL)animated
 {
     CGPoint newCenterCoordinate;
