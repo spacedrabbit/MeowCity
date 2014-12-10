@@ -22,6 +22,7 @@
 		B1AB09F91A34D0EB00ECDB18 /* BRKHomeTabBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = B1AB09F81A34D0EB00ECDB18 /* BRKHomeTabBar.xib */; };
 		B1AB09FD1A34D1CA00ECDB18 /* BRKHomeTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = B1AB09FC1A34D1CA00ECDB18 /* BRKHomeTabBar.m */; };
 		B1AB5BBC1A37C5D000CE151C /* navbar.001.png in Resources */ = {isa = PBXBuildFile; fileRef = B1AB5BBB1A37C5D000CE151C /* navbar.001.png */; };
+		B1AB5BBE1A38E0C700CE151C /* launchImage.png in Resources */ = {isa = PBXBuildFile; fileRef = B1AB5BBD1A38E0C600CE151C /* launchImage.png */; };
 		B1CAAE111A3517F2002E6EEC /* (null) in Resources */ = {isa = PBXBuildFile; };
 		B1CAAE2A1A352151002E6EEC /* (null) in Resources */ = {isa = PBXBuildFile; };
 		CBB50D491A35F34B00005B23 /* BRKCommentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE36D181A25067A00AD80F6 /* BRKCommentTableViewCell.m */; };
@@ -108,6 +109,7 @@
 		B1AB09FB1A34D1CA00ECDB18 /* BRKHomeTabBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRKHomeTabBar.h; sourceTree = "<group>"; };
 		B1AB09FC1A34D1CA00ECDB18 /* BRKHomeTabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRKHomeTabBar.m; sourceTree = "<group>"; };
 		B1AB5BBB1A37C5D000CE151C /* navbar.001.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = navbar.001.png; sourceTree = "<group>"; };
+		B1AB5BBD1A38E0C600CE151C /* launchImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = launchImage.png; sourceTree = "<group>"; };
 		CBBBE4211A27C4CB00109C41 /* BRKVenuesTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRKVenuesTableViewCell.h; sourceTree = "<group>"; };
 		CBBBE4221A27C4CB00109C41 /* BRKVenuesTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRKVenuesTableViewCell.m; sourceTree = "<group>"; };
 		CBBBE4231A27C4CB00109C41 /* BRKVenuesTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BRKVenuesTableViewCell.xib; sourceTree = "<group>"; };
@@ -399,6 +401,7 @@
 		CBE36D241A26678100AD80F6 /* Image Resources */ = {
 			isa = PBXGroup;
 			children = (
+				B1AB5BBD1A38E0C600CE151C /* launchImage.png */,
 				B1AB5BBB1A37C5D000CE151C /* navbar.001.png */,
 				145620B61A3565F40024B3C1 /* bark_fis.001.png */,
 				CBBBE4451A2FCCDB00109C41 /* bone_blank.png */,
@@ -589,6 +592,7 @@
 				B1434DD71A268BB300770E29 /* barkboxLogo.png in Resources */,
 				07F863FE1A250D90009EAB2F /* adorable-puppy.jpeg in Resources */,
 				F9A678D11A322CF20008921B /* BRKSearchBarContainer.xib in Resources */,
+				B1AB5BBE1A38E0C700CE151C /* launchImage.png in Resources */,
 				CBE36D261A26679600AD80F6 /* placeholder.png in Resources */,
 				CBBBE43C1A2F951200109C41 /* BRKReviewView.xib in Resources */,
 				B1CAAE111A3517F2002E6EEC /* (null) in Resources */,
