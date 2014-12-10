@@ -9,8 +9,10 @@
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
 
+@class BRKVenue;
+
 @interface BRKFoursquareClient : NSObject
 + (instancetype)sharedClient;
 - (void)requestVenuesForQuery:(NSString *)query location:(CLLocation *)location limit:(NSUInteger)limit success:(void (^)(NSArray *venues))success failure:(void (^)(NSError *error))failure;
-- (void)requestTipsForPlace:(BRKVenue *)venue limit:(NSUInteger)limit success:(void (^)(NSArray *tips))success failure:(void (^)(NSError *error))failure
+- (void)requestTipsForPlace:(BRKVenue *)venue limit:(NSUInteger)limit success:(void (^)(NSArray *tips))success failure:(void (^)(NSError *error))failure;
 @end

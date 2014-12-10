@@ -11,7 +11,10 @@
 #import "BRKDetailTableViewCell.h"
 #import "BRKCommentTableViewCell.h"
 #import "BRKVenue.h"
+#import "BRKTip.h"
 #import "BRKReviewViewController.h"
+#import "BRKFoursquareClient.h"
+#import <NSDate+DateTools.h>
 
 @interface BRKVenueDetailTableViewController ()
 
@@ -40,8 +43,18 @@
     self.tableView.estimatedRowHeight = 100.0;
     
     // -- COMMENT BUTTON -- //
-    UIBarButtonItem * reviewButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(displayReviewViewController)];
-    [self.navigationItem setRightBarButtonItem:reviewButton animated:YES];
+    //UIBarButtonItem * reviewButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(displayReviewViewController)];
+    //[self.navigationItem setRightBarButtonItem:reviewButton animated:YES];
+    BRKFoursquareClient *apiClient = [BRKFoursquareClient sharedClient];
+    [apiClient requestTipsForPlace:self.venue limit:8 success:^(NSArray *tips) {
+        self.venue.tips = [NSArray arrayWithArray:tips];
+        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+            [self.tableView reloadData];
+        }];
+    } failure:^(NSError *error) {
+        NSLog(@"Error requesting tips: %@", error.localizedDescription);
+    }];
+    
 
 }
 -(void)viewWillAppear:(BOOL)animated{
@@ -61,7 +74,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 10;
+    return 2+[self.venue.tips count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -82,17 +95,16 @@
     
     BRKCommentTableViewCell *cell = (BRKCommentTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"CommentCell" forIndexPath:indexPath];
     
-    // conditional to test the dynamic length of the cells
-    
-    if (indexPath.row %2 == 0) {
-        cell.userNameLabel.text = @"Mr. Jones";
-        cell.userCommentLabel.text = @"I liked it.";
-        cell.datePostedLabel.text = @"Today";
+    BRKTip *newTip = self.venue.tips[indexPath.row-2];
+    if (newTip.lastName) {
+        cell.userNameLabel.text = [NSString stringWithFormat:@"%@ %@", newTip.firstName, newTip.lastName];
     } else {
-        cell.userNameLabel.text = @"Ms. Jones";
-        cell.userCommentLabel.text = @"I am not sure if I enjoyed it. At times, I can be very complicated regarding what I like and what I don't. I might like it one day but the other day I don't. It just takes me a very, ver, very long time to make up my mind, but when I do, I can do it clearly.";
-        cell.datePostedLabel.text = @"A month ago";
+        cell.userNameLabel.text = [NSString stringWithFormat:@"%@", newTip.firstName];
     }
+    cell.userCommentLabel.text = newTip.text;
+    
+    NSDate *timeAgoDate = [NSDate dateWithTimeIntervalSince1970:[newTip.createdAt integerValue]];
+    cell.datePostedLabel.text = timeAgoDate.timeAgoSinceNow;
     
     return cell;
 }

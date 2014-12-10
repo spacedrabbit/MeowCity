@@ -48,6 +48,12 @@
 #define COCOAPODS_VERSION_MINOR_AFNetworking_UIKit 5
 #define COCOAPODS_VERSION_PATCH_AFNetworking_UIKit 0
 
+// DateTools
+#define COCOAPODS_POD_AVAILABLE_DateTools
+#define COCOAPODS_VERSION_MAJOR_DateTools 1
+#define COCOAPODS_VERSION_MINOR_DateTools 4
+#define COCOAPODS_VERSION_PATCH_DateTools 3
+
 // Masonry
 #define COCOAPODS_POD_AVAILABLE_Masonry
 #define COCOAPODS_VERSION_MAJOR_Masonry 0

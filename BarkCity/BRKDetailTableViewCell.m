@@ -82,23 +82,46 @@
     
     // Price
     if (venue.price) {
-        self.price.text = [NSString stringWithFormat:@"%@", venue.price];
-        //[self.price sizeToFit];
+        switch ([venue.price integerValue]) {
+            case 1:
+                self.price.text = @"$";
+                break;
+                
+            case 2:
+                self.price.text = @"$$";
+                break;
+                
+            case 3:
+                self.price.text = @"$$$";
+                break;
+                
+            case 4:
+                self.price.text = @"$$$$";
+                break;
+                
+            default:
+                break;
+        }
     } else {
         [self shrinkHorizontally:self.price];
     }
     
     // Distance
     if (venue.distance) {
-        self.distance.text = [NSString stringWithFormat:@"%@", venue.distance];
-        //[self.distance sizeToFit];
+        CGFloat feet = [venue.distance floatValue]*3.28084f;
+        CGFloat miles = feet*0.000189394f;
+        if (miles < 1) {
+            self.distance.text = [NSString stringWithFormat:@"%.0f feet", feet];
+        } else {
+            self.distance.text = [NSString stringWithFormat:@"%.1f miles", miles];
+        }
     } else {
         [self shrinkHorizontally:self.distance];
     }
     
     // Address
-    if (venue.formattedAddress) {
-        self.address.text = venue.formattedAddress;
+    if (venue.address) {
+        self.address.text = [NSString stringWithFormat:@"%@, %@", venue.address, venue.city];
         [self fitText:self.address andIcon:self.addressIcon];
     } else {
         [self shrinkText:self.address andIcon:self.addressIcon];

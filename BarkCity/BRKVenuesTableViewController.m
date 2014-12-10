@@ -98,11 +98,7 @@
     
     // conditional to test the dynamic length of the cells
     
-    if (indexPath.row %2 == 0) {
-        cell.descriptiveBody.text = @"This restaurant is great for dogs";
-    } else {
-        cell.descriptiveBody.text = @"This is a very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very long version of the cell";
-    }
+    cell.descriptiveBody.text = venue.firstTip;
     
     return cell;
 }
