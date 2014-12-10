@@ -14,9 +14,8 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="65" placeholderIntrinsicHeight="65" image="placeholder.png" translatesAutoresizingMaskIntoConstraints="NO" id="Psw-7p-Qtw">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="65" placeholderIntrinsicHeight="65" translatesAutoresizingMaskIntoConstraints="NO" id="Psw-7p-Qtw">
                         <rect key="frame" x="8" y="8" width="50" height="50"/>
-                        <color key="backgroundColor" red="0.98823535439999999" green="0.19215688110000001" blue="0.34901961679999999" alpha="1" colorSpace="deviceRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="50" id="5FA-CV-odV"/>
                             <constraint firstAttribute="width" constant="50" id="Dix-pJ-KnH"/>
@@ -66,7 +65,4 @@
             <point key="canvasLocation" x="378" y="382.5"/>
         </tableViewCell>
     </objects>
-    <resources>
-        <image name="placeholder.png" width="640" height="640"/>
-    </resources>
 </document>
