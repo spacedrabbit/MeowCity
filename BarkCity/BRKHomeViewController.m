@@ -54,7 +54,7 @@
 
     // -- FOURSQUARE -- //
     self.foursquareClient = [BRKFoursquareClient sharedClient];
-    self.numberOfLocationsToShow = 5;
+    self.numberOfLocationsToShow = 8;
     self.locationManager = [BRKLocationManager sharedLocationManager];
     [self.locationManager startUpdatingLocation];
 
@@ -83,6 +83,12 @@
     [super didReceiveMemoryWarning];
 }
 
+
+/**********************************************************************************
+ *
+ *                  Nav Bar Items
+ *
+ ***********************************************************************************/
 - (void)logout:(UIBarButtonItem *)sender {
     PFUser *currentUser = [PFUser currentUser];
     if (currentUser) {
@@ -98,7 +104,6 @@
     UINavigationController * navControl = [[UINavigationController alloc] initWithRootViewController:searchViewController ];
     navControl.navigationBar.topItem.title = @"Sniff Around!";
     navControl.navigationBar.topItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:searchViewController action:@selector(dismissModalViewControllerAnimated:)];
-    [navControl.navigationBar setTitleTextAttributes:[BRKUIManager navBarAttributes]];
     [navControl setModalPresentationStyle:UIModalPresentationOverCurrentContext];
 
     [self presentViewController:navControl animated:YES completion:nil];
@@ -122,7 +127,7 @@
 
     // -- SELF.VIEW -- //
     UIView * background = [[UIView alloc] initWithFrame:screenRect];
-    [background setBackgroundColor:[BRKUIManager snackCategoryBlue]];
+    [background setBackgroundColor:[BRKUIManager neutralNavBar]];
 
     self.homeView = [[UIView alloc] initWithFrame:screenRect];
     [self.homeView addSubview:background];
@@ -171,7 +176,7 @@
 
         UIImageView *backgroundImage = [[UIImageView alloc] initWithImage:self.venueCategoryHeroImages[idx]];
         [backgroundImage setContentMode:UIViewContentModeScaleToFill];
-
+        
         BRKVenuesViewController * newTableController = [[BRKVenuesViewController alloc] initWithQuery:self.venueCategories[idx]
                                                                                     andBackgroundView:backgroundImage];
         newTableController.venueDetailSegueDelegate = self;
@@ -180,10 +185,40 @@
         [tableViewsForCategories addObject:newTableController.view];
 
     }];
-
     BRKScrollView * scrollNavTables = [BRKScrollView createScrollViewFromFrame:frame withSubViews:tableViewsForCategories];
-
+    [scrollNavTables.layer setBorderColor:[BRKUIManager neutralNavBar].CGColor];
+    [scrollNavTables.layer setBorderWidth:2.0];
+    
     return scrollNavTables;
+}
+
+/**********************************************************************************
+ *
+ *                  BRKTabBar Delegates & Helpers
+ *
+ ***********************************************************************************/
+
+-(void)didSelectTabButton:(NSInteger)tabButtonIndex
+{
+
+    UIColor * newTabColor = [self updateTabColor:tabButtonIndex];
+    NSInteger tabDistanceChange = labs(self.previousTab - tabButtonIndex);
+
+    CGFloat timeInterval = .25 + (tabDistanceChange * 0.11); //smooths the change for larger distances
+
+    [UIView animateWithDuration:timeInterval animations:^{
+        [self.homeTabBar.tabBarView setBackgroundColor:newTabColor];
+        [self updateVisibleVenueTable:tabButtonIndex];
+    } completion:^(BOOL finished) {
+        self.previousTab = tabButtonIndex;
+    }];
+}
+
+-(void) updateVisibleVenueTable:(NSInteger)tabIndex
+{
+    CGFloat     pageWidth               =   [UIScreen mainScreen].bounds.size.width   ;
+    CGFloat currentOffset = pageWidth * tabIndex;
+    [self.venueTableScroll setContentOffset:CGPointMake(currentOffset, 0.0) animated:NO];
 }
 
 - (UIColor *)updateTabColor:(NSInteger)tabIndex
@@ -210,46 +245,6 @@
     }
     return updatedColor;
 }
-
--(void) updateVisibleVenueTable:(NSInteger)tabIndex
-{
-    CGFloat     pageWidth               =   [UIScreen mainScreen].bounds.size.width   ;
-    CGFloat currentOffset = pageWidth * tabIndex;
-    NSLog(@"Current X: Offset %f", currentOffset);
-    [self.venueTableScroll setContentOffset:CGPointMake(currentOffset, 0.0) animated:NO];
-}
-#pragma mark - in progress -
--(NSInteger) currentPageOfScrollViewWithOffset:(CGPoint)offset
-{
-    CGSize      totalContentSize    =   self.venueTableScroll.contentSize         ;
-    CGFloat     pageWidth           =   [UIScreen mainScreen].bounds.size.width   ;
-
-    return 0;
-
-}
-
-/**********************************************************************************
- *
- *                  BRKTabBar Delegates
- *
- ***********************************************************************************/
-
--(void)didSelectTabButton:(NSInteger)tabButtonIndex
-{
-
-    UIColor * newTabColor = [self updateTabColor:tabButtonIndex];
-    NSInteger tabDistanceChange = labs(self.previousTab - tabButtonIndex);
-
-    CGFloat timeInterval = .25 + (tabDistanceChange * 0.11); //smooths the change for larger distances
-
-    [UIView animateWithDuration:timeInterval animations:^{
-        [self.homeTabBar.tabBarView setBackgroundColor:newTabColor];
-        [self updateVisibleVenueTable:tabButtonIndex];
-    } completion:^(BOOL finished) {
-        self.previousTab = tabButtonIndex;
-    }];
-}
-
 /**********************************************************************************
  *
  *                  Scroll Delegate
@@ -258,6 +253,7 @@
 #pragma mark - Scroll Delegate -
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
+    
     CGFloat pageWidth = scrollView.frame.size.width;
     CGPoint offset = scrollView.contentOffset;
     NSInteger pageNumber = lroundf(offset.x / pageWidth);
@@ -271,6 +267,8 @@
     } completion:^(BOOL finished) {
         self.previousTab = pageNumber;
     }];
+    
+    
 }
 
 

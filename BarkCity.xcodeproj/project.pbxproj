@@ -20,6 +20,7 @@
 		B17860331A251C7F00EBE64F /* BRKHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B17860301A251C7F00EBE64F /* BRKHomeViewController.m */; };
 		B1AB09F91A34D0EB00ECDB18 /* BRKHomeTabBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = B1AB09F81A34D0EB00ECDB18 /* BRKHomeTabBar.xib */; };
 		B1AB09FD1A34D1CA00ECDB18 /* BRKHomeTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = B1AB09FC1A34D1CA00ECDB18 /* BRKHomeTabBar.m */; };
+		B1AB5BBC1A37C5D000CE151C /* navbar.001.png in Resources */ = {isa = PBXBuildFile; fileRef = B1AB5BBB1A37C5D000CE151C /* navbar.001.png */; };
 		B1CAAE111A3517F2002E6EEC /* (null) in Resources */ = {isa = PBXBuildFile; };
 		B1CAAE2A1A352151002E6EEC /* (null) in Resources */ = {isa = PBXBuildFile; };
 		CBB50D491A35F34B00005B23 /* BRKCommentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE36D181A25067A00AD80F6 /* BRKCommentTableViewCell.m */; };
@@ -101,6 +102,7 @@
 		B1AB09F81A34D0EB00ECDB18 /* BRKHomeTabBar.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BRKHomeTabBar.xib; sourceTree = "<group>"; };
 		B1AB09FB1A34D1CA00ECDB18 /* BRKHomeTabBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRKHomeTabBar.h; sourceTree = "<group>"; };
 		B1AB09FC1A34D1CA00ECDB18 /* BRKHomeTabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRKHomeTabBar.m; sourceTree = "<group>"; };
+		B1AB5BBB1A37C5D000CE151C /* navbar.001.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = navbar.001.png; sourceTree = "<group>"; };
 		CBBBE4211A27C4CB00109C41 /* BRKVenuesTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRKVenuesTableViewCell.h; sourceTree = "<group>"; };
 		CBBBE4221A27C4CB00109C41 /* BRKVenuesTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRKVenuesTableViewCell.m; sourceTree = "<group>"; };
 		CBBBE4231A27C4CB00109C41 /* BRKVenuesTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BRKVenuesTableViewCell.xib; sourceTree = "<group>"; };
@@ -386,6 +388,7 @@
 		CBE36D241A26678100AD80F6 /* Image Resources */ = {
 			isa = PBXGroup;
 			children = (
+				B1AB5BBB1A37C5D000CE151C /* navbar.001.png */,
 				145620B61A3565F40024B3C1 /* bark_fis.001.png */,
 				CBBBE4451A2FCCDB00109C41 /* bone_blank.png */,
 				CBBBE4461A2FCCDB00109C41 /* bone_blue.png */,
@@ -574,6 +577,7 @@
 				F925AC5C1A23C1670086F2EB /* LaunchScreen.xib in Resources */,
 				CBBBE4441A2F95FE00109C41 /* speech-bubble.png in Resources */,
 				CBE36D2A1A266F2A00AD80F6 /* BRKHome.xib in Resources */,
+				B1AB5BBC1A37C5D000CE151C /* navbar.001.png in Resources */,
 				F925AC591A23C1670086F2EB /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -48,4 +48,5 @@
 +(UIColor *) playOutsideCategorySalmon;
 +(UIColor *) doSomethingAwesomeCerulean;
 +(UIColor *) categoryDotOrage;
++(UIColor *) neutralNavBar;
 @end

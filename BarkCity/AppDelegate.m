@@ -33,6 +33,12 @@
     BRKHomeViewController * rootViewController = [[BRKHomeViewController alloc] init];
     
     UINavigationController * navControl = [[UINavigationController alloc] initWithRootViewController:rootViewController ];
+    [[UINavigationBar appearance] setTintColor:[BRKUIManager doSomethingAwesomeCerulean]];
+    [[UINavigationBar appearance] setBarTintColor:[BRKUIManager neutralNavBar]];
+    [[UINavigationBar appearance] setTitleTextAttributes:[BRKUIManager navBarAttributes]];
+    //[[UINavigationBar appearance] setTranslucent:NO]; // something about our code cause this to push the view 44 pixels down!!
+
+    
     
     UIViewController *leftViewController = [[UIViewController alloc] init];
     leftViewController.view.backgroundColor = [UIColor blueColor];

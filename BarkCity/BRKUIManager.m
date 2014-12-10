@@ -14,12 +14,16 @@
 
 + (NSDictionary *) navBarAttributes {
     NSString *fontName = @"Avenir-Heavy";
-    CGFloat fontSize = 18.0f;
+    CGFloat fontSize = 21.0f;
     UIFont *font = [UIFont fontWithName:fontName size:fontSize];
-    UIColor *fontColor = [UIColor blackColor];
+    UIColor *fontColor = [UIColor colorWithRed:.1607 green:.1607 blue:.1607 alpha:1.0];
+    NSShadow *navTextShadow = [[NSShadow alloc] init];
+    [navTextShadow setShadowColor:[UIColor grayColor]];
+    [navTextShadow setShadowOffset:CGSizeMake(1, 1)];
     
     NSDictionary *attributes = @{NSFontAttributeName:font,
-                                 NSForegroundColorAttributeName:fontColor};
+                                 NSForegroundColorAttributeName:fontColor,
+                                 NSShadowAttributeName: navTextShadow};
     
     return attributes;
 }
@@ -78,12 +82,11 @@
     return [UIFont fontWithName:fontName size:fontSize];
 }
 
-#pragma warning - searchFieldPlaceHolderAttributes doesnt work right now
 + (NSDictionary *) searchFieldPlaceHolderAttributes {
     NSString *fontName = @"AvenirNext-UltraLight";
     CGFloat fontSize = 148.0f;
     UIFont *font = [UIFont fontWithName:fontName size:fontSize];
-    UIColor *fontColor = [UIColor blackColor];
+    UIColor *fontColor = [UIColor orangeColor];
     
     NSDictionary *attributes = @{NSFontAttributeName:font,
                                  NSForegroundColorAttributeName:fontColor};
@@ -155,6 +158,9 @@
 }
 +(UIColor *) categoryDotOrage{
     return [UIColor colorWithRed:0.9686 green:0.4431 blue:0.0510 alpha:1.0];
+}
++(UIColor *) neutralNavBar{
+    return [UIColor colorWithRed:0.937 green:0.937 blue:0.937 alpha:1.0];
 }
 
 // -- Font Colors from Mock-Ups -- //

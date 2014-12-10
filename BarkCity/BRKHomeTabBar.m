@@ -25,6 +25,8 @@ enum tabLocations   {
 
 @property (strong,  nonatomic) UIImageView  * tabIndicator;
 
+@property (strong, nonatomic) NSArray * buttonsArray;
+
 @end
 
 @implementation BRKHomeTabBar
@@ -38,6 +40,8 @@ enum tabLocations   {
     
     self.tabBarView = [[UIView alloc] init];
     [self addSubview:self.tabBarView];
+    
+    self.buttonsArray = @[self.firstTabButton, self.secondTabButton, self.thirdTabButton, self.fourthTabButton, self.fifthTabButton];
     
     [self.tabBarView        setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self.firstTabButton    setTranslatesAutoresizingMaskIntoConstraints:NO];
@@ -119,6 +123,7 @@ enum tabLocations   {
         [currentButton setImage:self.iconImagesArray[idx] forState:UIControlStateNormal];
         [currentButton setImage:self.iconHighlightedArray[idx] forState:UIControlStateHighlighted];
         [currentButton setTag:idx];
+        [currentButton.imageView setContentScaleFactor:2.0];
         [currentButton.imageView setContentMode:UIViewContentModeScaleToFill];
         [currentButton setTitle:@"" forState:UIControlStateNormal];
         [currentButton setBackgroundColor:[UIColor clearColor]];
@@ -127,20 +132,11 @@ enum tabLocations   {
                 forControlEvents:UIControlEventTouchUpInside];
     }];
     
-    self.tabIndicator = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"select"]];
-    [self.tabIndicator setAlpha:1.0];
-    [self.tabIndicator.layer setDrawsAsynchronously:YES];
-    [self.tabIndicator.layer setShadowColor:[UIColor whiteColor].CGColor];
-    [self.tabIndicator.layer setShadowOpacity:.80];
-    [self.tabIndicator.layer setShadowRadius:6.0];
-    [self.tabIndicator.layer setShadowOffset:CGSizeMake(-1, -6)];
-    
-    
+    [self tabWasSelected:self.buttonsArray[0]]; //initially sets the correct state(s) for the buttons
     
 }
 -(void)layoutSubviews{
     [self.tabBarView insertSubview:self.tabIndicator atIndex:0];
-    [self updateTabIndicatorTo:999 animated:NO];
 }
 
 -(id)initWithCoder:(NSCoder *)aDecoder{
@@ -158,13 +154,29 @@ enum tabLocations   {
     }
     return self;
 }
+
+// -- a "selected" tab will be highlighted and 1.5X larger than the rest
 -(void) tabWasSelected:(id) sender{
     
     UIButton * senderButton = (UIButton *)sender;
     NSInteger indexOfButton = senderButton.tag;
     
-    self.lastSelectedTab = indexOfButton;
-    [self updateTabIndicatorTo:indexOfButton animated:YES];
+    CGAffineTransform selectedTabScale = CGAffineTransformMakeScale(1.5, 1.5);
+    
+    [self.buttonsArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        
+        UIButton * currentButton = (UIButton *)obj;
+        if ( idx == indexOfButton && !CGAffineTransformEqualToTransform(currentButton.transform,selectedTabScale) )
+        {
+            [currentButton setHighlighted:NO];
+            currentButton.transform = selectedTabScale;
+        }else if( idx != indexOfButton )
+        {
+            [currentButton setHighlighted:YES];
+            currentButton.transform = CGAffineTransformIdentity;
+        }
+        self.lastSelectedTab = indexOfButton;
+    }];
     
     [self.delegate didSelectTabButton:indexOfButton];
     
@@ -172,6 +184,7 @@ enum tabLocations   {
 -(NSInteger) currentlySelectedTab{
     return self.lastSelectedTab;
 }
+// deprecated
 -(void) updateTabIndicatorTo:(NSInteger)tabIndex animated:(BOOL)animated
 {
     CGPoint newCenterCoordinate;
@@ -203,7 +216,7 @@ enum tabLocations   {
         }];
     }else
     {
-        [self.tabIndicator setCenter:CGPointMake(newCenterCoordinate.x, 40.0)];
+        [self.tabIndicator setCenter:CGPointMake(newCenterCoordinate.x, 44.0)];
     }
     
 }

@@ -21,6 +21,8 @@
 @property (nonatomic) BRKFoursquareClient *foursquareClient;
 @property (nonatomic) NSArray *venues;
 
+@property (nonatomic) CGSize backgroundImageSize;
+
 @property (strong, nonatomic) NSString * query;
 @end
 
@@ -84,6 +86,7 @@
             .size.width = self.view.frame.size.width,
             .size.height = (self.view.frame.size.height / 3)
         };
+        self.backgroundImageSize = CGSizeMake(self.view.frame.size.width, (self.view.frame.size.height / 3));
     }
     
     self.tableView.frame = (CGRect){
@@ -173,6 +176,31 @@
     } failure:^(NSError *error) {
         NSLog(@"%@", error);
     }];
+}
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    
+//    if ( scrollView.contentInset.top > self.backgroundImageSize.height){
+//        NSLog(@"The Content Offset: %f    The ContentInset: %f ", scrollView.contentInset.top, self.backgroundImageSize.height);
+//        CGFloat delta = scrollView.contentInset.top - self.backgroundImageSize.height;
+//        CGFloat percentageOfImage = (fabs(scrollView.contentOffset.y)/scrollView.contentInset.top);
+//        [self applyTransformToBackGroundImageForDeltaSize:percentageOfImage];
+//        
+//    }//else if (scrollView.contentOffset){
+      //  self.backgroundView.transform  = CGAffineTransformInvert(self.backgroundView.transform);
+    //}
+    
+}
+-(void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
+    
+    NSLog(@"Did end Drag");
+}
+-(void)applyTransformToBackGroundImageForDeltaSize:(CGFloat)delta{
+    NSLog(@"The delta: %f", delta);
+    
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+            self.backgroundView.transform = CGAffineTransformScale(self.backgroundView.transform, 1.0, delta);
+    }];
+    
 }
 
 @end
