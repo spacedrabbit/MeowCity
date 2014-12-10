@@ -19,20 +19,8 @@
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Distance" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="34E-lJ-5C5">
-                        <rect key="frame" x="377" y="52" width="67" height="21"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Address" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g8v-Fa-JPR">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Address" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g8v-Fa-JPR">
                         <rect key="frame" x="58" y="86" width="386" height="21"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Website" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QYK-sV-0IQ">
-                        <rect key="frame" x="58" y="150" width="386" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
@@ -62,17 +50,35 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Price" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bJV-4H-KJm">
-                        <rect key="frame" x="66" y="52" width="303" height="21"/>
+                        <rect key="frame" x="66" y="52" width="49" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Phone Number" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Nj-Jm-ivP">
-                        <rect key="frame" x="58" y="117" width="386" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Distance" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="34E-lJ-5C5">
+                        <rect key="frame" x="116" y="52" width="67" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pRP-Pt-Nmh">
+                        <rect key="frame" x="58" y="113" width="44" height="30"/>
+                        <state key="normal" title="Phone">
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <connections>
+                            <action selector="phoneButtonTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="FYa-fK-mhv"/>
+                        </connections>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="auZ-vd-FLr">
+                        <rect key="frame" x="58" y="144" width="55" height="30"/>
+                        <state key="normal" title="Website">
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <connections>
+                            <action selector="websiteButtonTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="nnr-AN-cKQ"/>
+                        </connections>
+                    </button>
                 </subviews>
             </tableViewCellContentView>
             <connections>
@@ -82,11 +88,11 @@
                 <outlet property="hours" destination="wf9-zP-YNA" id="LW0-Fi-RNl"/>
                 <outlet property="hoursIcon" destination="YKt-Zz-WO0" id="xet-lO-Q4h"/>
                 <outlet property="name" destination="msv-l1-d3Z" id="wly-gM-m00"/>
+                <outlet property="phone" destination="pRP-Pt-Nmh" id="EZE-og-KRD"/>
                 <outlet property="phoneIcon" destination="Ixi-oh-7aZ" id="GGg-F8-RTW"/>
-                <outlet property="phoneNumber" destination="8Nj-Jm-ivP" id="Vng-5h-miC"/>
                 <outlet property="price" destination="bJV-4H-KJm" id="5xF-wy-HbA"/>
                 <outlet property="rating" destination="3Gb-tG-HtZ" id="ooM-T1-FVt"/>
-                <outlet property="website" destination="QYK-sV-0IQ" id="6fr-Jt-yhD"/>
+                <outlet property="website" destination="auZ-vd-FLr" id="TRb-ww-xUi"/>
                 <outlet property="websiteIcon" destination="ZwZ-0c-P4d" id="h54-gF-NBd"/>
             </connections>
             <point key="canvasLocation" x="-223" y="113.5"/>

@@ -9,6 +9,7 @@
 #import "BRKFoursquareClient.h"
 #import "AFHTTPRequestOperationManager.h"
 #import "BRKVenue.h"
+#import "BRKTip.h"
 
 #define CLIENT_ID @"BLU5G2IFZJ03ITEMFCFSCNFQHHE5ZCV0H3F24IWSBX0PPRC5"
 #define CLIENT_SECRET @"MRLRF0F3XOU00440F1CONS2TSE5B12J2J02TS4B5FJB3JXJC"
@@ -56,12 +57,15 @@
                 for (NSDictionary *groupDictionary in groups) {
                     if ([groupDictionary[@"name"] isEqualToString:@"recommended"]) {
                         for (NSDictionary *itemDictionary in groupDictionary[@"items"]) {
+                            
+                            // Venue dictionary is the first layer of dictionary we receive from Foursquare
                             NSDictionary *venueDictionary = itemDictionary[@"venue"];
                             
                             BRKVenue *venue = [[BRKVenue alloc] init];
                             venue.foursquareId = [venueDictionary objectForKey:@"id"];
                             venue.name = [venueDictionary objectForKey:@"name"];
                             venue.rating = [venueDictionary objectForKey:@"rating"];
+                            venue.website = [venueDictionary objectForKey:@"url"];
                             
                             NSDictionary *locationDictionary = [venueDictionary objectForKey:@"location"];
                             venue.address = [locationDictionary objectForKey:@"address"];
@@ -70,12 +74,41 @@
                             venue.postalCode = [locationDictionary objectForKey:@"postalCode"];
                             venue.latitude = [locationDictionary objectForKey:@"lat"];
                             venue.longitude = [locationDictionary objectForKey:@"lng"];
+                            venue.distance = [locationDictionary objectForKey:@"distance"];
+                            // Formatted address is an array. Need to convert in a string.
+                            NSArray *formattedAddressArray = [locationDictionary objectForKey:@"formattedAddress"];
+                            if ([formattedAddressArray count] > 1) {
+                                //Just taking the address (0th element) and city (1st element).
+                                venue.formattedAddress = [NSString stringWithFormat:@"%@, %@", formattedAddressArray[0], formattedAddressArray[1]];
+                            } else if ([formattedAddressArray count] == 1) {
+                                venue.formattedAddress = venue.address;
+                            }
                             
                             NSDictionary *photoGroupDictionary = [venueDictionary[@"photos"][@"groups"] firstObject];
                             NSDictionary *photoDictionary = [photoGroupDictionary[@"items"] firstObject];
                             
                             venue.foursquareImagePrefix = [photoDictionary objectForKey:@"prefix"];
                             venue.foursquareImageSuffix = [photoDictionary objectForKey:@"suffix"];
+                            
+                            // Contact dictionary
+                            NSDictionary *contactDictionary = [venueDictionary objectForKey:@"contact"];
+                            venue.phone = [contactDictionary objectForKey:@"phone"];
+                            venue.formattedPhone = [contactDictionary objectForKey:@"formattedPhone"];
+                            
+                            // Hours dictionary
+                            NSDictionary *hoursDictionary = [venueDictionary objectForKey:@"hours"];
+                            venue.hours = [hoursDictionary objectForKey:@"status"];
+                            
+                            // Price dictionary
+                            NSDictionary *priceDictionary = [venueDictionary objectForKey:@"price"];
+                            venue.price = [priceDictionary objectForKey:@"tier"];
+                            
+                            // Tips Array contains dictionaries for each tip
+                            venue.tips = [venueDictionary objectForKey:@"tips"];
+                            if ([venue.tips count] > 0) {
+                                NSDictionary *firstTipDictionary = venue.tips[0];
+                                venue.firstTip = [firstTipDictionary objectForKey:@"text"];
+                            }
                             
                             [venues addObject:venue];
                         }
@@ -84,6 +117,39 @@
                 [[NSOperationQueue mainQueue] addOperationWithBlock:^{
                         success(venues);
                 }];
+            }
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        if (failure) {
+            failure(error);
+        }
+    }];
+}
+
+- (void)requestTipsForPlace:(BRKVenue *)venue limit:(NSUInteger)limit success:(void (^)(NSArray *tips))success failure:(void (^)(NSError *error))failure
+{
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    parameters[@"client_id"] = CLIENT_ID;
+    parameters[@"client_secret"] = CLIENT_SECRET;
+    parameters[@"v"] = @"20140408";
+    parameters[@"limit"] = @(limit);
+    
+    NSString *venueString = [NSString stringWithFormat:@"https://api.foursquare.com/v2/venues/%@/tips", venue.foursquareId];
+    [_requestOperationManager GET:venueString parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        if (success) {
+            NSArray *tips = responseObject[@"response"][@"tips"][@"items"];
+            if (tips) {
+                NSMutableArray *array = [NSMutableArray array];
+                for (NSDictionary *tipDictionary in tips) {
+                    BRKTip *tip = [[BRKTip alloc] initWithText:tipDictionary[@"text"] createdAt:tipDictionary[@"createdAt"] likes:tipDictionary[@"likes"][@"count"] firstName:tipDictionary[@"user"][@"firstName"] lastName:tipDictionary[@"user"][@"lastName"]];
+                    
+                    [array addObject:tip];
+                }
+                success(array);
+            } else {
+                // FIXME: this is probably an error, not empty success?
+                success(@[]);
             }
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {

@@ -9,7 +9,7 @@
 #import "AppDelegate.h"
 #import "BRKHomeViewController.h"
 #import "BRKUIManager.h"
-
+#import "MenuViewController.h"
 @interface AppDelegate () <PKRevealing>
 
 #pragma mark - Properties
@@ -37,18 +37,15 @@
     [[UINavigationBar appearance] setBarTintColor:[BRKUIManager neutralNavBar]];
     [[UINavigationBar appearance] setTitleTextAttributes:[BRKUIManager navBarAttributes]];
     //[[UINavigationBar appearance] setTranslucent:NO]; // something about our code cause this to push the view 44 pixels down!!
-
     
-    
-    UIViewController *leftViewController = [[UIViewController alloc] init];
-    leftViewController.view.backgroundColor = [UIColor blueColor];
-    
-    self.revealController = [PKRevealController revealControllerWithFrontViewController:navControl leftViewController:leftViewController];
+   
+    MenuViewController *menuVC = [[MenuViewController alloc] init];
+    self.revealController = [PKRevealController revealControllerWithFrontViewController:navControl leftViewController:menuVC];
     self.revealController.delegate = self;
     self.revealController.animationDuration = 0.25;
+    [self.revealController setMinimumWidth:140.0 maximumWidth:140.0 forViewController:menuVC];
     
     self.window.rootViewController = self.revealController;
-
     [self.window makeKeyAndVisible];
     
     return YES;
