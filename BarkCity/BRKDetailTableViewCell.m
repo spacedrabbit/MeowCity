@@ -229,7 +229,7 @@
                                     toItem:self.contentView
                                  attribute:NSLayoutAttributeWidth
                                 multiplier:0
-                                  constant:30];
+                                  constant:20];
     
     NSLayoutConstraint *iconWidth =
     [NSLayoutConstraint constraintWithItem:icon
@@ -238,7 +238,7 @@
                                     toItem:self.contentView
                                  attribute:NSLayoutAttributeWidth
                                 multiplier:0
-                                  constant:30];
+                                  constant:20];
     NSLayoutConstraint *textInLine =
     [NSLayoutConstraint constraintWithItem:text
                                  attribute:NSLayoutAttributeCenterY
