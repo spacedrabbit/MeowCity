@@ -84,7 +84,7 @@
             .origin.x = 0.0f,
             .origin.y = 0,
             .size.width = self.view.frame.size.width,
-            .size.height = (self.view.frame.size.height / 3)
+            .size.height = round((self.view.frame.size.height / 3))
         };
         self.backgroundImageSize = CGSizeMake(self.view.frame.size.width, (self.view.frame.size.height / 3));
     }
@@ -179,16 +179,18 @@
 }
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView{
     
-//    if ( scrollView.contentInset.top > self.backgroundImageSize.height){
-//        NSLog(@"The Content Offset: %f    The ContentInset: %f ", scrollView.contentInset.top, self.backgroundImageSize.height);
-//        CGFloat delta = scrollView.contentInset.top - self.backgroundImageSize.height;
-//        CGFloat percentageOfImage = (fabs(scrollView.contentOffset.y)/scrollView.contentInset.top);
-//        [self applyTransformToBackGroundImageForDeltaSize:percentageOfImage];
-//        
-//    }//else if (scrollView.contentOffset){
-      //  self.backgroundView.transform  = CGAffineTransformInvert(self.backgroundView.transform);
-    //}
-    
+//    CGFloat delta = (fabs(scrollView.contentOffset.y) / self.backgroundView.frame.size.height);
+//    CGFloat imageAspectRatio = self.backgroundImageSize.width / self.backgroundImageSize.height;
+//    
+//    CGAffineTransform backgroundImgScaleFactor = CGAffineTransformMakeScale(1.5, 1.5);
+//
+//
+//    if (delta > 1.10000) {
+//
+//    }else{
+//
+//    }
+//    
 }
 -(void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
     
